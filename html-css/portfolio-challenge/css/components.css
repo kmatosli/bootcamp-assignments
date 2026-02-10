@@ -1,0 +1,158 @@
+/* ============================================================
+   # ---- Header Components ----
+   - Brand typography
+   - Nav links styling + divider
+   ============================================================ */
+
+.brand-link {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  text-decoration: none;
+  line-height: 1.1;
+  gap: 2px;
+}
+
+.brand-name {
+  font-family: var(--font-sans);
+  color: var(--k-bg); /* OffWhite */
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.brand-subtitle {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255,255,255,0.72); 
+  margin-top: 2px;
+  line-height: 1.1;
+}
+
+/* --- Nav (right) --- */
+.navlinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.navlinks a {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.92;
+}
+
+.navlinks a:hover{
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.navlinks a:focus-visible {
+  outline: 2px solid var(--k-blue-2); /* Provence */
+  outline-offset: 3px;
+  border-radius: 6px;
+  opacity: 1;
+}
+
+/* --- Divider before Resume --- */
+.nav-divider {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* --- Resume link (distinct) --- */
+.navlink--resume {
+    padding: 8px 12px;
+    color: var(--k-blue-2);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    opacity: 1;
+    text-decoration: none;
+}
+
+.navlink--resume:hover {
+    border-color: rgba(255,255,255,0.75);
+    text-decoration: none;
+}
+
+
+/* ============================================================
+   # ---- Hero Components ----
+   - Typography + buttons
+   ============================================================ */
+
+.hero-title {
+  font-family: var(--font-serif); /*IBM Plex Serif */
+  color: var(--k-bg); /* OffWhite */
+  font-size: 42px;
+  line-height: 1.1;
+  margin: 0 0 14px 0;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans); /*Inter */
+  color: var(--k-border);
+  max-width: 52ch;
+  margin: 0 0 18px 0;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Button primitives (reusable across site) */
+.btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--k-blue-1); /* Classic Blue */
+    color: var(--k-bg);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--k-blue-2); /* Provence */
+    color: var(--k-bg);
+}
+
+.btn-secondary {
+    background: transparent
+    color: var(--k-bg);
+    borderL 1px solid rgba(229, 231, 235, 0.35); /* LightGrey subtle */
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: var(--k-blue-2); /* Provence */
+    color: var(--k-bg);
+}
+
+/* Logo styling */
+.hero-logo {
+    width: min(320px, 40vw);
+    height: auto;
+    object-fit: contain;
+}
+
+
+
+

@@ -28,6 +28,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
   </head>
 
   <body>
@@ -40,19 +44,23 @@
        - Mobile: hamburger menu that reveals links on click
        ============================================================ -->
     <header class="site-header" role="banner">
-        <div class="container header-inner">
-             <div class="brand">
-                <!-- Replace with your logo image when ready -->
-        <img src="assets/images/kml_logo.png" alt="Kathy Matos logo" class="brand-logo" /> -->
-         <a class="brand-link" href="index.html" aria-label="Go to Home"></a>
-      <nav class="navbar container">
-        <h1 class="logo">Kathy Matos Linares Data Engineering & Analytics</h1>
-        <ui>
-          <a href="index.html">Home</a>
-          <a href="projects.html">Projects</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-        </ui>
+      <nav class="container header-inner" aria-label="Primary Navigation">
+        <div class="brand">
+          <a class="brand-link" href="index.html" aria-label="Go to Home">
+            <span class="brand-name">Kathy Matos Linares</span>
+            <span class="brand-subtitle">Data Engineering &amp; Analytics</span>
+          </a>
+        </div>
+        <ul class="navlinks">
+          <li></li><a href="index.html">Home</a></li>
+          <li></li><a href="projects.html">Projects</a></li>
+          <li></li><a href="about.html">About</a></li>
+          <li></li><a href="contact.html">Contact</a></li>
+
+         <li class="nav-divider" aria-hidden="true"></li>
+
+          <li></li><a href="resume.html">Resume</a></li>
+        </ul>
       </nav>
     </header>
 
@@ -63,23 +71,36 @@
       <!-- ============================================================
          # ---- Hero Section (Required) ----
          Requirements:
+         - Two columns: text left, logo/visual right
          - Welcome message introducing myself
          - Short description (1–2 sentences)
          ============================================================ -->
-      <section class="hero">
-        <div class="hero-text">
-          <h2>Building Scalable Data & Analytics Infrastructure.</h2>
-          <p>
-            Designing robust internal tooling and high-performance data systems
-            for quantitative research and financial analysis.
-          </p>
-          <button>View Infrastructure Projects</button>
+      <section class="hero" aria-label="Introduction">
+        <div class="container hero-inner">
+            <!-- Left column: hero copy -->
+             <div class="hero-title">
+                <h1>Building Scalable Data &amp; Analytics Infrastructure.</h1>
+
+                  <p class="hero-subtitle">
+                    Designing robust internal tooling and high-performance data systems
+                    for quantitative research and financial analysis.
+                  </p>
+            
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="projects.html">View Infrastructure Projects</a>
+                <a class="btn btn-secondary" href="contact.html">Contact</a>
+            </div>
         </div>
 
-        <img
-          src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
-          alt="Italian food"
-        />
+        <!-- Right column: logo / visual -->
+            <div class="hero-visual" aria-label="Logo">
+                <img 
+                    class="hero-logo"   
+                    src="assets/images/kml_logo.png" 
+                    alt="Kathy Matos logo" 
+                />
+            </div>
+        </div>
       </section>
 
       <!-- ============================================================

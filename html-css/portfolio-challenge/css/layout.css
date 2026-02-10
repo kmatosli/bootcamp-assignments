@@ -1,0 +1,61 @@
+/* ============================================================
+   # ---- Header Layout ----
+   - Black top bar
+   - Brand left, nav right
+   - Uses flexbox for 1-row layout
+   ============================================================ */
+
+.site-header {
+  background: #000; /* pure black token */
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+
+  /* gives the header height/air */
+  padding: 14px 18px;
+}
+
+/* ============================================================
+   # ---- Hero Layout ----
+   - Two column layout (text left, logo right)
+   - No scrolling landing: hero fills remaining viewport (visible area of the browswer window) under header
+   ============================================================ */
+
+.hero {
+  /* dark band like mock up; matches palette */
+  background: var(--k-ink); /* AnchorInk */
+}
+
+/* Actual two columns container */
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+
+  /* Height strategy:
+    - fill screen belwo header without forcing scroll
+    - adjust 72px if your header height differs
+  */
+  min-height: calc(100vh - 72px);
+  padding: 32px 18px;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 640px;
+}
+
+.hero-visual {
+  flex: 0 0 320px; /* right column width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

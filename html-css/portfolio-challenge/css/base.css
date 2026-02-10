@@ -78,3 +78,167 @@ h6 {
   font-weight: 600;
   margin: 0;
 }
+
+/* ============================================================
+   # ---- Header + Nav Styles ----
+   What this does:
+   - Dark header bar
+   - Left brand stacked (name + subtitle)
+   - Right nav links inline
+   - Divider before Resume
+   - Mobile hamburger + collapsible menu
+   ============================================================ */
+
+/* ---- Base tokens (adjust later to your palette) ---- */
+:root {
+  --header-bg: #2f3744;
+  --header-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.65);
+  --link: rgba(255, 255, 255, 0.78);
+  --link-hover: #ffffff;
+  --accent: #4aa3ff; /* subtle blue highlight */
+}
+
+/* ---- Header shell ---- */
+.site-header {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+}
+
+/* ---- Nav container ---- */
+.topnav {
+  width: 100%;
+}
+
+.topnav__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* ---- Brand (left) ---- */
+.brand {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 220px; /* helps match screenshot spacing */
+}
+
+.brand__name {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  line-height: 1.1;
+}
+
+.brand__subtitle {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+/* ---- Nav links (right) ---- */
+.navlinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin: 0;
+  padding: 0;
+}
+
+.navlinks__link {
+  text-decoration: none;
+  color: var(--link);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.navlinks__link:hover,
+.navlinks__link:focus {
+  color: var(--link-hover);
+  outline: none;
+}
+
+.navlinks__divider {
+  width: 1px;
+  height: 18px;
+  background: var(--header-border);
+}
+
+/* Resume link slightly differentiated */
+.navlinks__link--resume {
+  color: var(--accent);
+}
+
+.navlinks__link--resume:hover,
+.navlinks__link--resume:focus {
+  color: #8bc6ff;
+}
+
+/* ---- Hamburger (hidden on desktop) ---- */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.hamburger__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   # ---- Mobile behavior ----
+   - Hide inline nav
+   - Show hamburger
+   - Toggle nav open/close with .is-open
+   ============================================================ */
+@media (max-width: 760px) {
+  .hamburger {
+    display: inline-block;
+  }
+
+  .navlinks {
+    display: none; /* collapsed by default */
+    position: absolute;
+    right: 18px;
+    top: 56px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--header-bg);
+    border: 1px solid var(--header-border);
+    border-radius: 10px;
+    padding: 14px 14px;
+    width: min(240px, calc(100vw - 36px));
+    z-index: 50;
+  }
+
+  .navlinks.is-open {
+    display: flex;
+  }
+
+  .navlinks__divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  /* Reduce brand min-width so it doesn't crowd */
+  .brand {
+    min-width: 0;
+  }
+}
