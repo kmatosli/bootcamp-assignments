@@ -1,5 +1,7 @@
 /* ============================================================
-   base.css — Global foundation (Kathy brand)
+Make sure you check for the ellipsis to make sure your file is saved. 
+Otherwise VS Code won't let you commit.   
+base.css — Global foundation (Kathy brand)
    What this file does:
    - Defines design tokens (colors + fonts)
    - Applies safe global defaults (reset-ish)
@@ -13,3 +15,38 @@
    - Header/nav uses pure black (#000000) but should be styled in layout/components,
      not here. We still define a token so other files can reference it.
    ============================================================ */
+
+:root {
+  /* ---- Brand colors (from kathyColorList) ---- */
+
+  --k-ink: #2c333e; /* AnchorInk */
+  --k-blue-1: #34568b; /* ClassicBlue */
+  --k-blue-2: #6889c0; /* Provence */
+  --k-blue-3: #b3cde0; /* BabyBlue */
+  --k-muted: #7c8488; /* Monument */
+  --k-stucco: #a5968c; /* Stucco (rarely used) */
+  --k-bg: #f7f8fa; /* OffWhite */
+  --k-border: #e5e7eb; /* LightGrey */
+  --k-peach: #f5b9a0; /* PeachQuartz (sparingly) */
+  --k-corn: #f2e0b2; /* Cornhusk (sparingly) */
+
+  /* ---- Header token  ---- */
+  --k-header-bg: #000000; /* Pure Black */
+
+  /* ---- Typography (Serif for structure, Sans for data) ---- */
+  --font-sans:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-serif: "IBM Plex Serif", Georgia, "Times New Roman", Times, serif;
+
+  /* ---- Base type scale ---- */
+  --text-base: 16px;
+  --line-base: 1.5;
+
+  /* ---- Common radii (use in components/layout files) ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  /* ---- Focus ring ---- */
+  --focus-ring: 0 0 0 3px rgba(104, 137, 192, 0.35); /* Provence @ 35% */
+}
