@@ -50,3 +50,31 @@ base.css — Global foundation (Kathy brand)
   /* ---- Focus ring ---- */
   --focus-ring: 0 0 0 3px rgba(104, 137, 192, 0.35); /* Provence @ 35% */
 }
+
+/* ============================================================
+   Global typography defaults
+   ============================================================ */
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--k-ink);
+  background-color: var(--k-bg);
+  line-height: 1.6;
+}
+
+/* Structural typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  margin: 0;
+}
