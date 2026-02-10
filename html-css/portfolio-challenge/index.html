@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- ============================================================
+       KML — Landing Page (index.html)
+       What this file does:
+       - Defines the semantic HTML structure for the landing page
+       - Includes required sections: Nav, Hero, Projects, Footer
+       - Provides hooks for CSS + JS (hamburger menu, layout, components)
+       Notes:
+       - Styling lives in /css/*.css (linked below)
+       - Interactions live in /js/*.js (linked below)
+       ============================================================ -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio landing page showcasing data engineering, analytics infrastructure, and quantitative systems."
+    />
+
+    <title>Kathy Matos Linares | Data Engineering & Analytics</title>
+
+    <!-- # ---- CSS (no styling here; just hooks) ---- -->
+  </head>
+
+  <body>
+    <!-- ============================================================
+       # ---- Header + Navigation Bar (Required) ----
+       Requirements:
+       - Uses <nav>, <ul>, <li>, <a>
+       - Includes at least 4 links: Home, About, Projects, Contact
+       - Desktop: traditional menu bar
+       - Mobile: hamburger menu that reveals links on click
+       ============================================================ -->
+    <header class="site-header">
+      <nav class="navbar container">
+        <h1 class="logo">Kathy Matos Linares Data Engineering & Analytics</h1>
+        <ui>
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </ui>
+      </nav>
+    </header>
+
+    <!-- ============================================================
+       # ---- Main Content ----
+       ============================================================ -->
+    <main>
+      <!-- ============================================================
+         # ---- Hero Section (Required) ----
+         Requirements:
+         - Welcome message introducing myself
+         - Short description (1–2 sentences)
+         ============================================================ -->
+      <section class="hero">
+        <div class="hero-text">
+          <h2>Building Scalable Data & Analytics Infrastructure.</h2>
+          <p>
+            Designing robust internal tooling and high-performance data systems
+            for quantitative research and financial analysis.
+          </p>
+          <button>View Infrastructure Projects</button>
+        </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
+          alt="Italian food"
+        />
+      </section>
+
+      <!-- ============================================================
+         # ---- Projects Section (Required) ----
+         Requirements:
+         - Title “Selected Infrastructure Projects”
+         - At least three project cards
+         - Each card includes image, title, description
+         - Side-by-side using Flexbox (handled in CSS)
+         ============================================================ -->
+
+      <section class="menu">
+        <h2>Menu Highlights</h2>
+
+        <div class="menu-items">
+          <div class="card">
+            <img
+              src="https://ohsweetbasil.com/wp-content/uploads/four-cheese-margherita-pizza-recipe-12-scaled.jpg"
+              alt="Margherita pizza"
+            />
+            <h3>Margherita Pizza</h3>
+            <p>Tomato, mozzarella, basil</p>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://www.billyparisi.com/wp-content/uploads/2018/07/alfredo-tall.jpg"
+              alt="Fettuccine Alfredo"
+            />
+            <h3>Fettuccine Alfredo</h3>
+            <p>Creamy parmesan sauce</p>
+          </div>
+
+          <div class="card">
+            <img
+              src="https://kalejunkie.com/wp-content/uploads/2024/02/KJChickenParmesan_Shot5_110.jpg"
+              alt="Chicken Parmigiana"
+            />
+            <h3>Chicken Parmigiana</h3>
+            <p>Crispy chicken, marinara, mozzarella</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================================
+       # ---- Footer (Required) ----
+       Requirements:
+       - Privacy Policy
+       - Terms of Use
+       - Github
+       - LinkedIn
+       - Contact info
+       ============================================================ -->
+    <footer class="footer">
+      <p>© 2026 Kathy Matos Linares All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+/* ============================================================
+   base.css — Global foundation (Kathy brand)
+   What this file does:
+   - Defines design tokens (colors + fonts)
+   - Applies safe global defaults (reset-ish)
+   - Sets typography defaults (Inter + IBM Plex Serif)
+   - DOES NOT define page layout (header/hero/cards grids belong elsewhere)
+   ============================================================ */
+
+/* ============================================================
+   # ---- Design tokens (colors + typography) ----
+   Notes:
+   - Header/nav uses pure black (#000000) but should be styled in layout/components,
+     not here. We still define a token so other files can reference it.
+   ============================================================ */
