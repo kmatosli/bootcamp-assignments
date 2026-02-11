@@ -38,24 +38,46 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 40px;
 
   /* Height strategy:
     - fill screen belwo header without forcing scroll
     - adjust 72px if your header height differs
   */
-  min-height: calc(100vh - 72px);
-  padding: 32px 18px;
+
+  padding: 40px 18px;
 }
 
 .hero-text {
   flex: 1;
-  max-width: 640px;
+  max-width: 660px;
 }
 
 .hero-visual {
-  flex: 0 0 320px; /* right column width */
+  flex: 0 0 380px; /* right column width */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.projects {
+  background: var(--k-bg);
+  padding: 28px 0 34px 0;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.projects-grid {
+  display: flex;
+  gap: 16px;
+}
+
+.project-card {
+  flex: 1;
 }
