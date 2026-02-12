@@ -3,9 +3,16 @@
    - Black top bar
    - Brand left, nav right
    - Uses flexbox for 1-row layout
+   - Header stays fixed height
+   - Main is exactly the remaining viewport height
    ============================================================ */
 
+:root {
+  --header-h: 72px;
+}
+
 .site-header {
+  height: var(--header-h);
   background: #000; /* pure black token */
   border-bottom: none;
   box-shadow: none;
@@ -16,10 +23,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 18px;
-
   /* gives the header height/air */
   padding: 14px 18px;
+}
+
+main {
+  min-height: calc(100vh - var(--header-h));
 }
 
 /* ============================================================
@@ -45,7 +54,7 @@
     - adjust 72px if your header height differs
   */
 
-  padding: 40px 18px;
+  padding: 40px 0;
 }
 
 .hero-text {
@@ -58,6 +67,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Home panels sit under hero; make them compact */
+
+.home-panels {
+  background: var(--k-bg);
+  padding: 14px 0 0 0;
+}
+
+.home-panels-inner {
+  /* Prevent overall page scroll due to panels */
+  overflow: hidden;
+}
+
+/* Tab panel area: sorta fixed so nothing pushes the page */
+.tabpanels {
+  margin-top: 12px;
+  overflow: hidden;
 }
 
 .projects {
