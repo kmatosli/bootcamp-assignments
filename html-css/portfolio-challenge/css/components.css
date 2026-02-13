@@ -17,7 +17,7 @@
   font-family: var(--font-sans);
   color: var(--k-bg); /* OffWhite */
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
   line-height: 1.1;
 }
@@ -25,9 +25,9 @@
 .brand-subtitle {
   font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255,255,255,0.72); 
-  margin-top: 2px;
+  margin-top: 1px;
   line-height: 1.1;
 }
 
@@ -44,7 +44,7 @@
 .navlinks a {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   color: #fff;
   text-decoration: none;
   opacity: 0.92;
@@ -94,10 +94,17 @@
 .hero-title {
   font-family: var(--font-serif); /*IBM Plex Serif */
   font-weight: 600;
-  font-size: 44px;
-  line-height: 1.08;
-  margin: 0 0 16px 0;
+
+  font-size: clamp(26px, 2.6vw, 36px);
+  
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+
+  margin: 0 0 12px 0;
   color: var(--k-bg); /* OffWhite */
+
+  max-width: 20ch;
+
   }
 
 .hero-subtitle {
@@ -138,12 +145,15 @@
   border-radius: 999px;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
 
+.hero-specialization {
+  margin: 12px 0 0 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.70);
+  max-width: 62ch;
+}
 
 
 /* Button primitives (reusable across site) */
@@ -183,10 +193,52 @@
 /* Logo styling */
 .hero-logo {
     width: min(320px, 40vw);
+    max-height: 220px;
     height: auto;
     object-fit: contain;
 }
 
+.logo-sheen {
+  position: relative;
+  display: inline-block;
+  border-radius: 16px;     /* match your design softness */
+  overflow: hidden;        /* hides the moving light outside bounds */
+}
+
+/* the moving light */
+.logo-sheen::after {
+  content: "";
+  position: absolute;
+  top: 110%;
+  left: -30%;
+  width: 160%;
+  height: 55%;
+  transform: rotate(-12deg);
+
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.10) 35%,
+    rgba(255,255,255,0.22) 50%,
+    rgba(255,255,255,0.10) 65%,
+    rgba(255,255,255,0) 100%
+  );
+
+  animation: sheenUp 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sheenUp {
+  0%, 55% { top: 115%; opacity: 0; }
+  60%     { opacity: 0.25; }
+  78%     { top: -60%; opacity: 0.18; }
+  100%    { top: -60%; opacity: 0; }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .logo-sheen::after { animation: none; }
+}
 
 .section-title {
   font-family: var(--font-serif);
@@ -212,21 +264,21 @@
 .project.card {
   border: 1px solid rgba(44, 51, 62, 0.12);
   border-radius: 14px;
-  padding: 14px;
+  padding: 12px;
   background: #fff;
 }
 
 .project-img {
-  height: 110px;
+  height: 72px;
   border-radius: 12px;
   background: rgba(104, 137, 192, 0.18);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .project-title {
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0 0 6px 0;
   color: var(--k-ink);
 }
@@ -238,6 +290,40 @@
   color: rgba(44, 51, 62, 0.78);
 }
 
+.project-identity{
+  margin: 0 0 8px 0 ;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: rgba(44, 51, 62, 0.78);
+}
+
+.project-highlights{
+  margin: 0 0 10px 0;
+  padding-left: 16px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(44, 51, 62, 0.78);
+}
+
+.project-highlights li{
+  margin: 0 0 4px 0;
+}
+
+.project-tags{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-tags .tag{
+  font-size: 11px;
+  padding: 6px 9px;
+}
+
 /* ============================================================
    # ---- Footer Components ----
    - Stuff
@@ -247,27 +333,31 @@
    .site-footer {
       background: #0d0f13;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 28px 0;
-      margin-top: 80px;
+      padding: 0px 0;
+      height:40px;
+      margin: 0;
    }
 
    .footer-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
+      margin: 0;
    }
 
    .footer-left {
-     font-size: 0.9rem;
+     font-size: 12px;
      color: #d9dde3;
-     opacity: 0.7;
+     opacity: 0.65;
+     margin: 0;
    }
 
    .footer-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
+      margin: 0;
    }
 
    /* Email */
@@ -277,7 +367,7 @@
       gap: 8px;
       text-decoration: none;
       color: #d9dde3;
-      font-size: 0.9rem;
+      font-size: 12px;
       opacity: 0.85;
       transition: all 0.2s ease;
    }
@@ -289,6 +379,7 @@
    /* Icons */
    .footer-icon {
     color: #d9dde3;
+    font-size: 18px;
     opacity: 1;
     transition: all 0.2s ease;
     }

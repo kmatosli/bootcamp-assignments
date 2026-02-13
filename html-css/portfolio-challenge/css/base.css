@@ -56,11 +56,12 @@ base.css — Global foundation (Kathy brand)
    ============================================================ */
 
 html {
-  font-size: 100%;
+  height: 100%;
 }
 
 body {
   margin: 0;
+  overflow: hidden;
   font-family: var(--font-sans);
   color: var(--k-ink);
   background-color: var(--k-bg);
