@@ -92,19 +92,13 @@ h6 {
 
 /* ---- Base tokens (adjust later to your palette) ---- */
 :root {
-  --header-bg: #2f3744;
-  --header-border: rgba(255, 255, 255, 0.08);
+  --header-bg: #000000;
+  --header-border: transparent;
   --text-primary: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.65);
   --link: rgba(255, 255, 255, 0.78);
   --link-hover: #ffffff;
   --accent: #4aa3ff; /* subtle blue highlight */
-}
-
-/* ---- Header shell ---- */
-.site-header {
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--header-border);
 }
 
 /* ---- Nav container ---- */

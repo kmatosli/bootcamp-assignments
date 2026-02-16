@@ -1,0 +1,38 @@
+/* --- Tablet and down: stack hero and allow wrapping --- */
+@media (max-width: 900px) {
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .hero-visual {
+    flex: 0 0 auto;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .projects-grid {
+    flex-wrap: wrap;
+  }
+
+  .project.card {
+    flex: 1 1 280px;
+  }
+}
+
+/* --- Phone: turn on scrolling + simplify fixed heights --- */
+@media (max-width: 600px) {
+  body {
+    overflow: auto; /* undo desktop strategy */
+  }
+
+  main {
+    height: auto;
+    overflow: visible;
+  }
+
+  .site-footer {
+    position: static; /* footer becomes normal flow */
+  }
+}

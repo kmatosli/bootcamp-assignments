@@ -8,14 +8,14 @@
    ============================================================ */
 
 :root {
-  --header-h: 56px;
+  --header-h: 48px;
   --footer-h: 42px;
 }
 
 .site-header {
   height: var(--header-h);
-  background: #000; /* pure black token */
-  border-bottom: none;
+  background: var(--header-bg);
+  border-bottom: 0;
   box-shadow: none;
 }
 

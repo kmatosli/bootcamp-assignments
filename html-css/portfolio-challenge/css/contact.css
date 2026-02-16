@@ -1,0 +1,112 @@
+.contact-page {
+  background: var(--k-bg);
+  padding: 28px 0 40px 0;
+}
+
+/* Hero */
+.contact-hero {
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+
+.contact-kicker {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(44, 51, 62, 0.55);
+  margin: 0 0 8px 0;
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 650;
+  margin: 0 0 10px 0;
+  color: var(--k-ink);
+}
+
+.contact-lede {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(44, 51, 62, 0.78);
+  margin: 0;
+}
+
+/* Contact cards */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.contact-card {
+  background: #fff;
+  border: 1px solid rgba(44, 51, 62, 0.12);
+  border-radius: 14px;
+  padding: 18px;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+}
+
+.contact-card h2 {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+}
+
+.contact-card p {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  margin: 0 0 10px 0;
+  color: rgba(44, 51, 62, 0.75);
+}
+
+.contact-link {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--k-blue-1);
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+/* Engagement */
+.contact-engagement h2 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.engagement-list {
+  padding-left: 18px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.engagement-note {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: rgba(44, 51, 62, 0.65);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

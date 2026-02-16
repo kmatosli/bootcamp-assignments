@@ -1,53 +1,350 @@
-<header class="site-header" role="banner">
-  <nav class="topnav" aria-label="Primary navigation">
-    <div class="topnav__inner">
-      <!-- Left: Brand -->
-      <a class="brand" href="index.html" aria-label="Go to Home">
-        <span class="brand__name">Alex Morgan</span>
-        <span class="brand__subtitle">Data Engineering &amp; Analytics</span>
-      </a>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engineering Profile | Kathy Matos Linares</title>
 
-      <!-- Right: Desktop links -->
-      <ul class="navlinks" id="navlinks">
-        <li class="navlinks__item">
-          <a class="navlinks__link" href="index.html">Home</a>
-        </li>
-        <li class="navlinks__item">
-          <a class="navlinks__link" href="projects.html">Projects</a>
-        </li>
-        <li class="navlinks__item">
-          <a class="navlinks__link" href="about.html">About</a>
-        </li>
-        <li class="navlinks__item">
-          <a class="navlinks__link" href="contact.html">Contact</a>
-        </li>
+    <!-- Match whatever you use on index.html -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
 
-        <!-- Divider + Resume (matches your screenshot pattern) -->
-        <li class="navlinks__divider" aria-hidden="true"></li>
-        <li class="navlinks__item">
+    <!-- Add a small resume-specific file (next section) -->
+    <link rel="stylesheet" href="css/resume.css" />
+  </head>
+
+  <body>
+    <!-- Header (same pattern as index) -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand-link" href="index.html">
+          <span class="brand-name">Kathy Matos Linares</span>
+          <span class="brand-subtitle">Data Engineering &amp; Analytics</span>
+        </a>
+
+        <nav aria-label="Primary">
+          <ul class="navlinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="nav-divider" aria-hidden="true"></li>
+            <li>
+              <a class="navlink--resume" href="resume.html" aria-current="page"
+                >Engineering Profile</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="resume-page">
+      <div class="container">
+        <!-- Top row: title + download -->
+        <section class="resume-hero" aria-label="Engineering Profile header">
+          <div class="resume-hero-left">
+            <p class="resume-kicker">Engineering Profile</p>
+            <h1 class="resume-title">
+              Structured, production-minded systems — from ingestion to
+              decision.
+            </h1>
+            <p class="resume-lede">
+              I solve messy data + workflow chaos → structured, automated
+              decision systems: scalable, auditable, and production-ready.
+            </p>
+
+            <div class="resume-actions">
+              <!-- Replace href with your actual pdf path once you add it -->
+              <a
+                class="btn btn-primary"
+                href="assets/Kathy_Matos_Linares_CV.pdf"
+                download
+                >Download CV</a
+              >
+              <a class="btn btn-secondary" href="projects.html">View Systems</a>
+            </div>
+          </div>
+
+          <aside class="resume-hero-right" aria-label="System lifecycle">
+            <!-- Your “small visual” that breaks up text -->
+            <div class="arch-visual">
+              <div class="arch-visual-inner">
+                <span class="arch-chip">Ingestion</span
+                ><span class="arch-arrow">→</span>
+                <span class="arch-chip">Validation</span
+                ><span class="arch-arrow">→</span>
+                <span class="arch-chip">Storage</span
+                ><span class="arch-arrow">→</span>
+                <span class="arch-chip">Analytics</span
+                ><span class="arch-arrow">→</span>
+                <span class="arch-chip is-accent">Decision Interface</span
+                ><span class="arch-arrow">→</span>
+                <span class="arch-chip">Governance</span>
+              </div>
+              <p class="arch-caption">
+                How I think about engineering work: each step must be reliable
+                and reusable.
+              </p>
+            </div>
+          </aside>
+        </section>
+
+        <!-- Contact strip -->
+        <section class="resume-meta" aria-label="Contact and links">
+          <div class="resume-meta-row">
+            <span class="meta-item">Chicago, IL</span>
+            <span class="meta-dot">•</span>
+            <a class="meta-link" href="mailto:kmatosl@yahoo.com"
+              >kmatosl@yahoo.com</a
+            >
+            <span class="meta-dot">•</span>
+            <span class="meta-item">312-259-1331</span>
+            <span class="meta-dot">•</span>
+            <a
+              class="meta-link"
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noreferrer"
+              >LinkedIn</a
+            >
+            <span class="meta-dot">•</span>
+            <a
+              class="meta-link"
+              href="https://github.com/"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+          </div>
+        </section>
+
+        <!-- Modules grid -->
+        <section class="resume-grid" aria-label="Resume modules">
+          <!-- Summary -->
+          <article class="resume-card">
+            <h2 class="resume-h2">Summary</h2>
+            <p class="resume-p">
+              Quantitative research and analytics professional with deep
+              experience supporting investment decision-making in fast-moving,
+              data-dense environments. I translate complex, unstructured inputs
+              into decision-ready outputs through automation, visualization, and
+              disciplined workflow design — with attention to data quality,
+              governance, and operational reliability.
+            </p>
+          </article>
+
+          <!-- Core strengths -->
+          <article class="resume-card">
+            <h2 class="resume-h2">Core strengths</h2>
+            <ul class="resume-bullets">
+              <li>
+                Decision-first system design (repeatable, auditable workflows)
+              </li>
+              <li>
+                Data pipelines: ingestion → normalization → validation → publish
+              </li>
+              <li>
+                Analytics tooling for PM/analyst workflows (dashboards +
+                reporting)
+              </li>
+              <li>
+                Clear communication: “what changed, why it matters, what to do
+                next”
+              </li>
+            </ul>
+          </article>
+
+          <!-- Skills -->
+          <article class="resume-card">
+            <h2 class="resume-h2">Skills</h2>
+
+            <div class="skill-block">
+              <p class="skill-label">Languages</p>
+              <p class="skill-value">Python, R, SQL, JavaScript, HTML5, CSS3</p>
+            </div>
+
+            <div class="skill-block">
+              <p class="skill-label">Data &amp; DB</p>
+              <p class="skill-value">PostgreSQL, MySQL, MongoDB, BigQuery</p>
+            </div>
+
+            <div class="skill-block">
+              <p class="skill-label">Frameworks</p>
+              <p class="skill-value">FastAPI/Flask, React, Shiny</p>
+            </div>
+
+            <div class="skill-block">
+              <p class="skill-label">Viz</p>
+              <p class="skill-value">ggplot2, gt, Plotly, Matplotlib, Altair</p>
+            </div>
+
+            <div class="skill-block">
+              <p class="skill-label">Tools</p>
+              <p class="skill-value">
+                GitHub, REST APIs, Docker, Posit Workbench/Connect
+              </p>
+            </div>
+          </article>
+
+          <!-- Experience -->
+          <article class="resume-card resume-card--wide">
+            <h2 class="resume-h2">Experience</h2>
+
+            <div class="role">
+              <div class="role-head">
+                <h3 class="role-title">
+                  Quantitative Associate — William Blair
+                </h3>
+                <p class="role-dates">Jan 2007 – Jan 2026</p>
+              </div>
+
+              <ul class="resume-bullets">
+                <li>
+                  Led end-to-end research: question → data sourcing → factor
+                  development → testing → production analytics.
+                </li>
+                <li>
+                  Built and maintained pipelines with automated quality checks,
+                  documentation, and versioning for auditability.
+                </li>
+                <li>
+                  Designed decision-ready dashboards and reporting frameworks
+                  used by PMs and research leadership.
+                </li>
+                <li>
+                  Developed Shiny tools and internal R packages to standardize
+                  workflows and accelerate delivery.
+                </li>
+                <li>
+                  Evaluated third-party datasets (incl. ESG), validating
+                  coverage and signal behavior before integration.
+                </li>
+              </ul>
+            </div>
+
+            <div class="role role--divider">
+              <div class="role-head">
+                <h3 class="role-title">
+                  Software Engineer Apprenticeship — Coding Temple
+                </h3>
+                <p class="role-dates">Feb 2026 – Aug 2026</p>
+              </div>
+
+              <ul class="resume-bullets">
+                <li>
+                  Built full-stack applications with React frontends and Flask
+                  backends; integrated third-party APIs.
+                </li>
+                <li>
+                  Worked under tight deadlines with iterative delivery and
+                  documentation-first project hygiene.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Projects -->
+          <article class="resume-card resume-card--wide">
+            <h2 class="resume-h2">Selected systems</h2>
+
+            <div class="proj">
+              <h3 class="proj-title">
+                Financial Time-Series Analytics &amp; API-Driven Dashboard
+              </h3>
+              <p class="proj-meta">
+                Python • Data pipelines • REST APIs • Validation • Deployment
+              </p>
+              <ul class="resume-bullets">
+                <li>
+                  Ingests and normalizes large-scale time-series; computes
+                  returns, drawdowns, rolling stats, and relative metrics.
+                </li>
+                <li>
+                  Serves analytics via API endpoints for decoupled front-end
+                  consumption and reproducible runs.
+                </li>
+              </ul>
+            </div>
+
+            <div class="proj proj--divider">
+              <h3 class="proj-title">
+                Quant Factor Research &amp; Commentary Engine
+              </h3>
+              <p class="proj-meta">
+                R • data.table • ggplot2/gt • Shiny • Reporting
+              </p>
+              <ul class="resume-bullets">
+                <li>
+                  Ranks factors across markets/periods; handles ties; compares
+                  cross-market performance consistently.
+                </li>
+                <li>
+                  Generates decision-ready commentary and institutional-style
+                  visuals with repeatable templates.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Education -->
+          <article class="resume-card">
+            <h2 class="resume-h2">Education</h2>
+            <p class="resume-p">
+              <strong>Coding Temple</strong> — Certificate, Software Engineering
+            </p>
+            <p class="resume-p">
+              <strong>University of Chicago</strong> — B.A., Latin American
+              Studies &amp; Economics
+            </p>
+          </article>
+
+          <!-- Certifications -->
+          <article class="resume-card">
+            <h2 class="resume-h2">Certifications</h2>
+            <ul class="resume-bullets">
+              <li>Coding Temple — Full Stack Software Engineer</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer (same pattern as index) -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          © 2026 Kathy Matos Linares All rights reserved.
+        </div>
+        <div class="footer-right">
           <a
-            class="navlinks__link navlinks__link--resume"
-            href="assets/docs/Alex_Morgan_Resume.pdf"
-            target="_blank"
-            rel="noopener"
+            class="email-link"
+            href="mailto:kmatosl@yahoo.com"
+            aria-label="Email"
           >
-            Resume
+            <!-- If you're already using an SVG icon system, swap this -->
+            <span aria-hidden="true">✉</span>
+            <span>kmatosl@yahoo.com</span>
           </a>
-        </li>
-      </ul>
-
-      <!-- Mobile: Hamburger -->
-      <button
-        class="hamburger"
-        type="button"
-        aria-label="Toggle navigation"
-        aria-controls="navlinks"
-        aria-expanded="false"
-      >
-        <span class="hamburger__bar" aria-hidden="true"></span>
-        <span class="hamburger__bar" aria-hidden="true"></span>
-        <span class="hamburger__bar" aria-hidden="true"></span>
-      </button>
-    </div>
-  </nav>
-</header>
+          <a
+            class="footer-icon"
+            href="https://github.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+            >◼</a
+          >
+          <a
+            class="footer-icon"
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+            >in</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
