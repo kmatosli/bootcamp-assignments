@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any, Dict, List
+import os
 
 from impact_tracker.config import IMPACT_CATEGORIES, PRIORITY_LEVELS, OUTPUT_DIR
 from impact_tracker.models import build_task
@@ -22,7 +23,6 @@ from impact_tracker.validators import (
     validate_task_id,
 )
 from impact_tracker.utils import write_json
-import os
 
 
 # =============================================================================
@@ -30,12 +30,14 @@ import os
 # =============================================================================
 
 def print_header() -> None:
+    """Print a single application header banner."""
     print("\n" + "=" * 72)
     print("Impact Tracker — Work → Logged → Structured → Quantified → Reported")
     print("=" * 72)
 
 
 def print_menu() -> None:
+    """Print the main menu options."""
     print("\nMain Menu")
     print("1) Add task")
     print("2) View tasks")
@@ -46,7 +48,20 @@ def print_menu() -> None:
 def prompt_required(label: str) -> str:
     """
     Prompt until non-empty.
-    Uses try/except/else/finally for assignment compliance.
+
+    Parameters
+    ----------
+    label : str
+        Field label to display to the user.
+
+    Returns
+    -------
+    str
+        A non-empty validated string.
+
+    Raises
+    ------
+    Never raises; loops until valid input is provided.
     """
     while True:
         try:
@@ -57,11 +72,19 @@ def prompt_required(label: str) -> str:
         else:
             return value
         finally:
-            # minimal finally for assignment requirement visibility
+            # Minimal finally for assignment requirement visibility
             pass
 
 
 def prompt_priority() -> str:
+    """
+    Prompt for priority selection.
+
+    Returns
+    -------
+    str
+        Validated priority label (e.g., '⭐ major initiative', etc.).
+    """
     print("\nPriority")
     for k, v in PRIORITY_LEVELS.items():
         print(f"{k}) {v}")
@@ -79,6 +102,14 @@ def prompt_priority() -> str:
 
 
 def prompt_impact_category() -> str:
+    """
+    Prompt for an impact category.
+
+    Returns
+    -------
+    str
+        Validated impact category value.
+    """
     print("\nImpact Categories (promotion criteria)")
     for cat in IMPACT_CATEGORIES:
         print(f"- {cat}")
@@ -96,14 +127,26 @@ def prompt_impact_category() -> str:
 
 
 def prompt_tags() -> List[str]:
+    """
+    Prompt for tags.
+
+    Returns
+    -------
+    list[str]
+        Validated list of tags (may be empty).
+    """
     raw = input("Tags (e.g., #automation #leadership) (optional): ")
     return validate_tags(raw)
 
 
 def print_task(t: Dict[str, Any]) -> None:
+    """Pretty-print a single task record."""
     print("-" * 72)
     print(f"ID: {t['id']} | {t['title']}")
-    print(f"Status: {t.get('status')} | Priority: {t.get('priority')} | Category: {t.get('impact_category')}")
+    print(
+        f"Status: {t.get('status')} | Priority: {t.get('priority')} | "
+        f"Category: {t.get('impact_category')}"
+    )
     print(f"Created: {t.get('created_at')} | Completed: {t.get('completed_at')}")
     tags = t.get("tags", [])
     if tags:
@@ -116,6 +159,7 @@ def print_task(t: Dict[str, Any]) -> None:
 
 
 def add_task_cli(tasks: List[Dict[str, Any]], events: List[Dict[str, Any]]) -> None:
+    """CLI flow for adding a task."""
     print("\nAdd Task — capture evidence of impact")
     title = prompt_required("Title")
     problem = prompt_required("Problem / context (why it mattered)")
@@ -146,6 +190,7 @@ def add_task_cli(tasks: List[Dict[str, Any]], events: List[Dict[str, Any]]) -> N
 
 
 def view_tasks_cli(tasks: List[Dict[str, Any]], events: List[Dict[str, Any]]) -> None:
+    """CLI flow for viewing tasks (and optionally completing one)."""
     record_view(events)
 
     if not tasks:
@@ -174,6 +219,7 @@ def view_tasks_cli(tasks: List[Dict[str, Any]], events: List[Dict[str, Any]]) ->
 
 
 def delete_task_cli(tasks: List[Dict[str, Any]], events: List[Dict[str, Any]]) -> None:
+    """CLI flow for deleting a task."""
     if not tasks:
         print("\n(No tasks to delete.)")
         return
@@ -201,17 +247,22 @@ def main() -> None:
     """
     Application entry point.
 
-    Assignment requirement: tasks stored in a Python list (in-memory).
-    Enhancement: events stored in append-only Python list (in-memory).
+    Assignment requirement:
+      - tasks stored in a Python list (in-memory)
+
+    Enhancement:
+      - events stored in append-only Python list (in-memory)
     """
     tasks: List[Dict[str, Any]] = []
     events: List[Dict[str, Any]] = []
 
     emit_event(events, "APP_STARTED", None, {"version": "1.0", "notes": "Impact tracker started"})
 
+    # Print header ONCE for a clean UX (avoids looking like duplicated output)
+    print_header()
+
     try:
         while True:
-            print_header()
             print_menu()
 
             try:
@@ -231,7 +282,7 @@ def main() -> None:
                     emit_event(events, "APP_QUIT", None, {"reason": "user_exit"})
                     break
             finally:
-                # minimal finally, visible for the assignment
+                # Minimal finally, visible for the assignment
                 pass
     finally:
         # Always export on exit (even if unexpected error).
