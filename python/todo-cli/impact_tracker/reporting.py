@@ -16,8 +16,8 @@ def compute_derived_metrics(tasks: List[Dict[str, Any]], events: List[Dict[str, 
     """
     Compute derived metrics primarily from event log, with some support from state.
     """
-    created_week = Counter()
-    completed_week = Counter()
+    created_week:  Counter[str] = Counter()
+    completed_week: Counter[str] = Counter()
 
     created_at_by_task: Dict[int, datetime] = {}
     completed_at_by_task: Dict[int, datetime] = {}
@@ -42,8 +42,8 @@ def compute_derived_metrics(tasks: List[Dict[str, Any]], events: List[Dict[str, 
     total_completed = sum(completed_week.values())
     completion_rate = (total_completed / total_created) if total_created else 0.0
 
-    tag_counts = Counter()
-    impact_cat_counts = Counter()
+    tag_counts: Counter[str] = Counter()
+    impact_cat_counts: Counter[str] = Counter()
     flagship_count = 0
 
     for t in tasks:
