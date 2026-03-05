@@ -1,3 +1,51 @@
+"""
+FILE: impact_tracker/reporting.py
+
+PURPOSE
+Generate derived metrics and promotion-ready reports from:
+- tasks (current state: materialized view)
+- events (history: append-only event log)
+
+WHY THIS FILE EXISTS
+The bootcamp assignment requires an in-memory list of tasks, but the "impact
+tracker" goal is bigger than a to-do list.
+
+This reporting layer turns logged work into reusable outputs:
+- daily summary
+- weekly accomplishments
+- standup report
+- promotion evidence report
+- derived metrics (counts, rates, top tags, time-to-complete)
+
+DATA PIPELINE MENTAL MODEL
+User action -> event recorded -> state updated -> reporting derived
+
+Where:
+- tasks = current snapshot ("what we believe is true now")
+- events = history ("what happened and when")
+
+This module intentionally supports both:
+- metrics primarily from events (audit-friendly)
+- some fields from tasks for convenience and readability in reports
+
+OUTPUTS USING THIS MODULE
+storage.py will export:
+- outputs/metrics.json
+- outputs/reports.json
+- outputs/reports.md
+- outputs/promotion_report.md (promotion_evidence_report markdown output)
+
+DESIGN PRINCIPLES
+1) Deterministic, testable pure functions (no input(), no printing)
+2) Prefer event log for metrics to avoid relying on mutable state
+3) Keep report outputs simple JSON + Markdown so they are easy to diff in Git
+
+INVARIANTS / EXPECTATIONS
+- tasks: list[dict], each dict has keys like id, title, status, created_at, etc.
+- events: list[dict], each dict has keys like event_type, timestamp, payload, etc.
+- ISO timestamps are parsed using utils.parse_iso_datetime()
+"""
+
 from __future__ import annotations
 
 from collections import Counter, defaultdict
@@ -8,20 +56,55 @@ from impact_tracker.config import IMPACT_CATEGORIES
 from impact_tracker.utils import iso_week_key, now_iso, parse_iso_datetime
 
 
-# =============================================================================
-# Section: Reporting Layer (Derived from Events + State)
-# =============================================================================
-
+# region Derived Metrics (Events + State)
+# -----------------------------------------------------------------------------
+# SECTION: Derived Metrics (Events + State)
+#
+# WHAT
+# compute_derived_metrics() calculates analytics that help answer:
+# - how much work is being logged over time?
+# - how much work is being completed over time?
+# - what is the completion rate?
+# - what tags and categories dominate the work?
+# - how much "flagship work" is being produced?
+# - how long does work take from creation to completion?
+#
+# WHY
+# This is the "Quantified" part of the pipeline.
+# These metrics support weekly review, performance reviews, and promotion docs.
+#
+# DESIGN NOTES
+# - Weekly created/completed counts come from EVENTS for auditability.
+# - Tag/category counts come from TASKS because tags/categories are stored
+#   directly in the task records and reflect the current view.
+# - Time-to-complete uses timestamps captured during TASK_ADDED and TASK_COMPLETED.
+# -----------------------------------------------------------------------------
 def compute_derived_metrics(tasks: List[Dict[str, Any]], events: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Compute derived metrics primarily from event log, with some support from state.
+
+    Parameters
+    ----------
+    tasks : list[dict]
+        Current in-memory state (materialized view).
+
+    events : list[dict]
+        Append-only history of user actions (event log).
+
+    Returns
+    -------
+    dict
+        A JSON-serializable metrics dictionary suitable for exporting.
     """
-    created_week:  Counter[str] = Counter()
+    # Created / completed counts by ISO week key
+    created_week: Counter[str] = Counter()
     completed_week: Counter[str] = Counter()
 
+    # Track create/complete timestamps by task so we can compute time-to-complete
     created_at_by_task: Dict[int, datetime] = {}
     completed_at_by_task: Dict[int, datetime] = {}
 
+    # ---- Event-sourced counting and timestamps --------------------------------
     for e in events:
         if e.get("event_type") == "TASK_ADDED":
             t = e.get("payload", {}).get("task", {})
@@ -42,6 +125,7 @@ def compute_derived_metrics(tasks: List[Dict[str, Any]], events: List[Dict[str, 
     total_completed = sum(completed_week.values())
     completion_rate = (total_completed / total_created) if total_created else 0.0
 
+    # ---- State-sourced counts (tags, categories, flagship work) ----------------
     tag_counts: Counter[str] = Counter()
     impact_cat_counts: Counter[str] = Counter()
     flagship_count = 0
@@ -49,13 +133,16 @@ def compute_derived_metrics(tasks: List[Dict[str, Any]], events: List[Dict[str, 
     for t in tasks:
         for tag in t.get("tags", []) or []:
             tag_counts[tag] += 1
+
         impact_cat = t.get("impact_category")
         if impact_cat:
             impact_cat_counts[impact_cat] += 1
+
         if t.get("priority") == "⭐ major initiative":
             flagship_count += 1
 
-    # time-to-complete buckets
+    # ---- Time-to-complete distribution ----------------------------------------
+    # Compute time-to-complete (hours) where both timestamps exist.
     ttc_hours: List[float] = []
     for tid, created_dt in created_at_by_task.items():
         done_dt = completed_at_by_task.get(tid)
@@ -64,7 +151,8 @@ def compute_derived_metrics(tasks: List[Dict[str, Any]], events: List[Dict[str, 
             if delta_hours >= 0:
                 ttc_hours.append(delta_hours)
 
-    buckets = {"<1h": 0, "1-8h": 0, "8-24h": 0, "1-3d": 0, "3-7d": 0, "7d+": 0}
+    # Bucketize into human-readable bins (easy to present in a demo/video).
+    buckets: Dict[str, int] = {"<1h": 0, "1-8h": 0, "8-24h": 0, "1-3d": 0, "3-7d": 0, "7d+": 0}
     for h in ttc_hours:
         if h < 1:
             buckets["<1h"] += 1
@@ -91,11 +179,36 @@ def compute_derived_metrics(tasks: List[Dict[str, Any]], events: List[Dict[str, 
         "flagship_work_count": flagship_count,
         "time_to_complete_hours_buckets": buckets,
     }
+# endregion
 
 
+# region Daily Summary
+# -----------------------------------------------------------------------------
+# SECTION: Daily Summary
+#
+# WHAT
+# daily_summary() lists tasks completed today.
+#
+# WHY
+# This supports end-of-day reflection and helps build habit:
+# "What did I ship today, and what evidence exists?"
+#
+# NOTE
+# Uses the task state's completed_at timestamp (already updated by services.py).
+# -----------------------------------------------------------------------------
 def daily_summary(tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Daily summary: tasks completed today.
+
+    Parameters
+    ----------
+    tasks : list[dict]
+        Current task state.
+
+    Returns
+    -------
+    dict
+        JSON-serializable summary for "today".
     """
     today = date.today()
     completed_today: List[Dict[str, Any]] = []
@@ -110,15 +223,48 @@ def daily_summary(tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
         "date": today.isoformat(),
         "completed_count": len(completed_today),
         "completed_tasks": [
-            {"id": t["id"], "title": t["title"], "impact_category": t.get("impact_category"), "tags": t.get("tags", [])}
+            {
+                "id": t["id"],
+                "title": t["title"],
+                "impact_category": t.get("impact_category"),
+                "tags": t.get("tags", []),
+            }
             for t in completed_today
         ],
     }
+# endregion
 
 
+# region Weekly Accomplishments
+# -----------------------------------------------------------------------------
+# SECTION: Weekly Accomplishments
+#
+# WHAT
+# weekly_accomplishments() lists tasks completed in the last N days.
+#
+# WHY
+# Weekly review is the bridge between "tasks" and "promotion narrative".
+# A weekly list makes it easy to write:
+# - what shipped
+# - what impact happened
+# - what metrics moved
+# -----------------------------------------------------------------------------
 def weekly_accomplishments(tasks: List[Dict[str, Any]], days: int = 7) -> Dict[str, Any]:
     """
     Weekly accomplishments: tasks completed in last N days.
+
+    Parameters
+    ----------
+    tasks : list[dict]
+        Current task state.
+
+    days : int
+        Window size (defaults to 7).
+
+    Returns
+    -------
+    dict
+        JSON-serializable summary for last N days.
     """
     now = datetime.now().replace(microsecond=0)
     start = now.fromtimestamp(now.timestamp() - days * 24 * 3600)
@@ -140,14 +286,39 @@ def weekly_accomplishments(tasks: List[Dict[str, Any]], days: int = 7) -> Dict[s
             for t in completed
         ],
     }
+# endregion
 
 
+# region Standup Report
+# -----------------------------------------------------------------------------
+# SECTION: Standup Report
+#
+# WHAT
+# standup_report() builds three lists:
+# - yesterday completed
+# - today working on (everything not completed)
+# - blocked by (tagged with #blocked)
+#
+# WHY
+# This supports daily communication and creates "portable narrative":
+# you can paste this output into Slack, Jira comments, or notes.
+# -----------------------------------------------------------------------------
 def standup_report(tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Standup report:
     - Yesterday I completed
     - Today I am working on
     - Blocked by (tasks tagged #blocked)
+
+    Parameters
+    ----------
+    tasks : list[dict]
+        Current task state.
+
+    Returns
+    -------
+    dict
+        JSON-serializable standup structure.
     """
     today = date.today()
     yesterday = date.fromordinal(today.toordinal() - 1)
@@ -173,11 +344,52 @@ def standup_report(tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
         "today_working_on": [{"id": t["id"], "title": t["title"], "priority": t.get("priority")} for t in open_today],
         "blocked_by": [{"id": t["id"], "title": t["title"], "evidence": t.get("evidence")} for t in blocked],
     }
+# endregion
 
 
+# region Promotion Evidence Report (JSON + Markdown)
+# -----------------------------------------------------------------------------
+# SECTION: Promotion Evidence Report
+#
+# WHAT
+# promotion_evidence_report() produces:
+# - a structured JSON report for export
+# - a Markdown narrative for easy reading and sharing
+#
+# WHY
+# This is the core differentiator vs. a normal to-do list:
+# it organizes accomplishments by promotion criteria categories.
+#
+# INPUTS
+# - tasks: current task state (each task carries its evidence narrative)
+# - metrics: derived metrics bundle (counts, top tags, completion rate, etc.)
+#
+# OUTPUTS
+# - report_json: structured data for machine use / exporting
+# - markdown: human readable report suitable for GitHub or docs
+#
+# NOTE ON ORDERING
+# Within each category:
+# - flagship work first
+# - completed work before open work
+# - earlier created tasks first
+# -----------------------------------------------------------------------------
 def promotion_evidence_report(tasks: List[Dict[str, Any]], metrics: Dict[str, Any]) -> Tuple[Dict[str, Any], str]:
     """
     Build promotion evidence report in JSON and Markdown.
+
+    Parameters
+    ----------
+    tasks : list[dict]
+        Current task state.
+
+    metrics : dict
+        Derived metrics bundle (from compute_derived_metrics()).
+
+    Returns
+    -------
+    tuple[dict, str]
+        (report_json, markdown_text)
     """
     by_cat: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for t in tasks:
@@ -223,9 +435,11 @@ def promotion_evidence_report(tasks: List[Dict[str, Any]], metrics: Dict[str, An
         },
     }
 
+    # ---- Markdown rendering ---------------------------------------------------
     md: List[str] = []
     md.append("# Promotion Evidence Report\n")
     md.append(f"_Generated: {report_json['generated_at']}_\n")
+
     md.append("## Executive Summary")
     md.append(f"- Total tasks logged: **{len(tasks)}**")
     md.append(f"- Flagship work (⭐): **{metrics.get('flagship_work_count', 0)}**")
@@ -257,11 +471,36 @@ def promotion_evidence_report(tasks: List[Dict[str, Any]], metrics: Dict[str, An
         md.append("")
 
     return report_json, "\n".join(md).rstrip() + "\n"
+# endregion
 
 
+# region Report Bundling (One Export Payload)
+# -----------------------------------------------------------------------------
+# SECTION: Report Bundling
+#
+# WHAT
+# build_reports_bundle() composes all reports into one JSON object.
+#
+# WHY
+# storage.py exports a single reports.json and reports.md per run.
+# This function centralizes what "reports" means.
+# -----------------------------------------------------------------------------
 def build_reports_bundle(tasks: List[Dict[str, Any]], events: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Build all reports in one JSON bundle.
+
+    Parameters
+    ----------
+    tasks : list[dict]
+        Current task state.
+
+    events : list[dict]
+        Event log.
+
+    Returns
+    -------
+    dict
+        JSON-serializable bundle containing all reports and metrics.
     """
     metrics = compute_derived_metrics(tasks, events)
     return {
@@ -272,17 +511,44 @@ def build_reports_bundle(tasks: List[Dict[str, Any]], events: List[Dict[str, Any
         "promotion_evidence": promotion_evidence_report(tasks, metrics)[0],
         "metrics": metrics,
     }
+# endregion
 
 
+# region Markdown Export (Daily/Weekly/Standup)
+# -----------------------------------------------------------------------------
+# SECTION: Markdown Export
+#
+# WHAT
+# reports_to_markdown() converts the daily/weekly/standup sections into a
+# human-readable Markdown document.
+#
+# WHY
+# This is the "Reported" part of the pipeline:
+# - a user can open outputs/reports.md in GitHub and read it easily
+# - no special tools required
+#
+# NOTE
+# Promotion report markdown is exported separately (promotion_report.md).
+# -----------------------------------------------------------------------------
 def reports_to_markdown(reports: Dict[str, Any]) -> str:
     """
     Convert daily/weekly/standup into readable Markdown.
-    Promotion report is exported separately.
+
+    Parameters
+    ----------
+    reports : dict
+        JSON bundle produced by build_reports_bundle().
+
+    Returns
+    -------
+    str
+        Markdown document.
     """
     md: List[str] = []
     md.append("# Impact Reports\n")
     md.append(f"_Generated: {reports.get('generated_at')}_\n")
 
+    # ---- Daily ---------------------------------------------------------------
     d = reports.get("daily_summary", {})
     md.append("## Daily Summary")
     md.append(f"- Date: **{d.get('date')}**")
@@ -291,6 +557,7 @@ def reports_to_markdown(reports: Dict[str, Any]) -> str:
         md.append(f"  - {t.get('title')} (id={t.get('id')})")
     md.append("")
 
+    # ---- Weekly --------------------------------------------------------------
     w = reports.get("weekly_accomplishments", {})
     md.append("## Weekly Accomplishments")
     md.append(f"- Window: last **{w.get('window_days', 7)}** days")
@@ -299,6 +566,7 @@ def reports_to_markdown(reports: Dict[str, Any]) -> str:
         md.append(f"  - {t.get('title')} (id={t.get('id')}) — Metrics: {t.get('metrics')}")
     md.append("")
 
+    # ---- Standup -------------------------------------------------------------
     s = reports.get("standup", {})
     md.append("## Standup")
 
@@ -327,3 +595,4 @@ def reports_to_markdown(reports: Dict[str, Any]) -> str:
     md.append("")
 
     return "\n".join(md).rstrip() + "\n"
+# endregion
