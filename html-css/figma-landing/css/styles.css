@@ -5,6 +5,8 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background-color: #080808;
   color: #ffffff;
   font-family: Arial, sans-serif;
@@ -29,7 +31,8 @@ a {
 .site-header {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .nav-box {
@@ -60,12 +63,15 @@ a {
 
 .main-nav {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
 }
 
 .main-nav a {
   color: #9c9c9c;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  text-decoration: none;
 }
 
 .main-nav a:hover {
@@ -74,11 +80,15 @@ a {
 
 .social-links {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  gap: 24px;
 }
 
 .social-links a {
   color: #9c9c9c;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 /* Hero */
