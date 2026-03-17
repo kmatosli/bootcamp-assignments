@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #080808;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.nav-box {
+  width: 1110px;
+  height: 70px;
+
+  background: #1a1a1a;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 30px;
+}
+
+.main-nav a {
+  color: #9c9c9c;
+  font-size: 0.9rem;
+}
+
+.main-nav a:hover {
+  color: white;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: #9c9c9c;
+}
+
+/* Hero */
+.hero {
+  padding: 72px 0 96px;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero-text h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.hero-text p {
+  color: #9c9c9c;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.hero-button {
+  display: inline-block;
+  background-color: #3f8e00;
+  color: #ffffff;
+  padding: 16px 32px;
+  border-radius: 4px;
+  font-weight: 700;
+  box-shadow:
+    0 0 0 1px rgba(98, 186, 47, 0.4),
+    0 8px 20px rgba(63, 142, 0, 0.35);
+}
+
+.hero-image {
+  flex: 0 0 380px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Temporary spacing for unfinished sections */
+.worked-with,
+.recent-work,
+.testimonials,
+.contact,
+footer {
+  padding: 40px 5%;
+  color: #9c9c9c;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-text h1 {
+    font-size: 2.75rem;
+  }
+
+  .hero-image {
+    flex: none;
+  }
+
+  .hero-image img {
+    width: 280px;
+    height: 280px;
+  }
+}
