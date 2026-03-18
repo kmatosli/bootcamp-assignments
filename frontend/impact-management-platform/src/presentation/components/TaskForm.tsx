@@ -1,16 +1,16 @@
 /**
  * ============================================================
  * File: TaskForm.tsx
- * Purpose: UI component responsible for collecting task input
- * from the user and emitting a create-task event.
- * Context: This component is part of the presentation layer and
- * should not contain domain validation or repository logic.
- * Inputs: onCreate callback function.
- * Outputs: CreateTaskInput payload passed to the parent component.
+ * Purpose: Collects task input for create and edit workflows.
+ * Context: Presentation-layer form component with no repository
+ * or domain validation logic.
+ * Inputs: Initial form data, mode, and submit handler.
+ * Outputs: CreateTaskInput payload emitted to parent.
  * ============================================================
  */
 
 import {
+  useMemo,
   useState,
   type ChangeEvent,
   type CSSProperties,
@@ -19,10 +19,13 @@ import {
 import type { CreateTaskInput } from "../../application/actions/taskActions";
 
 interface TaskFormProps {
-  onCreate: (input: CreateTaskInput) => Promise<void>;
+  onCreate?: (input: CreateTaskInput) => Promise<unknown>;
+  onSubmit?: (input: CreateTaskInput) => Promise<unknown>;
+  initialData?: Partial<CreateTaskInput>;
+  mode?: "create" | "edit";
 }
 
-const initialFormData: CreateTaskInput = {
+const defaultFormData: CreateTaskInput = {
   title: "",
   description: "",
   status: "planned",
@@ -34,8 +37,23 @@ const initialFormData: CreateTaskInput = {
   impact: "",
 };
 
-export default function TaskForm({ onCreate }: TaskFormProps) {
-  const [formData, setFormData] = useState<CreateTaskInput>(initialFormData);
+export default function TaskForm({
+  onCreate,
+  onSubmit,
+  initialData,
+  mode = "create",
+}: TaskFormProps) {
+  const resolvedInitialData = useMemo<CreateTaskInput>(
+    () => ({
+      ...defaultFormData,
+      ...initialData,
+      tags: initialData?.tags ?? [],
+    }),
+    [initialData],
+  );
+
+  const [formData, setFormData] =
+    useState<CreateTaskInput>(resolvedInitialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(
@@ -43,23 +61,40 @@ export default function TaskForm({ onCreate }: TaskFormProps) {
   ) {
     const { name, value } = e.target;
 
-    setFormData((currentFormData: CreateTaskInput) => ({
+    setFormData((currentFormData) => ({
       ...currentFormData,
       [name]: value,
     }));
   }
 
-  function resetForm() {
-    setFormData(initialFormData);
+  function handleTagsChange(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+
+    setFormData((currentFormData) => ({
+      ...currentFormData,
+      tags: value
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter(Boolean),
+    }));
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    const submitHandler = onSubmit ?? onCreate;
+
+    if (!submitHandler) {
+      return;
+    }
+
     try {
       setIsSubmitting(true);
-      await onCreate(formData);
-      resetForm();
+      await submitHandler(formData);
+
+      if (mode === "create") {
+        setFormData(defaultFormData);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -67,7 +102,7 @@ export default function TaskForm({ onCreate }: TaskFormProps) {
 
   return (
     <section style={styles.container}>
-      <h2>Create Task</h2>
+      <h2>{mode === "edit" ? "Edit Task" : "Create Task"}</h2>
 
       <form onSubmit={handleSubmit} style={styles.form}>
         <input
@@ -112,6 +147,30 @@ export default function TaskForm({ onCreate }: TaskFormProps) {
           <option value="critical">Critical</option>
         </select>
 
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          style={styles.input}
+        >
+          <option value="delivery">Delivery</option>
+          <option value="analysis">Analysis</option>
+          <option value="leadership">Leadership</option>
+          <option value="stakeholder">Stakeholder</option>
+          <option value="process">Process</option>
+          <option value="learning">Learning</option>
+          <option value="career">Career</option>
+          <option value="other">Other</option>
+        </select>
+
+        <input
+          name="tags"
+          placeholder="Tags (comma separated)"
+          value={formData.tags?.join(", ") ?? ""}
+          onChange={handleTagsChange}
+          style={styles.input}
+        />
+
         <textarea
           name="problem"
           placeholder="Problem"
@@ -140,7 +199,13 @@ export default function TaskForm({ onCreate }: TaskFormProps) {
         />
 
         <button disabled={isSubmitting} style={styles.button}>
-          {isSubmitting ? "Creating..." : "Create Task"}
+          {isSubmitting
+            ? mode === "edit"
+              ? "Saving..."
+              : "Creating..."
+            : mode === "edit"
+              ? "Save Changes"
+              : "Create Task"}
         </button>
       </form>
     </section>

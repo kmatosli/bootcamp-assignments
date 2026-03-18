@@ -1,24 +1,13 @@
-/**
- * ============================================================
- * File: main.tsx
- * Purpose: Entry point for the React application.
- * Context: Bootstraps React and renders the App component
- * into the root DOM node.
- * ============================================================
- */
-
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import "./index.css";
 
-const rootElement = document.getElementById("root");
-
-if (!rootElement) {
-  throw new Error("Root element not found");
-}
-
-ReactDOM.createRoot(rootElement).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 );

@@ -2,48 +2,39 @@
  * ============================================================
  * File: DashboardPage.tsx
  * Purpose: Main dashboard page for the Impact Management
- * Platform MVP.
- * Context: This page composes presentation components and
- * displays top-level summary information for tasks and reports.
- * Inputs: Tasks, latest report, loading flags, error messages,
- * and UI event handlers passed down from App.tsx.
+ * Platform.
+ * Context: Uses TaskContext for task state and actions and
+ * composes presentation components for dashboard workflows.
+ * Inputs: Context state and actions.
  * Outputs: Rendered dashboard page UI.
  * Notes:
  * - Keep domain logic out of this file.
  * - Keep repository logic out of this file.
- * - Keep application orchestration in App.tsx or application actions.
  * ============================================================
  */
 
 import type { CSSProperties } from "react";
-import type { Task } from "../../domain/tasks/task.types";
-import type { ImpactReport } from "../../domain/reports/report.types";
-import type { CreateTaskInput } from "../../application/actions/taskActions";
+import { useNavigate } from "react-router-dom";
+import { useTaskContext } from "../context/TaskContext";
+import { selectCompletedTasks } from "../../domain/selectors/task.selectors";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
-import ReportSummary from "../components/ReportSummary";
 
-interface DashboardPageProps {
-  tasks: Task[];
-  report: ImpactReport | null;
-  totalTasks: number;
-  completedTaskCount: number;
-  isGeneratingReport: boolean;
-  error: string | null;
-  onCreateTask: (input: CreateTaskInput) => Promise<void>;
-  onGenerateReport: () => Promise<void>;
-}
+export default function DashboardPage() {
+  const navigate = useNavigate();
+  const { tasks, isLoading, error, createTask } = useTaskContext();
 
-export default function DashboardPage({
-  tasks,
-  report,
-  totalTasks,
-  completedTaskCount,
-  isGeneratingReport,
-  error,
-  onCreateTask,
-  onGenerateReport,
-}: DashboardPageProps) {
+  const completedTaskCount = selectCompletedTasks(tasks).length;
+
+  if (isLoading) {
+    return (
+      <main style={styles.pageShell}>
+        <h1 style={styles.title}>Impact Management Platform</h1>
+        <p style={styles.helperText}>Loading dashboard...</p>
+      </main>
+    );
+  }
+
   return (
     <main style={styles.pageShell}>
       <header style={styles.header}>
@@ -53,29 +44,14 @@ export default function DashboardPage({
             Structured work tracking, evidence capture, and impact reporting.
           </p>
         </div>
-
-        <button
-          type="button"
-          onClick={() => {
-            void onGenerateReport();
-          }}
-          disabled={isGeneratingReport}
-          style={styles.primaryButton}
-        >
-          {isGeneratingReport ? "Generating..." : "Generate Report"}
-        </button>
       </header>
 
-      {error && (
-        <section style={styles.errorBox}>
-          <strong>Error:</strong> {error}
-        </section>
-      )}
+      {error && <section style={styles.errorBox}>{error}</section>}
 
       <section style={styles.summaryGrid}>
         <div style={styles.summaryCard}>
           <span style={styles.summaryLabel}>Total Tasks</span>
-          <strong style={styles.summaryValue}>{totalTasks}</strong>
+          <strong style={styles.summaryValue}>{tasks.length}</strong>
         </div>
 
         <div style={styles.summaryCard}>
@@ -84,19 +60,22 @@ export default function DashboardPage({
         </div>
 
         <div style={styles.summaryCard}>
-          <span style={styles.summaryLabel}>Latest Report</span>
+          <span style={styles.summaryLabel}>Open Tasks</span>
           <strong style={styles.summaryValue}>
-            {report ? "Available" : "Not Generated"}
+            {tasks.length - completedTaskCount}
           </strong>
         </div>
       </section>
 
       <section style={styles.mainGrid}>
-        <TaskForm onCreate={onCreateTask} />
-        <TaskList tasks={tasks} />
+        <TaskForm onCreate={createTask} />
+        <TaskList
+          tasks={tasks}
+          onViewTask={(taskId) => {
+            navigate(`/tasks/${taskId}`);
+          }}
+        />
       </section>
-
-      <ReportSummary report={report} />
     </main>
   );
 }
@@ -124,16 +103,6 @@ const styles: Record<string, CSSProperties> = {
     marginTop: "8px",
     marginBottom: 0,
     color: "#4b5563",
-  },
-  primaryButton: {
-    padding: "10px 16px",
-    borderRadius: "8px",
-    border: "none",
-    backgroundColor: "#2563eb",
-    color: "#ffffff",
-    cursor: "pointer",
-    fontWeight: 600,
-    whiteSpace: "nowrap",
   },
   errorBox: {
     marginBottom: "16px",
@@ -170,5 +139,8 @@ const styles: Record<string, CSSProperties> = {
     gap: "24px",
     alignItems: "start",
     marginBottom: "24px",
+  },
+  helperText: {
+    color: "#6b7280",
   },
 };

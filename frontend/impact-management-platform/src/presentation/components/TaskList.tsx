@@ -2,24 +2,21 @@
  * ============================================================
  * File: TaskList.tsx
  * Purpose: Presentation component for rendering a list of tasks.
- * Context: This component belongs to the presentation layer and
- * should only display task data passed in from parent state.
- * Inputs: Array of Task entities.
+ * Context: Displays task data passed from parent state.
+ * Inputs: Task array and optional task-view callback.
  * Outputs: Rendered task list UI.
- * Notes:
- * - Keep domain filtering logic out of this file.
- * - Keep repository/storage logic out of this file.
- * - Keep application orchestration out of this file.
  * ============================================================
  */
 
+import type { CSSProperties } from "react";
 import type { Task } from "../../domain/tasks/task.types";
 
 interface TaskListProps {
   tasks: Task[];
+  onViewTask?: (taskId: string) => void;
 }
 
-export default function TaskList({ tasks }: TaskListProps) {
+export default function TaskList({ tasks, onViewTask }: TaskListProps) {
   if (tasks.length === 0) {
     return (
       <section style={styles.container}>
@@ -76,6 +73,20 @@ export default function TaskList({ tasks }: TaskListProps) {
                 <strong>Evidence:</strong> {task.impactFields.evidence.length}
               </span>
             </div>
+
+            {onViewTask && (
+              <div style={styles.actionRow}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onViewTask(task.id);
+                  }}
+                  style={styles.viewButton}
+                >
+                  View Details
+                </button>
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -90,7 +101,7 @@ function formatLabel(value: string): string {
     .join(" ");
 }
 
-const styles: Record<string, React.CSSProperties> = {
+const styles: Record<string, CSSProperties> = {
   container: {
     border: "1px solid #e5e7eb",
     padding: "20px",
@@ -166,5 +177,17 @@ const styles: Record<string, React.CSSProperties> = {
   impactText: {
     margin: "6px 0",
     color: "#374151",
+  },
+  actionRow: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  viewButton: {
+    padding: "8px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "#ffffff",
+    cursor: "pointer",
   },
 };
