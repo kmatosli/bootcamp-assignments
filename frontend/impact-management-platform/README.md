@@ -1,73 +1,118 @@
-# React + TypeScript + Vite
+Impact Management Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small system for capturing the impact of your work — not just the tasks.
 
-Currently, two official plugins are available:
+Why I built this
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Something strange happens during performance reviews.
 
-## React Compiler
+You remember being busy.
+You remember the meetings.
+You remember the projects.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+But when someone asks:
 
-## Expanding the ESLint configuration
+“What impact did your work actually have?”
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+…it’s harder than it should be to answer clearly.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Not because the work wasn’t valuable —
+but because the value wasn’t structured as it happened.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Most tools help you do the work.
+Very few help you explain why it mattered.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+What this does
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This app captures work as impact events instead of tasks.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Each entry records four things:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Problem — what needed to be solved
+
+Action — what you actually did
+
+Impact — what changed as a result
+
+Evidence — how you can prove it
+
+Over time, this turns day-to-day activity into something much more useful:
+
+a structured record of contributions that’s ready when you need it
+
+What it looks like in practice
+
+Add a new entry as you complete meaningful work
+
+Edit or refine entries as outcomes become clearer
+
+Review everything in one place when you need to communicate your impact
+
+Instead of reconstructing your year from memory, the record already exists.
+
+Features
+
+Create, edit, and delete impact entries
+
+Structured input (Problem → Action → Impact → Evidence)
+
+Simple dashboard for reviewing all entries
+
+Authentication (Auth0)
+
+Protected routes
+
+Local persistence (designed to be extended to a backend)
+
+Tech stack
+
+React + TypeScript
+
+Vite
+
+Context API (state management)
+
+Auth0 (authentication)
+
+Layered structure:
+
+domain
+
+application
+
+infrastructure
+
+presentation
+
+Running locally
+
+Clone the repo, then:
+
+npm install
+npm run dev
+Environment variables
+
+Create a .env file:
+
+VITE_AUTH0_DOMAIN=your-auth0-domain
+VITE_AUTH0_CLIENT_ID=your-client-id
+Build
+npm run build
+What I’d do next
+
+If I were taking this further:
+
+Add persistence (API + database)
+
+Introduce tagging / filtering for impact categories
+
+Generate exportable reports (review-ready summaries)
+
+Add analytics (e.g., type of impact over time)
+
+Closing thought
+
+Most systems optimize for execution.
+This one is meant to support explanation.
+
+That difference matters more than it seems.
