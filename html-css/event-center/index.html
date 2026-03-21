@@ -3,27 +3,622 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spain Cultural Travel Studio</title>
+    <title>The Curious Itinerary — Intellectual Cultural Travel</title>
+    <meta
+      name="description"
+      content="Curated cultural immersion trips for intellectually curious travelers. Small groups, structured experiences, accessible pricing, and substance over spectacle."
+    />
     <link rel="stylesheet" href="styles/main.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>"
+    />
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="journeys.html">Journeys</a>
-        <a href="philosophy.html">Philosophy & Contact</a>
-      </nav>
+    <a id="top"></a>
+
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-logo"
+        >The <span>Curious</span> Itinerary</a
+      >
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Trips</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="nav-cta">Inquire Now</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-eyebrow">Intellectual · Cultural · Immersive</span>
+        <h1>Travel That <em>Teaches</em><br />Something Real</h1>
+        <div class="hero-divider"></div>
+        <p class="hero-subtitle">
+          Curated small-group journeys through Spain and Europe for travelers
+          who want context, depth, and genuine human connection. Not bus
+          marathons. Not inflated luxury. Not Instagram backdrops.
+        </p>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>8–12</strong>
+            <span>Travelers per trip</span>
+          </div>
+          <div class="hero-stat">
+            <strong>$0</strong>
+            <span>Solo upcharge</span>
+          </div>
+          <div class="hero-stat">
+            <strong>8</strong>
+            <span>Signature journeys</span>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <a href="events.html" class="btn btn-primary">View Upcoming Trips</a>
+          <a href="about.html" class="btn btn-outline">Our Philosophy</a>
+        </div>
+      </div>
     </header>
 
     <main>
-      <h1>Return to Spain. See What You Missed.</h1>
-      <p>
-        Cultural journeys designed for depth, context, and thoughtful pacing.
-      </p>
+      <!-- DIFFERENTIATORS -->
+      <section class="differentiators">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Why We're Different</span>
+            <h2 style="color: var(--cream)">Premium Without<br />the Waste</h2>
+            <p style="color: rgba(245, 240, 232, 0.65)">
+              We redesigned group travel from the ground up — removing the parts
+              that waste time, attention, and money, and keeping the parts that
+              create understanding.
+            </p>
+          </div>
+
+          <div class="diff-grid">
+            <div class="diff-card">
+              <span class="diff-icon">🏛️</span>
+              <h3>Intellectual Depth</h3>
+              <p>
+                Every itinerary is built around a unifying theme — Roman
+                infrastructure, Spanish literature, Flamenco identity — so every
+                site and experience connects to a larger story.
+              </p>
+            </div>
+
+            <div class="diff-card">
+              <span class="diff-icon">🚶</span>
+              <h3>Less Transit, More Meaning</h3>
+              <p>
+                We do not pad itineraries with excessive movement just to make
+                them look bigger. Fewer transfers. Better pacing. More depth per
+                day.
+              </p>
+            </div>
+
+            <div class="diff-card">
+              <span class="diff-icon">🤝</span>
+              <h3>Engineered Bonding</h3>
+              <p>
+                Ice breakers, evening socials, and shared experiences are built
+                into every journey. You leave with friendships, not just photos.
+              </p>
+            </div>
+
+            <div class="diff-card">
+              <span class="diff-icon">💡</span>
+              <h3>Curated Free Time</h3>
+              <p>
+                No agonizing over lunch. No generic “explore on your own.” We
+                provide a vetted shortlist of off-the-beaten-path options so
+                your free time is actually free.
+              </p>
+            </div>
+
+            <div class="diff-card">
+              <span class="diff-icon">👤</span>
+              <h3>Zero Solo Upcharge</h3>
+              <p>
+                Solo travelers are penalized almost everywhere else. Not here.
+                One price, everyone pays the same — because traveling alone
+                should not cost more.
+              </p>
+            </div>
+
+            <div class="diff-card">
+              <span class="diff-icon">📊</span>
+              <h3>Transparent Value</h3>
+              <p>
+                We do not confuse price with quality. Our trips are designed to
+                justify your time and money with judgment, clarity, and real
+                cultural return.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED TRIPS -->
+      <section class="trips-section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Signature Journeys</span>
+            <h2>Eight Ways to<br />Understand Spain</h2>
+            <p>
+              Each journey is built around a lens — historical, literary,
+              artistic, or political — that transforms sightseeing into genuine
+              learning.
+            </p>
+          </div>
+
+          <div class="trips-grid">
+            <article class="trip-card">
+              <div class="trip-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80"
+                  alt="Roman aqueduct in Segovia, Spain"
+                />
+                <span class="trip-tag">History</span>
+              </div>
+              <div class="trip-card-body">
+                <h3>Roman Spain</h3>
+                <p>
+                  Empire, infrastructure, and power — from Tarragona to Mérida,
+                  trace the engineering and political logic that shaped the
+                  peninsula.
+                </p>
+                <div class="trip-meta">
+                  <span>📍 Tarragona · Mérida · Segovia</span>
+                  <span>📅 8 Days</span>
+                </div>
+                <span class="trip-price"
+                  >From $3,200 <small>/ person, excl. flights</small></span
+                >
+                <a href="events.html#roman-spain" class="btn btn-dark"
+                  >Learn More</a
+                >
+              </div>
+            </article>
+
+            <article class="trip-card">
+              <div class="trip-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80"
+                  alt="Flamenco dancer in Andalusia"
+                />
+                <span class="trip-tag">Culture</span>
+              </div>
+              <div class="trip-card-body">
+                <h3>Flamenco: History, Movement & Identity</h3>
+                <p>
+                  Not a tourist dance class. Understand Flamenco as a living
+                  archive of Roma influence, Andalusian grief, and cultural
+                  survival.
+                </p>
+                <div class="trip-meta">
+                  <span>📍 Seville · Granada · Cádiz</span>
+                  <span>📅 7 Days</span>
+                </div>
+                <span class="trip-price"
+                  >From $2,900 <small>/ person, excl. flights</small></span
+                >
+                <a href="events.html#flamenco" class="btn btn-dark"
+                  >Learn More</a
+                >
+              </div>
+            </article>
+
+            <article class="trip-card">
+              <div class="trip-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=700&q=80"
+                  alt="Granada and the Alhambra at sunset"
+                />
+                <span class="trip-tag">Literature</span>
+              </div>
+              <div class="trip-card-body">
+                <h3>Spain Through Literature & Ideas</h3>
+                <p>
+                  Walk through Madrid and Granada with Cervantes, Lorca, and the
+                  tensions of Civil War, exile, and identity as your frame.
+                </p>
+                <div class="trip-meta">
+                  <span>📍 Madrid · Granada · Seville</span>
+                  <span>📅 8 Days</span>
+                </div>
+                <span class="trip-price"
+                  >From $3,100 <small>/ person, excl. flights</small></span
+                >
+                <a href="events.html#literary-spain" class="btn btn-dark"
+                  >Learn More</a
+                >
+              </div>
+            </article>
+          </div>
+
+          <div style="text-align: center; margin-top: 3rem">
+            <a href="events.html" class="btn btn-primary"
+              >View All 8 Journeys</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- VALUE SECTION -->
+      <section style="background: var(--cream-dark); padding: 5rem 2rem">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Why It Feels Different</span>
+            <h2>We Don't Inflate<br />Value</h2>
+            <p>
+              Some premium itineraries justify their price with more transfers,
+              more vague luxury language, and more packaging. We take the
+              opposite approach.
+            </p>
+          </div>
+
+          <div
+            class="diff-grid"
+            style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))"
+          >
+            <div
+              class="diff-card"
+              style="
+                background: var(--white);
+                border-color: rgba(15, 30, 60, 0.08);
+                color: var(--navy);
+              "
+            >
+              <span class="diff-icon">🗺️</span>
+              <h3 style="color: var(--navy)">Less Itinerary Inflation</h3>
+              <p style="color: var(--text-muted)">
+                We do not add stops just to make a trip look impressive on
+                paper. Every city must earn its place.
+              </p>
+            </div>
+
+            <div
+              class="diff-card"
+              style="
+                background: var(--white);
+                border-color: rgba(15, 30, 60, 0.08);
+                color: var(--navy);
+              "
+            >
+              <span class="diff-icon">📚</span>
+              <h3 style="color: var(--navy)">More Depth Per Day</h3>
+              <p style="color: var(--text-muted)">
+                We care less about the number of things you see and more about
+                whether you leave understanding what mattered.
+              </p>
+            </div>
+
+            <div
+              class="diff-card"
+              style="
+                background: var(--white);
+                border-color: rgba(15, 30, 60, 0.08);
+                color: var(--navy);
+              "
+            >
+              <span class="diff-icon">💶</span>
+              <h3 style="color: var(--navy)">Premium Judgment</h3>
+              <p style="color: var(--text-muted)">
+                Boutique hotels, strong local guides, better sequencing, and
+                honest pricing — premium where it counts, not where it performs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UPCOMING SCHEDULE -->
+      <section style="background: var(--cream-dark); padding: 5rem 2rem">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">2026 Departures</span>
+            <h2>Upcoming Trips</h2>
+            <p>
+              Small groups fill quickly. Join the interest list for any trip not
+              yet open.
+            </p>
+          </div>
+
+          <div class="schedule-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dates</th>
+                  <th>Journey</th>
+                  <th>Theme</th>
+                  <th>Duration</th>
+                  <th>Group Size</th>
+                  <th>Price (excl. flights)</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>May 3–10, 2026</td>
+                  <td><strong>Roman Spain</strong></td>
+                  <td>History &amp; Empire</td>
+                  <td>8 Days</td>
+                  <td>10 max</td>
+                  <td>From $3,200</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Jul 12–19, 2026</td>
+                  <td><strong>Spain Through Literature</strong></td>
+                  <td>Literature &amp; Ideas</td>
+                  <td>8 Days</td>
+                  <td>10 max</td>
+                  <td>From $3,100</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Sep 5–11, 2026</td>
+                  <td><strong>Flamenco: History &amp; Identity</strong></td>
+                  <td>Culture &amp; Movement</td>
+                  <td>7 Days</td>
+                  <td>8 max</td>
+                  <td>From $2,900</td>
+                  <td><span class="status-interest">Interest List</span></td>
+                </tr>
+                <tr>
+                  <td>Oct 10–18, 2026</td>
+                  <td><strong>France: Revolution &amp; Republic</strong></td>
+                  <td>History &amp; Politics</td>
+                  <td>9 Days</td>
+                  <td>10 max</td>
+                  <td>From $3,600</td>
+                  <td><span class="status-planning">Planning</span></td>
+                </tr>
+                <tr>
+                  <td>Nov 2–10, 2026</td>
+                  <td><strong>Mediterranean Civilizations</strong></td>
+                  <td>Cross-Cultural History</td>
+                  <td>9 Days</td>
+                  <td>10 max</td>
+                  <td>From $4,200</td>
+                  <td><span class="status-planning">Planning</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="text-align: center; margin-top: 2rem">
+            <a href="contact.html" class="btn btn-primary"
+              >Join the Interest List</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT TEASER -->
+      <section class="about-teaser">
+        <div class="container">
+          <div class="about-split">
+            <div class="about-image">
+              <img
+                src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=700&q=80"
+                alt="Curator leading a cultural discussion in Spain"
+              />
+            </div>
+            <div class="about-text">
+              <span class="section-label">About Your Curator</span>
+              <h2>Built by a Traveler<br />Who Got It Wrong First</h2>
+              <p>
+                I've done the big bus tours. I've paid for prestige itineraries
+                that looked expensive but felt thin. I've watched groups of
+                curious adults spend their evenings alone, not knowing what to
+                do, not connecting with each other or with the place they
+                traveled so far to see.
+              </p>
+              <p>
+                The Curious Itinerary exists because that experience should not
+                cost more — and it definitely should not be the standard.
+              </p>
+
+              <div class="about-pillars">
+                <div class="pillar">
+                  <h4>Licensed Agent</h4>
+                  <p>Industry access &amp; supplier relationships</p>
+                </div>
+                <div class="pillar">
+                  <h4>Liberal Arts Depth</h4>
+                  <p>Spanish lit, history, and cultural theory</p>
+                </div>
+                <div class="pillar">
+                  <h4>Data Scientist</h4>
+                  <p>Transparent pricing, no hidden costs</p>
+                </div>
+                <div class="pillar">
+                  <h4>Year-Round</h4>
+                  <p>Not limited to faculty schedules</p>
+                </div>
+              </div>
+
+              <a href="about.html" class="btn btn-dark">Read the Full Story</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="testimonials">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Traveler Voices</span>
+            <h2>What Curious Travelers Say</h2>
+          </div>
+
+          <div class="testimonial-grid">
+            <div class="testimonial-card">
+              <blockquote>
+                "I've done cruise excursions for years and always felt like I
+                was just checking boxes. This was the first time I actually
+                understood what I was looking at."
+              </blockquote>
+              <span class="testimonial-author"
+                >— Margaret T., Chicago · Roman Spain, 2025</span
+              >
+            </div>
+
+            <div class="testimonial-card">
+              <blockquote>
+                "The hammam recommendation alone was worth it. The group became
+                friends within 48 hours. I've never experienced that on a tour
+                before."
+              </blockquote>
+              <span class="testimonial-author"
+                >— David R., New York · Flamenco Journey, 2025</span
+              >
+            </div>
+
+            <div class="testimonial-card">
+              <blockquote>
+                "Seeing Granada through Lorca's eyes, with a guide who actually
+                understood the poetry — remarkable."
+              </blockquote>
+              <span class="testimonial-author"
+                >— Dr. Ana V., Boston · Literary Spain, 2025</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT CTA -->
+      <section
+        style="background: var(--navy); padding: 5rem 2rem; text-align: center"
+      >
+        <div class="container">
+          <span class="section-label">Ready to Travel Differently?</span>
+          <h2 style="color: var(--cream); margin-bottom: 1.25rem">
+            Your Next Chapter<br />Starts with a Conversation
+          </h2>
+          <p
+            style="
+              color: rgba(245, 240, 232, 0.65);
+              max-width: 500px;
+              margin: 0 auto 2.5rem;
+            "
+          >
+            Tell us what themes fascinate you, when you can travel, and how you
+            like to explore. We'll find the right journey together.
+          </p>
+          <div class="btn-group">
+            <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+            <a href="pricing.html" class="btn btn-outline">View Pricing</a>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
-      <p>© 2026 Spain Cultural Travel Studio</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>The Curious Itinerary</h3>
+          <p>
+            Intellectual cultural immersion travel for curious adults. Small
+            groups. Accessible pricing. Substance over spectacle.
+          </p>
+          <div class="social-links">
+            <div class="social-links">
+              <a
+                href="https://www.united.com/en/us"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="United Airlines"
+                >United</a
+              >
+              <a
+                href="https://www.aa.com/homePage.do"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="American Airlines"
+                >American</a
+              >
+              <a
+                href="https://www.iberia.com/us/?language=en&cq_src=bing_ads&cq_cmp=Search%20-%20US%2Fen%20-%20Branded%20Exact%2FB&cq_con=Iberia%20-%20exact%20%7C%20MT%3AExact&cq_term=iberia&cq_med=&cq_net=o&cq_plt=bp&esl-k=bing-ads|n|c78683997183066|me|k78684186871142|p|t|a1258941434628287|g434099990&msclkid=6d928435f4851dfdc76ced88095b6f9b&utm_source=bing&utm_medium=cpc&utm_campaign=Search%20-%20US%2Fen%20-%20Branded%20Exact%2FB&utm_term=iberia&utm_content=Iberia%20-%20exact%20%7C%20MT%3AExact"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Iberia Airlines"
+                >Iberia</a
+              >
+              <a
+                href="https://www.delta.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Delta Airlines"
+                >Delta</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Journeys</h4>
+          <ul>
+            <li><a href="events.html#roman-spain">Roman Spain</a></li>
+            <li><a href="events.html#literary-spain">Literary Spain</a></li>
+            <li><a href="events.html#flamenco">Flamenco &amp; Identity</a></li>
+
+            <li>
+              <a href="events.html#mediterranean"
+                >Mediterranean Civilizations</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="events.html">2026 Schedule</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Travelers</h4>
+          <ul>
+            <li><a href="#">Cruise Community</a></li>
+            <li><a href="#">University Partners</a></li>
+            <li><a href="#">Solo Travelers</a></li>
+            <li><a href="#">Group Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 The Curious Itinerary. All rights reserved.</p>
+        <p>Licensed Travel Agency · Chicago, IL</p>
+      </div>
     </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      ↑
+    </button>
+    <script src="main.js"></script>
   </body>
 </html>

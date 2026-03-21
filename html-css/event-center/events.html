@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trips &amp; Events — The Curious Itinerary</title>
+    <meta
+      name="description"
+      content="Eight signature intellectual cultural journeys through Spain and Europe. Small groups, expert guides, accessible pricing."
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>"
+    />
+    <style>
+      .trip-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+        padding: 5rem 0;
+        border-bottom: 1px solid var(--cream-dark);
+      }
+      .trip-detail:last-child {
+        border-bottom: none;
+      }
+      .trip-detail.reverse {
+        direction: rtl;
+      }
+      .trip-detail.reverse > * {
+        direction: ltr;
+      }
+      .trip-detail-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .trip-detail-content h2 {
+        margin-bottom: 0.75rem;
+      }
+      .trip-detail-content .trip-tag-lg {
+        display: inline-block;
+        background: var(--gold);
+        color: var(--navy);
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.85rem;
+        border-radius: 2px;
+        margin-bottom: 1rem;
+      }
+      .trip-detail-content p {
+        margin-bottom: 1.1rem;
+        line-height: 1.9;
+      }
+      .trip-highlights {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+      }
+      .trip-highlights li {
+        font-size: 0.88rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--cream-dark);
+        display: flex;
+        gap: 0.75rem;
+        color: var(--text-dark);
+        font-weight: 300;
+        letter-spacing: 0.03em;
+      }
+      .trip-highlights li::before {
+        content: "✦";
+        color: var(--gold);
+        font-size: 0.6rem;
+        padding-top: 0.25rem;
+        flex-shrink: 0;
+      }
+      .trip-info-bar {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+        padding: 1.25rem;
+        background: var(--cream-dark);
+        border-radius: 4px;
+      }
+      .trip-info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .trip-info-item span:first-child {
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .trip-info-item span:last-child {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--text-dark);
+      }
+      @media (max-width: 800px) {
+        .trip-detail {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .trip-detail.reverse {
+          direction: ltr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a id="top"></a>
+
+    <nav>
+      <a href="index.html" class="nav-logo"
+        >The <span>Curious</span> Itinerary</a
+      >
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html" class="active">Trips</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="nav-cta">Inquire Now</a></li>
+      </ul>
+    </nav>
+
+    <header class="page-header">
+      <div class="page-header-content">
+        <span class="section-label">Eight Signature Journeys</span>
+        <h1>Trips &amp; Events</h1>
+        <p>
+          Each journey is built around a lens that transforms sightseeing into
+          genuine understanding.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <!-- SCHEDULE TABLE -->
+      <section style="background: var(--cream-dark)">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">2026 Departures</span>
+            <h2>Full Schedule</h2>
+            <p>
+              Groups fill at 8–10 travelers. Spots go quickly — especially for
+              solo travelers, who pay the same as everyone else.
+            </p>
+          </div>
+          <div class="schedule-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dates</th>
+                  <th>Journey</th>
+                  <th>Theme</th>
+                  <th>Cities</th>
+                  <th>Duration</th>
+                  <th>Max Group</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>May 3–10, 2026</td>
+                  <td><strong>Roman Spain</strong></td>
+                  <td>History &amp; Empire</td>
+                  <td>Tarragona, Mérida, Segovia</td>
+                  <td>8 Days</td>
+                  <td>10</td>
+                  <td>From $3,200</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Jul 12–19, 2026</td>
+                  <td><strong>Spain Through Literature</strong></td>
+                  <td>Literature &amp; Ideas</td>
+                  <td>Madrid, Granada, Seville</td>
+                  <td>8 Days</td>
+                  <td>10</td>
+                  <td>From $3,100</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Sep 5–11, 2026</td>
+                  <td><strong>Flamenco: History &amp; Identity</strong></td>
+                  <td>Culture &amp; Movement</td>
+                  <td>Seville, Granada, Cádiz</td>
+                  <td>7 Days</td>
+                  <td>8</td>
+                  <td>From $2,900</td>
+                  <td><span class="status-interest">Interest List</span></td>
+                </tr>
+                <tr>
+                  <td>Jul 5–13, 2026</td>
+                  <td>
+                    <strong
+                      >The Golden Age: Spain's Theatrical Revolution</strong
+                    >
+                  </td>
+                  <td>Theatre &amp; Literature</td>
+                  <td>Madrid, Alcalá, Toledo, Almagro</td>
+                  <td>9 Days</td>
+                  <td>10</td>
+                  <td>From $3,400</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Aug 24–Sep 1, 2026</td>
+                  <td>
+                    <strong>Seeing Spain: An Art Appreciation Journey</strong>
+                  </td>
+                  <td>Art &amp; Visual Culture</td>
+                  <td>Madrid, Toledo, Bilbao</td>
+                  <td>9 Days</td>
+                  <td>8</td>
+                  <td>From $3,500</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Oct 3–9, 2026</td>
+                  <td>
+                    <strong>Vivir Bien: A Women's Wellness Journey</strong>
+                  </td>
+                  <td>Wellness &amp; Culture</td>
+                  <td>Granada, Córdoba, Ronda</td>
+                  <td>7 Days</td>
+                  <td>10 women</td>
+                  <td>From $3,200</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Apr 19–25, 2026</td>
+                  <td>
+                    <strong>Barcelona: The Full Architectural Argument</strong>
+                  </td>
+                  <td>Architecture</td>
+                  <td>Barcelona</td>
+                  <td>7 Days</td>
+                  <td>10 max</td>
+                  <td>From $3,300</td>
+                  <td><span class="status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td>Nov 2–10, 2026</td>
+                  <td><strong>Mediterranean Civilizations</strong></td>
+                  <td>Cross-Cultural History</td>
+                  <td>Barcelona, Marseille, Montpellier</td>
+                  <td>9 Days</td>
+                  <td>10</td>
+                  <td>From $4,200</td>
+                  <td><span class="status-planning">Planning</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p
+            style="
+              font-size: 0.8rem;
+              color: var(--text-muted);
+              text-align: center;
+              margin-top: 1rem;
+            "
+          >
+            All prices exclude international flights. Zero solo traveler
+            upcharge. See
+            <a href="pricing.html" style="color: var(--gold)">pricing page</a>
+            for full breakdown.
+          </p>
+        </div>
+      </section>
+
+      <!-- TRIP DETAILS -->
+      <section style="background: var(--cream)">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Eight Signature Journeys</span>
+            <h2>The Eight Journeys</h2>
+          </div>
+
+          <article class="trip-detail" id="roman-spain">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80"
+              alt="Roman aqueduct of Segovia, Spain"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">History</span>
+              <h2>Roman Spain: Empire, Infrastructure &amp; Power</h2>
+              <p>
+                For more than six centuries, the Iberian Peninsula was the
+                western frontier of the Roman Empire. The roads, aqueducts,
+                theatres, and cities that survive today are not ruins — they're
+                arguments about how civilization is built.
+              </p>
+              <p>
+                This journey traces the Roman presence from Tarragona's
+                amphitheatre to Mérida's magnificent theatre, with a private
+                archaeologist guide who understands both the engineering and the
+                politics.
+              </p>
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Duration</span><span>8 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Group Size</span><span>Max 10</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $3,200</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Cities</span
+                  ><span>Tarragona · Mérida · Córdoba · Segovia</span>
+                </div>
+              </div>
+              <ul class="trip-highlights">
+                <li>
+                  Private archaeologist-led tour of Mérida's Roman theatre
+                </li>
+                <li>Walk original Roman road segments outside Córdoba</li>
+                <li>
+                  Evening lecture: Rome vs. modern European infrastructure
+                </li>
+                <li>Segovia aqueduct — 2,000 years, no mortar</li>
+                <li>Layered city walk: Roman → Moorish → Christian Córdoba</li>
+                <li>
+                  Curated evening: local hammam &amp; dinner off the beaten path
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark">Reserve Your Spot</a>
+            </div>
+          </article>
+
+          <article class="trip-detail reverse" id="literary-spain">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1562979314-bee7453e911c?w=800&q=80"
+              alt="The Alhambra in Granada, Spain"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">Literature</span>
+              <h2>Spain Through Literature &amp; Ideas</h2>
+              <p>
+                You've read Cervantes. Maybe Lorca. Perhaps even Unamuno. But
+                have you stood where <em>Don Quixote</em> was written, or seen
+                the Granada that haunted every line Federico García Lorca ever
+                composed?
+              </p>
+              <p>
+                This journey connects the texts to the terrain — and the terrain
+                to the trauma of Civil War, exile, and the literary genius that
+                emerged from both.
+              </p>
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Duration</span><span>8 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Group Size</span><span>Max 10</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $3,100</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Cities</span
+                  ><span>Madrid · Granada · Seville · Barcelona</span>
+                </div>
+              </div>
+              <ul class="trip-highlights">
+                <li>
+                  Guided literary walk through Madrid's Barrio de las Letras
+                </li>
+                <li>Granada: Lorca's birthplace, the Alhambra, and Viznar</li>
+                <li>
+                  Evening salon: reading discussion with Spanish literature
+                  expert
+                </li>
+                <li>
+                  Civil War history — the Republic, the Nationalists, and the
+                  writers caught between
+                </li>
+                <li>Flamenco performance framed as poetic expression</li>
+                <li>Pre-trip reading list curated by the journey curator</li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark">Reserve Your Spot</a>
+            </div>
+          </article>
+
+          <article class="trip-detail" id="flamenco">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800&q=80"
+              alt="Flamenco performance in Andalusia"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">Culture &amp; Movement</span>
+              <h2>Flamenco: History, Movement &amp; Cultural Identity</h2>
+              <p>
+                This is not a tourist dance class. Flamenco is a living record
+                of cultural collision — Roma tradition, Moorish musical scales,
+                Andalusian grief, and centuries of marginalization transformed
+                into devastating art.
+              </p>
+              <p>
+                You'll learn the movements. You'll also understand why they mean
+                what they mean.
+              </p>
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Duration</span><span>7 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Group Size</span><span>Max 8</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $2,900</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Cities</span><span>Seville · Granada · Cádiz</span>
+                </div>
+              </div>
+              <ul class="trip-highlights">
+                <li>
+                  Small-group workshop with a professional flamenco dancer
+                </li>
+                <li>Private performance with cultural historian commentary</li>
+                <li>Discussion: Roma influence, Moorish musical heritage</li>
+                <li>Rhythm and palmas (handclapping) music workshop</li>
+                <li>Cádiz — birthplace of many flamenco forms</li>
+                <li>Evening: intimate tablao performance, not tourist venue</li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark"
+                >Join the Interest List</a
+              >
+            </div>
+          </article>
+
+          <article class="trip-detail" id="golden-age">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+              alt="Historic Spanish plaza and classical architecture"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">Theatre &amp; Literature</span>
+              <h2>The Golden Age: Spain's Theatrical Revolution</h2>
+              <p>
+                While Shakespeare was reshaping English drama, Spain was
+                experiencing its own theatrical explosion — and almost no one in
+                the English-speaking world knows it. Lope de Vega wrote over 400
+                surviving plays. Calderón de la Barca's
+                <em>La vida es sueño</em> is one of the most philosophically
+                profound works in Western literature. Tirso de Molina invented
+                Don Juan. This is the trip for everyone who studied Spanish
+                literature and was never taught any of this.
+              </p>
+              <p>
+                Built around the
+                <strong
+                  >Festival Internacional de Teatro Clásico de Almagro</strong
+                >
+                — the world's largest Golden Age theatre festival, held every
+                July in a 17th-century <em>Corral de Comedias</em> that has been
+                in continuous operation since 1628 — this journey combines live
+                performance with the cities, histories, and ideas that produced
+                Spain's greatest literary century.
+              </p>
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Dates</span><span>July 5–13, 2026</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Duration</span><span>9 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Group Size</span><span>Max 10</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $3,400</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Cities</span
+                  ><span>Madrid · Alcalá de Henares · Toledo · Almagro</span>
+                </div>
+              </div>
+              <ul class="trip-highlights">
+                <li>
+                  Attend 2–3 live performances at Almagro festival — Calderón,
+                  Lope de Vega, Tirso de Molina — in the
+                  <em>Corral de Comedias</em> built in 1628
+                </li>
+                <li>
+                  Pre-show discussion each evening: what you're about to see,
+                  why it matters, what the playwright was arguing
+                </li>
+                <li>
+                  Madrid's <em>Barrio de las Letras</em> — the literary quarter
+                  where Cervantes, Lope de Vega, and Quevedo all lived within
+                  blocks of each other
+                </li>
+                <li>
+                  Alcalá de Henares — Cervantes' birthplace and its own
+                  Classical Theatre Festival, with a
+                  <em>Corral de Comedias</em> still in use
+                </li>
+                <li>
+                  Toledo — Calderón's city: the layered Roman, Moorish, and
+                  Christian capital that shaped his <em>auto sacramentales</em>
+                </li>
+                <li>
+                  National Museum of Theatre (Almagro) — costumes, stage
+                  machinery, and manuscripts from the Golden Age
+                </li>
+                <li>
+                  Evening salon: The <em>Siglo de Oro</em> as Spain's
+                  Shakespeare moment — and why American universities ignore it
+                </li>
+                <li>
+                  Pre-trip reading list: one play each from Calderón (<em
+                    >La vida es sueño</em
+                  >), Lope (<em>Fuenteovejuna</em>), Tirso (<em
+                    >El burlador de Sevilla</em
+                  >), and Cervantes' <em>entremeses</em>
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark">Reserve Your Spot</a>
+            </div>
+          </article>
+
+          <article class="trip-detail reverse" id="seeing-spain">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=800&q=80"
+              alt="Visitor contemplating masterpiece painting in Spanish museum"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">Art &amp; Visual Culture</span>
+              <h2>Seeing Spain: An Art Appreciation Journey</h2>
+              <p>
+                Most people walk past <em>Las Meninas</em> in 45 seconds. They
+                glance at Goya's Black Paintings and keep moving. They stand in
+                front of El Greco's <em>Burial of the Count of Orgaz</em> and
+                feel vaguely impressed without knowing why. They leave the Prado
+                overwhelmed — and no richer for it.
+              </p>
+              <p>
+                This journey is built around one radical idea:
+                <strong
+                  >you don't need an art history degree to truly see a
+                  masterpiece. You need someone to slow you down and teach you
+                  the language.</strong
+                >
+                Once you understand WHY Velázquez's brushwork was revolutionary,
+                WHY Goya painted his darkest works in secret on his own walls,
+                WHY El Greco deliberately rearranged Toledo's skyline — you can
+                never un-see it. Every museum you visit for the rest of your
+                life changes.
+              </p>
+              <p>
+                And then you pick up a brush yourself. Not to become an artist.
+                To train your eye. Because trying to paint what you see forces
+                you to actually look at it — and that changes everything.
+              </p>
+
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Dates</span><span>Aug 24–Sep 1, 2026</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Duration</span><span>9 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Group Size</span><span>Max 8</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $3,500</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Cities</span><span>Madrid · Toledo · Bilbao</span>
+                </div>
+              </div>
+
+              <ul class="trip-highlights">
+                <li>
+                  <strong>The Prado — Done Right:</strong> Not a highlights
+                  rush. Six masterworks. 30 minutes each. Velázquez, Goya, El
+                  Greco, Bosch — with a guide who teaches you to see, not just
+                  look
+                </li>
+                <li>
+                  <strong>Las Meninas decoded:</strong> Why did Velázquez paint
+                  himself into a royal portrait? What is he actually saying
+                  about power, art, and the nature of seeing?
+                </li>
+                <li>
+                  <strong>Goya's Black Paintings:</strong> He painted these
+                  secretly on his own dining room walls — they were never meant
+                  to be exhibited. What does that tell us about the artist?
+                </li>
+                <li>
+                  <strong
+                    >Reina Sofía — Guernica with full Civil War context:</strong
+                  >
+                  Then a Cubist sketch workshop — you try Picasso's technique of
+                  decomposing what you see
+                </li>
+                <li>
+                  <strong>Toledo — El Greco in context:</strong> See
+                  <em>The Burial of the Count of Orgaz</em> in the actual church
+                  it was painted for, not a museum. Then stand outside and look
+                  at Toledo the way he painted it
+                </li>
+                <li>
+                  <strong>Studio Day — Pick up the brush:</strong> Local Madrid
+                  artist's studio. Watercolor or oil pastel — your choice.
+                  Velázquez light-and-shadow OR Goya dramatic contrast. All
+                  skill levels. The point is to look, not to produce a
+                  masterpiece
+                </li>
+                <li>
+                  <strong>Bilbao — Guggenheim as architecture:</strong> How
+                  Frank Gehry designed a building that changed a dying
+                  industrial city. The art inside AND the building itself as art
+                </li>
+                <li>
+                  <strong>Outdoor sketching session, Toledo:</strong> Try to
+                  draw what El Greco painted. Even stick figures. The attempt
+                  forces your eye to see what it normally skips
+                </li>
+                <li>
+                  <strong>Pre-trip reading:</strong> One essay on each artist —
+                  accessible, not academic. You arrive knowing just enough to be
+                  dangerous
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark">Reserve Your Spot</a>
+            </div>
+          </article>
+
+          <article class="trip-detail" id="vivir-bien">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80"
+              alt="Hammam thermal baths with warm candlelit water pools in Andalusia Spain"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">Women Only · Wellness</span>
+              <h2>Vivir Bien: A Women's Wellness Journey Through Andalusia</h2>
+
+              <p>
+                You have spent $400 at Aire Ancient Baths for a single hammam
+                session. You have booked spa treatments at hotel prices that
+                should embarrass everyone involved. You have sat in a Gate1 bus
+                for eight hours and arrived somewhere beautiful too exhausted to
+                appreciate it.
+              </p>
+
+              <p>This trip is the antidote to all of that.</p>
+
+              <p>
+                Spain has one of the oldest and most layered wellness traditions
+                in the Western world — Roman thermal springs built 2,000 years
+                ago, Moorish hammam culture that turned bathing into a social
+                art, olive oil therapy rooted in Andalusian agricultural
+                heritage, and a daily philosophy of <em>vivir bien</em> — living
+                well — that has nothing to do with productivity and everything
+                to do with presence. Most travelers walk past all of it. You are
+                going to live inside it for seven days.
+              </p>
+
+              <p>
+                This is not a yoga retreat. There is no meditation gong. There
+                is no juice cleanse. This is what Spanish women have known for
+                centuries — that the body deserves unhurried attention, that
+                beauty comes from the earth you live on, and that pleasure is
+                not indulgence. It is cultural intelligence.
+              </p>
+
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Dates</span><span>Oct 3–9, 2026</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Duration</span><span>7 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Who</span><span>Women only · Max 10</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $3,200</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Cities</span><span>Granada · Córdoba · Ronda</span>
+                </div>
+              </div>
+
+              <ul class="trip-highlights">
+                <li>
+                  <strong>Hammam Al Ándalus Granada</strong> — full ritual on
+                  arrival night: warm pool, hot pool, cold plunge, kessa scrub,
+                  ghassoul clay mask. The authentic Moorish sequence, not the
+                  tourist version
+                </li>
+                <li>
+                  <strong>The Alhambra — slowly.</strong> Two hours. Four rooms.
+                  No rushing. You sit in the Nasrid Palaces long enough to
+                  actually feel them
+                </li>
+                <li>
+                  <strong>Balneario thermal springs</strong> — ancient mineral
+                  waters that Romans built, Arabs rebuilt, and Spaniards have
+                  bathed in continuously for 2,000 years
+                </li>
+                <li>
+                  <strong>Olive oil morning in Jaén</strong> — visit an
+                  <em>almazara</em> (traditional olive press), taste
+                  single-estate oils, then receive a full olive oil body
+                  treatment using the oil you just tasted. You understand it
+                  before it touches your skin
+                </li>
+                <li>
+                  <strong>Hammam Al Ándalus Córdoba</strong> — different hammam,
+                  different city, different Moorish tradition. Compare the two
+                </li>
+                <li>
+                  <strong>The Mezquita at your own pace</strong> — one of the
+                  most spiritually overwhelming buildings in the world. Sit in
+                  it. Don't rush through it
+                </li>
+                <li>
+                  <strong>Ronda</strong> — the most dramatically beautiful town
+                  in Spain, perched above a 400-foot gorge. One full free
+                  afternoon. Walk, sit, read, watch the light change. This is
+                  the <em>paseo</em> as philosophy
+                </li>
+                <li>
+                  <strong>Flamenco movement session</strong> — not performance,
+                  not tourist show. A private session with a local dancer
+                  focused on embodied expression and emotional release through
+                  movement
+                </li>
+                <li>
+                  <strong>Thalassotherapy</strong> — Atlantic coastal spa using
+                  warmed seawater circuits, marine mud, and sea air. Spain has
+                  2,000km of coastline and has been doing this for centuries
+                </li>
+                <li>
+                  <strong>The <em>vivir bien</em> table</strong> — every group
+                  dinner is unhurried, every dish explained, every wine chosen.
+                  No phones. Mediterranean eating as it was meant to be
+                  practiced
+                </li>
+                <li>
+                  <strong>Zero solo traveler upcharge.</strong> Come alone. You
+                  will not feel alone for one single hour of this trip
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark">Reserve Your Spot</a>
+            </div>
+          </article>
+
+          <article class="trip-detail reverse" id="barcelona-architecture">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=800&q=80"
+              alt="Barcelona Sagrada Familia and Modernisme architecture skyline"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">Architecture</span>
+              <h2>Barcelona: The Full Architectural Argument</h2>
+
+              <p>
+                Every tourist sees the Sagrada Família. Every tourist
+                photographs Casa Batlló. Every tourist climbs Park Güell and
+                takes the same picture. And almost every tourist leaves
+                Barcelona having heard one person talking in a room full of
+                geniuses.
+              </p>
+
+              <p>
+                Barcelona has been having a 150-year architectural argument —
+                about what buildings should do, what they should say, and who
+                they should serve. Gaudí is the most famous voice. But Lluís
+                Domènech i Montaner may have been the better architect. Josep
+                Puig i Cadafalch was their direct rival. Ildefons Cerdà designed
+                the grid that every building sits inside. Enric Miralles
+                answered them all from the 21st century. And Jean Nouvel asked a
+                completely different question with glass and aluminum.
+              </p>
+
+              <p>
+                This trip is the whole conversation. And in 2026, with the
+                completion of the Sagrada Família's Tower of Jesus making it the
+                world's tallest church, there has never been a better moment to
+                understand what Gaudí was actually arguing.
+              </p>
+
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Dates</span><span>Apr 19–25, 2026</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Duration</span><span>7 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Group Size</span><span>Max 10</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $3,300</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>City</span><span>Barcelona (exclusively)</span>
+                </div>
+              </div>
+
+              <ul class="trip-highlights">
+                <li>
+                  <strong>Sagrada Família — with the laboratory first:</strong>
+                  Before the cathedral, the Colònia Güell Crypt — the UNESCO
+                  World Heritage Site where Gaudí worked out every structural
+                  principle he later used at Sagrada Família. On a typical
+                  weekday you share it with six people. This is where the
+                  masterpiece was invented
+                </li>
+                <li>
+                  <strong
+                    >The Bloc de la Discòrdia — read the whole argument:</strong
+                  >
+                  Four architects, four philosophies, one block of Passeig de
+                  Gràcia. Casa Amatller's blacksmith rabbits and glassblowing
+                  frogs versus Gaudí's House of Bones. Most tourists photograph
+                  one building. Your group reads the debate
+                </li>
+                <li>
+                  <strong
+                    >Recinte Modernista de Sant Pau — the building tourists
+                    should be queuing for:</strong
+                  >
+                  27 Art Nouveau pavilions, UNESCO World Heritage, a ten-minute
+                  walk from Sagrada Família. Arguably more technically dazzling
+                  than anything Gaudí built. Almost entirely uncrowded
+                </li>
+                <li>
+                  <strong
+                    >Palau de la Música Catalana — attended as a concert, not a
+                    tour:</strong
+                  >
+                  Domènech i Montaner designed this building to be experienced
+                  with music. The stained glass ceiling, the sculptural columns,
+                  the acoustics. You attend an evening performance. The building
+                  performs
+                </li>
+                <li>
+                  <strong
+                    >Casa Vicens — Gaudí's first house, his most
+                    surprising:</strong
+                  >
+                  Before the curves. Before the religion. Mudéjar influence,
+                  bold ceramic tiles, botanical interior painting. In the
+                  residential Gràcia neighborhood. Almost nobody finds it
+                </li>
+                <li>
+                  <strong>Torre Bellesguard — Gaudí's medieval castle:</strong>
+                  Built on the ruins of a 15th-century royal residence. Straight
+                  lines — rare for Gaudí. Gothic verticality. Medieval Catalan
+                  history embedded in the foundations. Practically empty on any
+                  given day
+                </li>
+                <li>
+                  <strong>Born Market underground excavations:</strong> Beneath
+                  a 19th-century iron market, archaeologists found an entire
+                  neighborhood destroyed in 1714 when Spain conquered Catalonia.
+                  The streets, homes, and artifacts the victors never
+                  documented. This is where Catalan identity becomes visceral
+                  and architectural at the same time
+                </li>
+                <li>
+                  <strong>Bunkers del Carmel at sunset:</strong> Anti-aircraft
+                  battery from the Spanish Civil War. 360° views — Sagrada
+                  Família, Montjuïc, the Mediterranean, the mountains. Free.
+                  Used by locals. The best view in Barcelona and almost no
+                  tourists know it
+                </li>
+                <li>
+                  <strong>Mercat de Santa Caterina:</strong> Enric Miralles'
+                  wildly undulating mosaic roof — the 21st century's answer to
+                  Gaudí's trencadís. This is where the neighborhood actually
+                  shops. La Boqueria is the tourist market. This is the real one
+                </li>
+                <li>
+                  <strong
+                    >The Eixample grid — Cerdà's radical social vision:</strong
+                  >
+                  Every building in Barcelona sits inside Ildefons Cerdà's 1860
+                  urban plan. He designed the chamfered corners so light could
+                  reach every apartment. He designed interior courtyards as
+                  public gardens. The grid itself is a political argument about
+                  equality. Almost no tourist knows his name
+                </li>
+                <li>
+                  <strong
+                    >Torres Glòries — Jean Nouvel's glass argument:</strong
+                  >
+                  472 feet of multi-colored glass and aluminum asking what
+                  21st-century Barcelona says in response to 19th-century
+                  Modernisme. The Pritzker jury cited his ability to rupture
+                  scale and manipulate light
+                </li>
+                <li>
+                  <strong>Sketching session:</strong> One building, 45 minutes,
+                  whatever medium you choose. The act of trying to draw what you
+                  see forces your eye to notice what it skips. You leave with a
+                  sketch and a permanently changed way of seeing buildings
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark">Reserve Your Spot</a>
+            </div>
+          </article>
+
+          <article class="trip-detail" id="mediterranean">
+            <img
+              class="trip-detail-img"
+              src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80"
+              alt="Mediterranean coastline Spain France"
+            />
+            <div class="trip-detail-content">
+              <span class="trip-tag-lg">Advanced Journey</span>
+              <h2>Mediterranean Civilizations: Spain + South of France</h2>
+              <p>
+                The Mediterranean is not a body of water. It is the world's
+                oldest conversation — between Rome and Carthage, Islam and
+                Christianity, trade and war, migration and empire.
+              </p>
+              <p>
+                This is our flagship advanced journey, designed for travelers
+                who have explored Spain and France individually and are ready
+                for the synthesis.
+              </p>
+              <div class="trip-info-bar">
+                <div class="trip-info-item">
+                  <span>Duration</span><span>9 Days</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Group Size</span><span>Max 10</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Price</span><span>From $4,200</span>
+                </div>
+                <div class="trip-info-item">
+                  <span>Cities</span
+                  ><span>Barcelona · Marseille · Montpellier</span>
+                </div>
+              </div>
+              <ul class="trip-highlights">
+                <li>
+                  Roman → Moorish → Christian cultural layering, both sides of
+                  the border
+                </li>
+                <li>
+                  Trade routes: how the Mediterranean shaped modern Europe
+                </li>
+                <li>Marseille: immigration, identity, and the modern city</li>
+                <li>Montpellier's medieval Islamic intellectual heritage</li>
+                <li>Barcelona: Gaudí as cultural synthesis</li>
+                <li>
+                  Guest expert: historian specializing in Mediterranean
+                  cross-cultural exchange
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-dark"
+                >Join the Planning List</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section
+        style="background: var(--navy); padding: 5rem 2rem; text-align: center"
+      >
+        <div class="container">
+          <span class="section-label">Don't See Your Dates?</span>
+          <h2 style="color: var(--cream); margin-bottom: 1.25rem">
+            Private &amp; Custom Groups Welcome
+          </h2>
+          <p
+            style="
+              color: rgba(245, 240, 232, 0.65);
+              max-width: 520px;
+              margin: 0 auto 2.5rem;
+            "
+          >
+            Universities, cruise communities, alumni groups, and private parties
+            of 6+ can request custom departures around any of our eight themes.
+            Year-round availability.
+          </p>
+          <div class="btn-group">
+            <a href="contact.html" class="btn btn-primary"
+              >Request Custom Dates</a
+            >
+            <a href="pricing.html" class="btn btn-outline">View Pricing</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>The Curious Itinerary</h3>
+          <p>
+            Intellectual cultural immersion travel for curious adults. Small
+            groups. Accessible pricing. Substance over spectacle.
+          </p>
+          <div class="social-links">
+            <a
+              href="https://www.united.com/en/us"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="United Airlines"
+              >United</a
+            >
+            <a
+              href="https://www.aa.com/homePage.do"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="American Airlines"
+              >American</a
+            >
+            <a
+              href="https://www.iberia.com/us/?language=en&cq_src=bing_ads&cq_cmp=Search%20-%20US%2Fen%20-%20Branded%20Exact%2FB&cq_con=Iberia%20-%20exact%20%7C%20MT%3AExact&cq_term=iberia&cq_med=&cq_net=o&cq_plt=bp&esl-k=bing-ads|n|c78683997183066|me|k78684186871142|p|t|a1258941434628287|g434099990&msclkid=6d928435f4851dfdc76ced88095b6f9b&utm_source=bing&utm_medium=cpc&utm_campaign=Search%20-%20US%2Fen%20-%20Branded%20Exact%2FB&utm_term=iberia&utm_content=Iberia%20-%20exact%20%7C%20MT%3AExact"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Iberia Airlines"
+              >Iberia</a
+            >
+            <a
+              href="https://www.delta.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Delta Airlines"
+              >Delta</a
+            >
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Journeys</h4>
+          <ul>
+            <li>
+              <a href="#barcelona-architecture">Barcelona Architecture</a>
+            </li>
+            <li><a href="#roman-spain">Roman Spain</a></li>
+            <li><a href="#literary-spain">Literary Spain</a></li>
+            <li><a href="#flamenco">Flamenco &amp; Identity</a></li>
+            <li><a href="#golden-age">The Golden Age</a></li>
+            <li><a href="#seeing-spain">Art Appreciation</a></li>
+            <li><a href="#vivir-bien">Vivir Bien Wellness</a></li>
+            <li><a href="#mediterranean">Mediterranean Civilizations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="events.html">2026 Schedule</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Travelers</h4>
+          <ul>
+            <li><a href="contact.html">Cruise Community</a></li>
+            <li><a href="contact.html">University Partners</a></li>
+            <li><a href="contact.html">Solo Travelers</a></li>
+            <li><a href="contact.html">Group Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 The Curious Itinerary. All rights reserved.</p>
+        <p>Licensed Travel Agency · Chicago, IL</p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      ↑
+    </button>
+    <script src="main.js"></script>
+  </body>
+</html>

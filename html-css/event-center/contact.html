@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — The Curious Itinerary</title>
+    <meta
+      name="description"
+      content="Inquire about a Spain journey, join an interest list, or ask about custom group and cruise programs with The Curious Itinerary."
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>"
+    />
+    <style>
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+      details summary::before {
+        content: "+ ";
+        font-family: var(--font-body);
+        font-size: 1rem;
+        color: var(--gold);
+        font-weight: 300;
+      }
+      details[open] summary::before {
+        content: "− ";
+      }
+      details summary {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a id="top"></a>
+
+    <nav>
+      <a href="index.html" class="nav-logo"
+        >The <span>Curious</span> Itinerary</a
+      >
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Trips</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html" class="nav-cta">Inquire Now</a></li>
+      </ul>
+    </nav>
+
+    <header class="page-header">
+      <div class="page-header-content">
+        <span class="section-label">Get in Touch</span>
+        <h1>Start the Conversation</h1>
+        <p>
+          Tell us what fascinates you. We'll find — or build — the right
+          journey.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <!-- CONTACT SECTION -->
+      <section class="contact-section">
+        <div class="container">
+          <div class="contact-grid">
+            <!-- LEFT: INFO -->
+            <div class="contact-info">
+              <span class="section-label">Reach Us</span>
+              <h2>Every Great Trip<br />Begins Here</h2>
+              <p>
+                Whether you're ready to book, want to join an interest list, or
+                have questions about custom group, university, or cruise
+                programs — we respond to every inquiry within 48 hours. Usually
+                much sooner.
+              </p>
+
+              <ul class="contact-details">
+                <li>
+                  <span>📍</span>
+                  <span
+                    >Chicago, Illinois<br />Available year-round,
+                    worldwide</span
+                  >
+                </li>
+                <li>
+                  <span>✉️</span>
+                  <span>hello@thecuriousitinerary.com</span>
+                </li>
+                <li>
+                  <span>📞</span>
+                  <span>By appointment — schedule via the form</span>
+                </li>
+                <li>
+                  <span>⏰</span>
+                  <span>Response within 48 hours<br />Usually much sooner</span>
+                </li>
+              </ul>
+
+              <div
+                style="
+                  margin-top: 2.5rem;
+                  padding-top: 2rem;
+                  border-top: 1px solid rgba(245, 240, 232, 0.1);
+                "
+              >
+                <h3
+                  style="
+                    color: var(--gold);
+                    font-size: 1rem;
+                    font-family: var(--font-body);
+                    font-weight: 600;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  🚢 Cruise Community
+                </h3>
+                <p
+                  style="
+                    color: rgba(245, 240, 232, 0.65);
+                    font-size: 0.88rem;
+                    line-height: 1.8;
+                  "
+                >
+                  Planning a pre or post-cruise land extension? Done every port
+                  and ready for something real? We design experiences around
+                  your sailing schedule at a fraction of what cruise lines
+                  charge — and teach you things their excursion desk never will.
+                </p>
+              </div>
+
+              <div style="margin-top: 1.5rem">
+                <h3
+                  style="
+                    color: var(--gold);
+                    font-size: 1rem;
+                    font-family: var(--font-body);
+                    font-weight: 600;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  🎓 University & Academic Partners
+                </h3>
+                <p
+                  style="
+                    color: rgba(245, 240, 232, 0.65);
+                    font-size: 0.88rem;
+                    line-height: 1.8;
+                  "
+                >
+                  Custom itineraries built around your department's curriculum.
+                  Spanish Lit students who actually go to Granada. Art History
+                  students who paint at the Prado. Holiday break and semester
+                  programs. Faculty partnership model available.
+                </p>
+              </div>
+
+              <div style="margin-top: 1.5rem">
+                <h3
+                  style="
+                    color: var(--gold);
+                    font-size: 1rem;
+                    font-family: var(--font-body);
+                    font-weight: 600;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                    margin-bottom: 0.75rem;
+                  "
+                >
+                  👥 Private Groups
+                </h3>
+                <p
+                  style="
+                    color: rgba(245, 240, 232, 0.65);
+                    font-size: 0.88rem;
+                    line-height: 1.8;
+                  "
+                >
+                  Book any journey exclusively for your group of 6–10. Reunions,
+                  milestone birthdays, women's groups, book clubs. Your dates,
+                  your way. We customize around you.
+                </p>
+              </div>
+            </div>
+
+            <!-- RIGHT: FORM -->
+            <div class="contact-form">
+              <span
+                class="section-label"
+                style="margin-bottom: 1.5rem; display: block"
+                >Inquiry Form</span
+              >
+              <form action="#" method="post" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      placeholder="Katherine"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      placeholder="Smith"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone (optional)</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="+1 (312) 000-0000"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="inquiryType">Type of Inquiry</label>
+                  <select id="inquiryType" name="inquiryType" required>
+                    <option value="" disabled selected>Select one...</option>
+                    <option value="individual">Individual / Couple</option>
+                    <option value="solo">Solo Traveler</option>
+                    <option value="womens">Women's Group</option>
+                    <option value="cruise">Cruise Community Extension</option>
+                    <option value="university">
+                      University / Academic Program
+                    </option>
+                    <option value="group">Private Group (6+ travelers)</option>
+                    <option value="custom">Custom Dates Request</option>
+                    <option value="general">General Question</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="journey">Journey of Interest</label>
+                  <select id="journey" name="journey">
+                    <option value="" disabled selected>
+                      Select a journey...
+                    </option>
+                    <option value="barcelona">
+                      Barcelona: The Full Architectural Argument
+                    </option>
+                    <option value="roman">
+                      Roman Spain: Empire, Infrastructure &amp; Power
+                    </option>
+                    <option value="golden-age">
+                      The Golden Age: Spain's Theatrical Revolution
+                    </option>
+                    <option value="literary">
+                      Spain Through Literature &amp; Ideas
+                    </option>
+                    <option value="art">
+                      Seeing Spain: An Art Appreciation Journey
+                    </option>
+                    <option value="flamenco">
+                      Flamenco: History, Movement &amp; Identity
+                    </option>
+                    <option value="wellness">
+                      Vivir Bien: A Women's Wellness Journey
+                    </option>
+                    <option value="mediterranean">
+                      Mediterranean Civilizations (Advanced)
+                    </option>
+                    <option value="unsure">
+                      Not sure yet — help me choose
+                    </option>
+                    <option value="custom">I want something custom</option>
+                  </select>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="travelers">Number of Travelers</label>
+                    <input
+                      type="number"
+                      id="travelers"
+                      name="travelers"
+                      min="1"
+                      max="50"
+                      placeholder="1"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="timing">Preferred Timing</label>
+                    <input
+                      type="text"
+                      id="timing"
+                      name="timing"
+                      placeholder="e.g. Spring 2026"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="travelerType">Which best describes you?</label>
+                  <select id="travelerType" name="travelerType">
+                    <option value="" disabled selected>Select one...</option>
+                    <option value="cruise">
+                      Cruiser looking for something better on land
+                    </option>
+                    <option value="gate1">
+                      Done Gate1-style tours and want more depth
+                    </option>
+                    <option value="solo">
+                      Solo traveler tired of the upcharge
+                    </option>
+                    <option value="academic">
+                      Academic / student / faculty
+                    </option>
+                    <option value="womens">
+                      Looking for the women's wellness journey
+                    </option>
+                    <option value="firsttime">First time visiting Spain</option>
+                    <option value="returnvisit">
+                      Been to Spain, want to go deeper
+                    </option>
+                    <option value="other">Something else entirely</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="message"
+                    >Tell Us About Yourself & What You're Looking For</label
+                  >
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="What themes fascinate you? What have you loved or hated about group tours in the past? What would make a trip truly memorable for you? The more you share, the better we can match you to — or build — the right journey..."
+                  ></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="hearAbout">How Did You Hear About Us?</label>
+                  <select id="hearAbout" name="hearAbout">
+                    <option value="" disabled selected>Select one...</option>
+                    <option value="referral">
+                      Friend or colleague referral
+                    </option>
+                    <option value="cruise">Cruise community / forum</option>
+                    <option value="university">
+                      University / faculty recommendation
+                    </option>
+                    <option value="search">Web search</option>
+                    <option value="social">Social media</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="width: 100%; margin-top: 0.5rem"
+                >
+                  Send Inquiry →
+                </button>
+                <p
+                  style="
+                    font-size: 0.75rem;
+                    color: rgba(245, 240, 232, 0.4);
+                    text-align: center;
+                    margin-top: 1rem;
+                    font-weight: 300;
+                  "
+                >
+                  We respond to all inquiries within 48 hours. Your information
+                  is never shared or sold.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section style="background: var(--cream)">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Common Questions</span>
+            <h2>Before You Ask</h2>
+            <p>The questions we get most. If yours isn't here, just ask.</p>
+          </div>
+          <div style="max-width: 780px; margin: 0 auto">
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                Why no solo traveler upcharge?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                Because it's unfair and economically unnecessary. Solo travelers
+                are one of the largest and most underserved demographics in
+                group travel — and they get penalized everywhere else. We build
+                our pricing to work with groups of 8–10 without needing to
+                penalize anyone for traveling alone. One price. Everyone pays
+                the same.
+              </p>
+            </details>
+
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                How is this different from Gate1 or a big group tour?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                Gate1 and similar operators move 30–45 people by bus through as
+                many stops as possible. The model is volume — see a lot,
+                understand none of it, spend half your time in transit. We cap
+                at 10. Every itinerary is built around a single intellectual
+                theme. We engineer social connection. And we eliminate decision
+                fatigue by curating your free time so it's actually free. Less
+                bus. More depth. Real connections.
+              </p>
+            </details>
+
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                Do I need to be an academic to enjoy these trips?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                Absolutely not. You need to be curious — that's it. Our pre-trip
+                reading lists are designed to bring anyone up to speed
+                regardless of background. You don't need a Spanish Literature
+                degree to be moved by Lorca's Granada. You don't need art
+                training to understand why Las Meninas changed painting forever.
+                You just need context. That's what we provide.
+              </p>
+            </details>
+
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                I've done every Barcelona port excursion. Is there really more
+                to see?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                There is so much more. The Recinte Modernista de Sant Pau — a
+                UNESCO World Heritage Site ten minutes from Sagrada Família that
+                almost nobody visits. The Born Market underground excavations
+                where an entire neighborhood destroyed in 1714 lies beneath your
+                feet. Torre Bellesguard, Gaudí's medieval castle that most
+                Barcelona residents have never been to. The Bunkers del Carmel —
+                the best view in the city, free, and almost entirely
+                tourist-free. The cruise excursion shows you what everyone sees.
+                We show you what the city actually is.
+              </p>
+            </details>
+
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                What is a hammam and why is the Vivir Bien trip built around it?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                A hammam is a traditional Moorish bathhouse — warm pool, hot
+                pool, cold plunge, steam, kessa scrub, ghassoul clay mask — a
+                bathing ritual the Arab world brought to Spain and practiced
+                continuously for over a thousand years. The cities of Granada
+                and Córdoba have extraordinary restored hammams that are nothing
+                like a hotel spa. One session at Aire Ancient Baths in Chicago
+                costs $400. The Vivir Bien trip includes two full hammam
+                rituals, ancient Roman-Arab thermal springs, olive oil therapy
+                from the grove that pressed it, and a week in Andalusia — for
+                $3,200. The math speaks for itself.
+              </p>
+            </details>
+
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                Can you build a trip around my cruise sailing dates?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                Yes — this is one of our specialties. As a licensed travel
+                agent, we work with your existing sailing schedule to build pre
+                or post-cruise land extensions, or full-day shore experiences in
+                port cities. We know Barcelona, Málaga, Cádiz, Cartagena, and
+                the surrounding areas well. If you've done every port stop
+                before and want something genuinely different, we're the right
+                call.
+              </p>
+            </details>
+
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                What's in the pre-trip reading list?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                Each trip gets a curated PDF delivered 60 days before departure.
+                It includes one book (readable, not academic), two essays, one
+                film, and a playlist — all chosen to put you in the place
+                intellectually and emotionally before you arrive. For the
+                Literary Spain trip: a selection of Lorca's poems, a Civil War
+                essay, Almodóvar's <em>Volver</em>, and a flamenco playlist. For
+                the Art trip: an essay on Velázquez's revolutionary technique, a
+                Goya biography excerpt, and the Prado's own audio guide
+                recommendations. You arrive knowing just enough to be genuinely
+                curious — not overwhelmed.
+              </p>
+            </details>
+
+            <details
+              style="
+                border-bottom: 1px solid var(--cream-dark);
+                padding: 1.25rem 0;
+              "
+            >
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                What is your cancellation policy?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                $500 deposit secures your spot and is fully refundable up to 90
+                days before departure. Between 90–60 days, 50% is refundable.
+                The full balance is due at 60 days and is non-refundable after
+                that date. We strongly recommend travel insurance — as a
+                licensed agent, we can help you find a policy that actually
+                covers what matters. Reach out and we'll walk you through your
+                options.
+              </p>
+            </details>
+
+            <details style="padding: 1.25rem 0">
+              <summary
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.2rem;
+                  cursor: pointer;
+                  color: var(--navy);
+                  font-weight: 400;
+                "
+              >
+                Can I come on a trip if I don't speak Spanish?
+              </summary>
+              <p
+                style="
+                  margin-top: 1rem;
+                  padding-left: 1.25rem;
+                  border-left: 3px solid var(--gold);
+                  line-height: 1.9;
+                "
+              >
+                Completely. All our trips are conducted in English. Our local
+                guides are bilingual specialists. The only Spanish you need is
+                <em>por favor</em>, <em>gracias</em>, and a willingness to try
+                the menu del día. That said — if you do speak Spanish, these
+                trips will deepen your connection to the language in ways no
+                classroom ever could. Standing in Granada knowing why Lorca used
+                the specific vocabulary he did is a different experience when
+                you can read it in the original.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- STILL DECIDING CTA -->
+      <section
+        style="background: var(--navy); padding: 5rem 2rem; text-align: center"
+      >
+        <div class="container">
+          <span class="section-label">Not Sure Which Trip?</span>
+          <h2 style="color: var(--cream); margin-bottom: 1.25rem">
+            Tell Us What<br />Fascinates You
+          </h2>
+          <p
+            style="
+              color: rgba(245, 240, 232, 0.65);
+              max-width: 520px;
+              margin: 0 auto 2.5rem;
+            "
+          >
+            You don't need to know which trip you want. Tell us what you're
+            drawn to — Roman history, Lorca's poetry, Gaudí's architecture, a
+            week of hammams and olive oil — and we'll match you or build
+            something around it. That's what we do.
+          </p>
+          <div class="btn-group">
+            <a href="events.html" class="btn btn-primary">Browse All 8 Trips</a>
+            <a href="pricing.html" class="btn btn-outline">See Pricing First</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>The Curious Itinerary</h3>
+          <p>
+            Intellectual cultural immersion travel for curious adults. Small
+            groups. Accessible pricing. Substance over spectacle.
+          </p>
+          <div class="social-links">
+            <div class="social-links">
+              <a
+                href="https://www.united.com/en/us"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="United Airlines"
+                >United</a
+              >
+              <a
+                href="https://www.aa.com/homePage.do"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="American Airlines"
+                >American</a
+              >
+              <a
+                href="https://www.iberia.com/us/?language=en&cq_src=bing_ads&cq_cmp=Search%20-%20US%2Fen%20-%20Branded%20Exact%2FB&cq_con=Iberia%20-%20exact%20%7C%20MT%3AExact&cq_term=iberia&cq_med=&cq_net=o&cq_plt=bp&esl-k=bing-ads|n|c78683997183066|me|k78684186871142|p|t|a1258941434628287|g434099990&msclkid=6d928435f4851dfdc76ced88095b6f9b&utm_source=bing&utm_medium=cpc&utm_campaign=Search%20-%20US%2Fen%20-%20Branded%20Exact%2FB&utm_term=iberia&utm_content=Iberia%20-%20exact%20%7C%20MT%3AExact"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Iberia Airlines"
+                >Iberia</a
+              >
+              <a
+                href="https://www.delta.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Delta Airlines"
+                >Delta</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Journeys</h4>
+          <ul>
+            <li>
+              <a href="events.html#barcelona-architecture"
+                >Barcelona Architecture</a
+              >
+            </li>
+            <li><a href="events.html#roman-spain">Roman Spain</a></li>
+            <li><a href="events.html#golden-age">The Golden Age</a></li>
+            <li><a href="events.html#literary-spain">Literary Spain</a></li>
+            <li><a href="events.html#seeing-spain">Art Appreciation</a></li>
+            <li><a href="events.html#flamenco">Flamenco &amp; Identity</a></li>
+            <li><a href="events.html#vivir-bien">Vivir Bien Wellness</a></li>
+            <li><a href="events.html#mediterranean">Mediterranean</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="events.html">2026 Schedule</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Travelers</h4>
+          <ul>
+            <li><a href="#">Cruise Community</a></li>
+            <li><a href="#">University Partners</a></li>
+            <li><a href="#">Solo Travelers</a></li>
+            <li><a href="#">Women's Groups</a></li>
+            <li><a href="#">Private Groups</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 The Curious Itinerary. All rights reserved.</p>
+        <p>Licensed Travel Agency · Chicago, IL</p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      ↑
+    </button>
+    <script src="main.js"></script>
+  </body>
+</html>
