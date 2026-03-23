@@ -26,7 +26,7 @@
   font-family: var(--font-sans);
   font-weight: 500;
   font-size: 11px;
-  color: rgba(255,255,255,0.72); 
+  color: rgba(255, 255, 255, 0.72);
   margin-top: 0;
   line-height: 1;
 }
@@ -51,10 +51,10 @@
   opacity: 0.92;
 }
 
-.navlinks a:hover{
-    opacity: 1;
-    text-decoration: underline;
-    text-underline-offset: 6px;
+.navlinks a:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
 
 .navlinks a:focus-visible {
@@ -66,27 +66,26 @@
 
 /* --- Divider before Resume --- */
 .nav-divider {
-    width: 1px;
-    height: 18px;
-    background: rgba(255, 255, 255, 0.35);
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.35);
 }
 
 /* --- Resume link (distinct) --- */
 .navlink--resume {
-    padding: 5px 10px;
-    color: var(--k-blue-2);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-radius: 10px;
-    opacity: 1;
-    line-height: 1;
-    text-decoration: none;
+  padding: 5px 10px;
+  color: var(--k-blue-2);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  opacity: 1;
+  line-height: 1;
+  text-decoration: none;
 }
 
 .navlink--resume:hover {
-    border-color: rgba(255,255,255,0.75);
-    text-decoration: none;
+  border-color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
 }
-
 
 /* ============================================================
    # ---- Hero Components ----
@@ -98,7 +97,7 @@
   font-weight: 600;
 
   font-size: clamp(26px, 2.6vw, 36px);
-  
+
   line-height: 1.12;
   letter-spacing: -0.01em;
 
@@ -106,8 +105,7 @@
   color: var(--k-bg); /* OffWhite */
 
   max-width: 20ch;
-
-  }
+}
 
 .hero-subtitle {
   font-family: var(--font-sans); /*Inter */
@@ -115,16 +113,15 @@
   font-size: 15px;
   line-height: 1.5;
   margin: 0 0 18px 0; /* space befor divider */
-  color: rgba(255,255,255,0.78);
+  color: rgba(255, 255, 255, 0.78);
   max-width: 56ch;
-  
 }
 /* Barely-there divider line */
 .hero-divider {
-    height: 1px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.16);
-    margin: 0 0 14px 0;
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.16);
+  margin: 0 0 14px 0;
 }
 
 .hero-tags {
@@ -140,71 +137,69 @@
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  border: 1px solid rgba(255,255,255,0.22);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.06);
   padding: 7px 10px;
   border-radius: 999px;
 }
-
 
 .hero-specialization {
   margin: 12px 0 0 0;
   font-family: var(--font-sans);
   font-size: 13px;
   line-height: 1.5;
-  color: rgba(255,255,255,0.70);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 62ch;
 }
 
-
 /* Button primitives (reusable across site) */
 .btn {
-    display: inline-block;
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 13px;
-    text-decoration: none;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
 }
 
 .btn-primary {
-    background: var(--k-blue-1); /* Classic Blue */
-    color: var(--k-bg);
+  background: var(--k-blue-1); /* Classic Blue */
+  color: var(--k-bg);
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background: var(--k-blue-2); /* Provence */
-    color: var(--k-bg);
+  background: var(--k-blue-2); /* Provence */
+  color: var(--k-bg);
 }
 
 .btn-secondary {
-    background: transparent
-    color: var(--k-bg);
-    borderL 1px solid rgba(229, 231, 235, 0.35); /* LightGrey subtle */
+  background: transparent;
+  color: var(--k-bg);
+  border: 1px solid rgba(229, 231, 235, 0.35); /* LightGrey subtle */
 }
 
 .btn-secondary:hover,
 .btn-secondary:focus {
-    background: var(--k-blue-2); /* Provence */
-    color: var(--k-bg);
+  background: var(--k-blue-2); /* Provence */
+  color: var(--k-bg);
 }
 
 /* Logo styling */
 .hero-logo {
-    width: min(320px, 40vw);
-    max-height: 220px;
-    height: auto;
-    object-fit: contain;
+  width: min(320px, 40vw);
+  max-height: 220px;
+  height: auto;
+  object-fit: contain;
 }
 
 .logo-sheen {
   position: relative;
   display: inline-block;
-  border-radius: 16px;     /* match your design softness */
-  overflow: hidden;        /* hides the moving light outside bounds */
+  border-radius: 16px; /* match your design softness */
+  overflow: hidden; /* hides the moving light outside bounds */
 }
 
 /* the moving light */
@@ -219,11 +214,11 @@
 
   background: linear-gradient(
     to right,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.10) 35%,
-    rgba(255,255,255,0.22) 50%,
-    rgba(255,255,255,0.10) 65%,
-    rgba(255,255,255,0) 100%
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 35%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.1) 65%,
+    rgba(255, 255, 255, 0) 100%
   );
 
   animation: sheenUp 9s ease-in-out infinite;
@@ -231,15 +226,29 @@
 }
 
 @keyframes sheenUp {
-  0%, 55% { top: 115%; opacity: 0; }
-  60%     { opacity: 0.25; }
-  78%     { top: -60%; opacity: 0.18; }
-  100%    { top: -60%; opacity: 0; }
+  0%,
+  55% {
+    top: 115%;
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.25;
+  }
+  78% {
+    top: -60%;
+    opacity: 0.18;
+  }
+  100% {
+    top: -60%;
+    opacity: 0;
+  }
 }
 
 /* respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .logo-sheen::after { animation: none; }
+  .logo-sheen::after {
+    animation: none;
+  }
 }
 
 .section-title {
@@ -292,15 +301,15 @@
   color: rgba(44, 51, 62, 0.78);
 }
 
-.project-identity{
-  margin: 0 0 8px 0 ;
+.project-identity {
+  margin: 0 0 8px 0;
   font-family: var(--font-sans);
   font-size: 12.5px;
   line-height: 1.35;
   color: rgba(44, 51, 62, 0.78);
 }
 
-.project-highlights{
+.project-highlights {
   margin: 0 0 10px 0;
   padding-left: 16px;
   font-family: var(--font-sans);
@@ -308,11 +317,11 @@
   color: rgba(44, 51, 62, 0.78);
 }
 
-.project-highlights li{
+.project-highlights li {
   margin: 0 0 4px 0;
 }
 
-.project-tags{
+.project-tags {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -321,7 +330,7 @@
   gap: 8px;
 }
 
-.project-tags .tag{
+.project-tags .tag {
   font-size: 11px;
   padding: 6px 9px;
 }
@@ -331,168 +340,201 @@
    - Stuff
    ============================================================ */
 
-
-   .site-footer {
-      background: #0d0f13;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 0px 0;
-      height:40px;
-      margin: 0;
-   }
-
-   .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin: 0;
-   }
-
-   .footer-left {
-     font-size: 12px;
-     color: #d9dde3;
-     opacity: 0.65;
-     margin: 0;
-   }
-
-   .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 0;
-   }
-
-
-   .footer-legal{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-family: var(--font-sans);
-      font-size: 12px;
-      opacity: 0.85;
+.site-footer {
+  background: #0d0f13;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0px 0;
+  height: 40px;
+  margin: 0;
 }
 
-    .footer-link{
-      color:#d9dde3;
-      text-decoration:none;
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
 }
 
-    .footer-link:hover{
-      text-decoration:underline;
-      text-underline-offset:4px;
+.footer-left {
+  font-size: 12px;
+  color: #d9dde3;
+  opacity: 0.65;
+  margin: 0;
 }
 
-    .footer-dot{
-      opacity:0.5;
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
 }
 
-   /* Email */
-   .email-link {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #d9dde3;
-      font-size: 12px;
-      opacity: 0.85;
-      transition: all 0.2s ease;
-   }
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  opacity: 0.85;
+}
 
-   .email-link:hover {
-    opacity: 1;
-   }
+.footer-link {
+  color: #d9dde3;
+  text-decoration: none;
+  line-height: 1;
+}
 
-   /* Icons */
-   .footer-icon {
-    color: #d9dde3;
-    font-size: 18px;
-    opacity: 1;
-    transition: all 0.2s ease;
-    }
+.footer-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 
-    .footer-icon:hover {
-      opacity: 1;
-      transform: translateY(-2px);
-    }
+.footer-dot {
+  opacity: 0.5;
+}
+
+/* Footer: kill default text spacing + enforce vertical centering */
+.site-footer {
+  line-height: 1;
+}
+
+.site-footer .container {
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.site-footer .container {
+  padding-left: 18px;
+  padding-right: 18px;
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Make inner row fill the footer height */
+.footer-inner {
+  height: 100%;
+}
+
+/* This is the #1 cause of “footer feels too tall” */
+.footer-left p {
+  margin: 0;
+}
+
+/* SVG baseline adds invisible extra space unless block */
+.site-footer svg {
+  display: block;
+}
+
+/* Email */
+.email-link {
+  display: block;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #d9dde3;
+  font-size: 12px;
+  opacity: 0.85;
+  transition: all 0.2s ease;
+}
+
+.email-link:hover {
+  opacity: 1;
+}
+
+/* Icons */
+.footer-icon {
+  color: #d9dde3;
+  font-size: 18px;
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.footer-icon:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
 
 /* ============================================================
    # ---- Tabs UI  ----
-   ============================================================ */ 
-   
-   .tabs {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-   }
+   ============================================================ */
 
-   .tab {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.02em;
-    padding: 10px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(44, 51, 62, 0.14);
-    background: #fff;
-    color: rgba(44, 51, 62, 0.86);
-   }
+.tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-   .tab.is-active {
-      border-color: rgba(52, 86, 139, 0.55);
-      background: rgba(104, 137, 192, 0.12);
-      color: rgba(44, 51, 62, 0.92);
-   }
+.tab {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(44, 51, 62, 0.14);
+  background: #fff;
+  color: rgba(44, 51, 62, 0.86);
+}
 
-   .tab:focus-visible {
-    outline: 2px solid rgba(104, 137, 192, 0.65);
-    outline-offset: 3px;
-   }
+.tab.is-active {
+  border-color: rgba(52, 86, 139, 0.55);
+  background: rgba(104, 137, 192, 0.12);
+  color: rgba(44, 51, 62, 0.92);
+}
 
-   /* Panels */
+.tab:focus-visible {
+  outline: 2px solid rgba(104, 137, 192, 0.65);
+  outline-offset: 3px;
+}
 
-   .tabpanel {
-    padding: 10px 0 0 0;
-   }
+/* Panels */
 
-   .section-kicker {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(44, 51, 62, 0.65);
-   }
+.tabpanel {
+  padding: 10px 0 0 0;
+}
 
-   /* Capabilities */
-   .cap-grid {
-     display: flex;
-     gap: 14px;
-   }
+.section-kicker {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(44, 51, 62, 0.65);
+}
 
-   .cap-col {
-    flex: 1;
-    border: 1px solid rgba(44, 51, 62, 0.12);
-    background: #fff;
-    border-radius: 14px;
-    padding: 12px 12px;
-   }
+/* Capabilities */
+.cap-grid {
+  display: flex;
+  gap: 14px;
+}
 
-   .cap-title {
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: 14px;
-      margin: 0 0 8px 0;
-      color: var(--k-ink);
-   }
+.cap-col {
+  flex: 1;
+  border: 1px solid rgba(44, 51, 62, 0.12);
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px 12px;
+}
 
-   .cap-list {
-    margin: 0;
-    padding-left: 18px;
-    color: rgba(44, 51, 62, 0.78);
-    font-family: var(--font-sans);
-    font-size: 13px;
-    }
+.cap-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  color: var(--k-ink);
+}
 
-    /* Architecture strip */
+.cap-list {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(44, 51, 62, 0.78);
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+/* Architecture strip */
 .arch-strip {
   display: flex;
   align-items: center;
@@ -544,7 +586,6 @@
   color: rgba(44, 51, 62, 0.84);
 }
 
-
 /* ============================================================
    # ---- Architecture Visual Strip (Engineering Profile) ----
    - Centered, narrower than body text (Option B)
@@ -583,14 +624,19 @@
   display: inline-flex;
   align-items: center;
 
-  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease,
+    background 0.12s ease;
 }
 
-.arch-visual { margin: 14px 0 16px 0; }
+.arch-visual {
+  margin: 14px 0 16px 0;
+}
 
 .arch-chip--accent {
-  border-color: rgba(52, 86, 139, 0.55);       /* ClassicBlue */
-  background: rgba(104, 137, 192, 0.12);       /* Provence tint */
+  border-color: rgba(52, 86, 139, 0.55); /* ClassicBlue */
+  background: rgba(104, 137, 192, 0.12); /* Provence tint */
   color: rgba(44, 51, 62, 0.92);
 }
 
@@ -610,31 +656,3 @@
 .arch-chip--accent:hover {
   border-color: rgba(52, 86, 139, 0.78);
 }
-
-
-<!-- ============================================================
-     # ---- Architecture Strip (Playbook Visual) ----
-     - Centered, slightly narrower than text column
-     - Text arrows between nodes
-     - Emphasize "Decision Interface"
-     ============================================================ -->
-<section class="arch-visual" aria-label="Architecture model">
-  <div class="arch-visual-inner">
-    <span class="arch-chip">Ingestion</span>
-    <span class="arch-arrow" aria-hidden="true">→</span>
-
-    <span class="arch-chip">Validation</span>
-    <span class="arch-arrow" aria-hidden="true">→</span>
-
-    <span class="arch-chip">Storage</span>
-    <span class="arch-arrow" aria-hidden="true">→</span>
-
-    <span class="arch-chip">Analytics</span>
-    <span class="arch-arrow" aria-hidden="true">→</span>
-
-    <span class="arch-chip arch-chip--accent">Decision Interface</span>
-    <span class="arch-arrow" aria-hidden="true">→</span>
-
-    <span class="arch-chip">Governance</span>
-  </div>
-</section>

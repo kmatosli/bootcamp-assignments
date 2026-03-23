@@ -1,0 +1,221 @@
+/* css/components/timeline.css
+   PURPOSE: FAANG-style alternating timeline (stable, no narrow-card collapse)
+*/
+
+.timeline {
+  --spine-w: 2px;
+  --node: 12px;
+  --center-col: 72px; /* reserved space for spine + breathing room */
+  --gap: 24px;
+  --card-pad: 18px;
+  --radius: 16px;
+
+  position: relative;
+  display: grid;
+  gap: 28px;
+  margin-top: 18px;
+  padding: 6px 0 2px;
+}
+
+/* Center spine */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: var(--spine-w);
+  transform: translateX(-50%);
+  background: rgba(17, 24, 39, 0.14);
+  border-radius: 999px;
+}
+
+/* ✅ FIX: 3-column grid prevents the right card from getting squeezed */
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--center-col) minmax(0, 1fr);
+  column-gap: var(--gap);
+  align-items: start;
+  min-height: calc(var(--node) + 8px);
+}
+
+/* Node */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  width: var(--node);
+  height: var(--node);
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.92);
+  box-shadow:
+    0 0 0 4px rgba(17, 24, 39, 0.1),
+    0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Card container */
+.timeline-card {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(17, 24, 39, 0.1);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.02),
+    0 10px 26px rgba(0, 0, 0, 0.06);
+
+  /* ✅ FIX: prevent skinny “word-stack” cards */
+  width: min(560px, 100%);
+  max-width: 100%;
+  min-width: 0;
+
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+/* Left item positions */
+.timeline-item--left .timeline-card {
+  grid-column: 1;
+  justify-self: end;
+}
+
+/* Right item positions */
+.timeline-item--right .timeline-card {
+  grid-column: 3;
+  justify-self: start;
+}
+
+/* Typography */
+.timeline-role {
+  font-family: var(--font-serif, "IBM Plex Serif", ui-serif, Georgia, serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: rgba(17, 24, 39, 0.92);
+}
+
+.timeline-meta {
+  font-family: var(
+    --font-sans,
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial
+  );
+  font-weight: 600;
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: rgba(17, 24, 39, 0.55);
+}
+
+.timeline-desc {
+  font-family: var(
+    --font-sans,
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial
+  );
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(17, 24, 39, 0.78);
+  max-width: 70ch;
+}
+
+/* Tags */
+.timeline-tags {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timeline-tags .tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 24, 39, 0.1);
+  background: rgba(17, 24, 39, 0.03);
+  font-family: var(
+    --font-sans,
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial
+  );
+  font-weight: 700;
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.65);
+}
+
+/* Connector stubs (subtle, optional) */
+.timeline-item--left .timeline-card,
+.timeline-item--right .timeline-card {
+  position: relative;
+}
+
+.timeline-item--left .timeline-card::after {
+  content: "";
+  position: absolute;
+  top: 24px;
+  right: -14px;
+  width: 14px;
+  height: 2px;
+  background: rgba(17, 24, 39, 0.12);
+}
+
+.timeline-item--right .timeline-card::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: -14px;
+  width: 14px;
+  height: 2px;
+  background: rgba(17, 24, 39, 0.12);
+}
+
+/* Mobile: single column */
+@media (max-width: 900px) {
+  .timeline {
+    padding-left: 18px;
+  }
+
+  .timeline::before {
+    left: 12px;
+    transform: none;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-item::before {
+    left: 12px;
+    transform: none;
+  }
+
+  .timeline-item--left .timeline-card,
+  .timeline-item--right .timeline-card {
+    grid-column: 1;
+    justify-self: stretch;
+    width: 100%;
+    margin-left: 20px;
+  }
+
+  .timeline-item--left .timeline-card::after,
+  .timeline-item--right .timeline-card::before {
+    display: none;
+  }
+}

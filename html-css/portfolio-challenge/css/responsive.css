@@ -1,5 +1,32 @@
-/* --- Tablet and down: stack hero and allow wrapping --- */
+/* ============================================================
+   FILE: responsive.css
+   PURPOSE:
+   - Tablet and down: allow normal scrolling + stack hero
+   - Phone: keep any phone-specific layout tweaks
+   ============================================================ */
+
+/* --- Tablet and down: stack hero, allow wrapping, ENABLE SCROLL --- */
 @media (max-width: 900px) {
+  /* ✅ Undo desktop no-scroll strategy */
+  html,
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  main {
+    height: auto;
+    overflow: visible;
+    display: block;
+  }
+
+  /* ✅ Footer returns to normal document flow on tablet/phone */
+  .site-footer {
+    position: static;
+    height: auto;
+  }
+
+  /* Existing layout behavior */
   .hero-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -21,18 +48,8 @@
   }
 }
 
-/* --- Phone: turn on scrolling + simplify fixed heights --- */
+/* --- Phone: keep phone-only tweaks (scroll already enabled above) --- */
 @media (max-width: 600px) {
-  body {
-    overflow: auto; /* undo desktop strategy */
-  }
-
-  main {
-    height: auto;
-    overflow: visible;
-  }
-
-  .site-footer {
-    position: static; /* footer becomes normal flow */
-  }
+  /* Add phone-specific refinements here if needed.
+     (No scroll rules here—handled at <=900px to cover all tablets.) */
 }

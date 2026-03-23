@@ -1,0 +1,129 @@
+/* ============================================================
+   FILE: header.css
+   PURPOSE:
+   - Header styling only (no layout sizing)
+   - Brand + navigation
+   - Resume CTA variant
+   ============================================================ */
+
+/* =========================
+   Header appearance
+   ========================= */
+
+.site-header {
+  background: var(--k-header-bg); /* Pure black */
+}
+
+/* =========================
+   Brand
+   ========================= */
+
+.brand-link {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.05;
+  text-decoration: none;
+}
+
+.brand-name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.05;
+  color: #fff;
+}
+
+.brand-subtitle {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* =========================
+   Nav
+   ========================= */
+
+.navlinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.navlinks a {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.92;
+  transition: opacity 0.18s ease;
+}
+
+.navlinks a:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.navlinks a:focus-visible {
+  outline: 2px solid var(--k-blue-2);
+  outline-offset: 3px;
+  border-radius: 6px;
+  opacity: 1;
+}
+
+/* =========================
+   Divider
+   ========================= */
+
+.nav-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* =========================
+   Resume CTA (Engineering Profile)
+   FIXED: specificity + visible text
+   ========================= */
+
+.navlinks a.navlink--resume {
+  background: #ffffff;
+  color: #111827; /* dark readable text */
+
+  padding: 6px 14px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
+
+  /* fixed shadow (previous version invalid) */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+
+  opacity: 1;
+  text-decoration: none;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.navlinks a.navlink--resume:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+  text-decoration: none;
+}
+
+.navlinks a.navlink--resume:focus-visible {
+  outline: 2px solid var(--k-blue-2);
+  outline-offset: 3px;
+  border-radius: 12px;
+}

@@ -1,0 +1,558 @@
+/* about.css
+   MODE: About Page Hero Compression — Fold Visibility Guaranteed
+
+   IMPORTANT:
+   - This file does NOT define a new hero background.
+   - The hero background MUST come from css/components/hero.css (same as homepage).
+   - Compression is achieved by:
+     1) reducing padding + margins
+     2) reducing type scale
+     3) capping hero visual height on desktop
+     4) preventing margin-collapsing artifacts
+*/
+
+/* ============================================================
+   Desktop scroll behavior for About
+   - If layout.css locks overflow hidden for all pages on desktop,
+     About must override to allow remaining content to scroll.
+   ============================================================ */
+@media (min-width: 901px) {
+  body.page-about {
+    overflow: auto;
+    height: auto;
+  }
+
+  body.page-about main {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+/* ============================================================
+   HERO COMPRESSION (REQ-1, REQ-3, REQ-4, REQ-2)
+   ============================================================ */
+
+.page-about .hero {
+  /* REQ-1: Hero height must be capped; never 100vh */
+  min-height: unset;
+  height: auto;
+
+  /* REQ-4: Prevent margin-collapsing from first child */
+  padding-top: 1px; /* tiny pad prevents collapse without visual impact */
+  overflow: clip; /* ensures max-height behaves predictably */
+}
+
+@media (min-width: 901px) {
+  .page-about .hero {
+    /* REQ-1: hard cap on desktop */
+    max-height: 420px;
+  }
+}
+
+/* REQ-4: Remove excess header-to-hero gap + tighten inner spacing */
+.page-about .hero-inner {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+
+  /* reduced from 2.25rem+; helps fold visibility */
+  gap: 1.6rem;
+
+  /* align to top so the card doesn't force vertical centering space */
+  align-items: start;
+
+  /* REQ-1: reduce padding-block to compress hero */
+  padding-top: 18px;
+  padding-bottom: 14px;
+}
+
+/* REQ-3: Match homepage-type scale (sane clamp + tighter line-height + margins) */
+.page-about .hero-left h1 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+
+  /* tighten margins */
+  margin: 0 0 10px;
+
+  /* compressed scale: avoids oversized H1 pushing below-fold content */
+  font-size: clamp(2rem, 3.05vw, 3.25rem);
+}
+
+/* Paragraph compression */
+.page-about .hero-subtext {
+  line-height: 1.52;
+  font-size: 1rem;
+
+  /* tighter spacing between paragraphs */
+  margin: 0 0 10px;
+
+  max-width: 58ch;
+}
+
+/* CTA spacing tighter */
+.page-about .hero-actions {
+  margin-top: 12px;
+}
+
+/* ============================================================
+   FOLD GUARANTEE (REQ-2)
+   ------------------------------------------------------------
+   This ensures the next section is visible on common laptop
+   viewports (1366×768, 1440×900):
+   - Hero max-height: 420px (desktop)
+   - Hero inner padding: 18px top / 14px bottom
+   - H1 max size: 3.25rem; paragraph size: 1rem with tight margins
+   - Next section top padding reduced
+   ============================================================ */
+
+/* Immediately beneath hero: bring content up */
+.page-about .about-philosophy {
+  padding-top: 22px; /* reduced so grid/cards show on initial load */
+}
+
+/* ============================================================
+   KML CARD (keep, but ensure it doesn’t inflate hero height)
+   ============================================================ */
+
+.page-about .kml-card {
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.03)
+  );
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+
+  /* slightly smaller to help the cap */
+  padding: 1.15rem;
+  max-width: 340px;
+  margin-left: auto;
+}
+
+.page-about .kml-card-inner {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 1.05rem;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.page-about .kml-mark {
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  font-size: 0.9rem;
+  padding: 0.65rem 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.75rem;
+}
+
+.page-about .kml-stack {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.page-about .kml-stack li {
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  padding: 0.5rem 0.6rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ============================================================
+   SECTIONS (unchanged visual intent; keep your structure)
+   ============================================================ */
+
+.page-about .about-section {
+  padding: 3rem 0;
+}
+
+/* Light body area below hero */
+.page-about .about-section:not(.hero) {
+  background: #ffffff;
+  color: #121417;
+}
+
+.page-about .about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.page-about .about-section h2 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9rem;
+  font-size: 1.65rem;
+}
+
+.page-about .about-lede {
+  color: rgba(0, 0, 0, 0.72);
+  line-height: 1.62;
+  margin: 0 0 1.25rem;
+  max-width: 70ch;
+}
+
+/* Stats */
+.page-about .about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.page-about .stat-value {
+  font-weight: 800;
+  font-size: 2.1rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2rem;
+}
+
+.page-about .stat-label {
+  color: rgba(0, 0, 0, 0.58);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Card */
+.page-about .card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+}
+
+.page-about .competencies h3 {
+  margin: 0 0 1.1rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.page-about .competency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.page-about .competency {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.page-about .competency-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.page-about .competency-text {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.78);
+}
+
+/* ============================================================
+   TIMELINE (kept)
+   ============================================================ */
+
+.page-about .section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.page-about .section-link {
+  font-weight: 700;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.page-about .section-link:hover {
+  text-decoration: underline;
+}
+
+.page-about .timeline {
+  display: grid;
+  gap: 3rem;
+}
+
+.page-about .timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 44px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.page-about .timeline-mid {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+.page-about .timeline-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #111;
+  border: 6px solid rgba(0, 0, 0, 0.12);
+  margin-top: 0.2rem;
+}
+
+.page-about .timeline-dot.is-muted {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.page-about .timeline-line {
+  width: 2px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.12);
+  margin-top: 0.75rem;
+  border-radius: 2px;
+}
+
+.page-about .role-title {
+  font-weight: 800;
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+.page-about .role-meta {
+  margin-top: 0.25rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.page-about .role-desc {
+  margin-top: 0.65rem;
+  line-height: 1.62;
+  color: rgba(0, 0, 0, 0.72);
+  margin-bottom: 0;
+  max-width: 68ch;
+}
+
+.page-about .tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: flex-start;
+  padding-top: 0.35rem;
+}
+
+.page-about .tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.65rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.66);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   CONTACT CARD (kept)
+   ============================================================ */
+
+.page-about .about-contact {
+  background: #ffffff;
+  padding-top: 2rem;
+}
+
+.page-about .contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.page-about .contact-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   FOOTER ICON FIX (does not redesign footer; hides text fallbacks)
+   ============================================================ */
+
+.site-footer .footer-icon span {
+  display: none; /* prevents "GitHub LinkedIn" text fallbacks */
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .page-about .hero {
+    max-height: none;
+  }
+
+  .page-about .hero-inner {
+    grid-template-columns: 1fr;
+    padding-bottom: 1rem;
+  }
+
+  .page-about .kml-card {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .page-about .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-about .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .page-about .timeline-mid {
+    display: none;
+  }
+
+  .page-about .contact-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ============================================================
+   ABOUT HERO: final compression for fold visibility
+   ============================================================ */
+@media (min-width: 901px) {
+  .page-about .hero {
+    max-height: 320px; /* lower than 360 */
+    overflow: hidden; /* enforce the cap */
+  }
+
+  .page-about .hero-inner {
+    padding-top: 14px; /* tighten */
+    padding-bottom: 12px;
+  }
+
+  .page-about .hero-left h1 {
+    font-size: clamp(1.9rem, 2.7vw, 3rem);
+    line-height: 1.03;
+    margin-bottom: 8px;
+  }
+
+  .page-about .hero-subtext {
+    font-size: 0.98rem;
+    line-height: 1.48;
+    margin-bottom: 8px;
+    max-width: 66ch;
+  }
+
+  .page-about .hero-actions {
+    margin-top: 10px;
+  }
+}
+
+/* Force button styling on About (in case global btn styles don't apply) */
+.page-about .btn.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.05rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0b0d10;
+}
+
+.page-about .btn.btn-primary:hover {
+  opacity: 0.95;
+}
+
+/* ============================================================
+   ABOUT PAGE: enable internal scroll inside main (desktop)
+   Reason: html/body are overflow:hidden globally in layout.css.
+   About is longer than 1 screen, so main must scroll here.
+   ============================================================ */
+@media (min-width: 901px) {
+  body.page-about main {
+    overflow-y: auto; /* allow scrolling for About content */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.page-about main {
+  background: transparent; /* or match site bg token if you have one */
+}
+
+.page-about .about-section:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.page-about .hero {
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.page-about .hero h1 {
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+
+.page-about .hero .hero-subtext {
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+
+/* ============================================================
+   ABOUT: FORCE SCROLL ON DESKTOP (override layout.css no-scroll)
+   ============================================================ */
+@media (min-width: 901px) {
+  html {
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+
+  body.page-about {
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+
+  body.page-about main {
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important; /* kills the flex constraint from layout.css */
+    padding-bottom: calc(var(--footer-h) + 24px);
+  }
+}

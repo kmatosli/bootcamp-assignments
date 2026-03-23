@@ -1,0 +1,286 @@
+/* ============================================================
+   FILE: project.css
+   PURPOSE:
+   - Make cards compact
+   - Remove excess bottom whitespace
+   - Keep original font sizes
+   - Fix: remove stretching + tighten CTA + make tags readable on white cards
+   - NEW: Pin CTA bottom-right without adding height
+   ============================================================ */
+
+/* =========================
+   Card shell
+   ========================= */
+
+.project.card {
+  border: 1px solid rgba(44, 51, 62, 0.12);
+  border-radius: 14px;
+  background: #fff;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+
+  padding: 16px;
+  align-self: flex-start;
+  overflow: visible;
+  height: auto;
+  min-height: 0;
+
+  /* NEW: anchor the absolute CTA */
+  position: relative;
+}
+
+.project.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+  border-color: rgba(44, 51, 62, 0.22);
+}
+
+/* =========================
+   Icon chip
+   ========================= */
+
+.project-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(104, 137, 192, 0.16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 6px 0;
+}
+
+.project-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  display: block;
+}
+
+/* =========================
+   Card header row (icon + title)
+   - saves vertical space by placing title beside icon
+   ========================= */
+
+.project-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px 0; /* replaces stacked spacing */
+}
+
+/* remove bottom margin when icon sits in the header row */
+.project-head .project-icon {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+/* keep titles on one line to save height (ellipsis allowed) */
+.project-head .project-title {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* =========================
+   Typography (UNCHANGED)
+   ========================= */
+
+.project-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 6px 0;
+  color: var(--k-ink);
+}
+
+.project-identity {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.35;
+  margin: 0 0 8px 0;
+  color: rgba(44, 51, 62, 0.78);
+}
+
+/* =========================
+   Highlights
+   ========================= */
+
+.project-highlights {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 16px;
+  line-height: 1.55;
+  margin-top: 12px;
+}
+
+.project-highlights li {
+  margin: 0;
+}
+
+.project-highlights li + li {
+  margin-top: 8px;
+}
+
+/* =========================
+   Tags
+   ========================= */
+
+.project-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 6px 0 0 0;
+  padding: 0;
+}
+
+/* REMOVE BOTTOM WHITESPACE */
+.project-tags:last-child {
+  margin-bottom: 0;
+}
+
+/* Prevent margin collapse from last child */
+.project.card > *:last-child {
+  margin-bottom: 0;
+}
+
+/* your existing size rule */
+.project-tags .tag {
+  font-size: 10px;
+  padding: 0;
+}
+
+/* FIX: tags were inheriting global white-on-transparent styles (ui.css) */
+.project.card .tag {
+  color: rgba(44, 51, 62, 0.85);
+  border: 1px solid rgba(44, 51, 62, 0.18);
+  background: rgba(44, 51, 62, 0.04);
+}
+
+/* ============================================================
+   HARD OVERRIDES (wins against ui.css / global .card rules)
+   - removes bottom whitespace
+   - prevents flex "space-between" stretch
+   - NEW: reserve space for bottom-right CTA
+   ============================================================ */
+
+.project.card {
+  height: auto !important;
+  min-height: 0 !important;
+  display: block !important;
+
+  /* IMPORTANT:
+     This used to be 14px !important which prevents CTA pinning.
+     We reserve space so CTA doesn't overlap tags. */
+  padding-bottom: 42px !important;
+}
+
+.project.card > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.project-highlights,
+.project-tags {
+  margin-bottom: 0 !important;
+}
+
+.project-tags {
+  padding-bottom: 0 !important;
+}
+
+/* ============================================================
+   Desktop/Laptop: compact cards WITHOUT stretching height
+   ============================================================ */
+
+@media (min-width: 901px) {
+  .project.card {
+    padding: 14px 16px !important; /* slightly tighter */
+    padding-bottom: 42px !important; /* keep CTA reserve */
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* keep project-head spacing tight on desktop */
+  .project-head {
+    margin-bottom: 6px !important;
+  }
+
+  /* ensure the default bottom margin doesn't re-add height */
+  .project-title {
+    margin-bottom: 6px !important;
+  }
+
+  .project-identity {
+    line-height: 1.45 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .project-highlights {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+    line-height: 1.4;
+  }
+
+  .project-highlights li {
+    margin: 0;
+  }
+
+  .project-highlights li + li {
+    margin-top: 6px !important;
+  }
+
+  .project-tags {
+    margin-top: 8px !important;
+    gap: 8px !important;
+  }
+
+  .project-tags .tag {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+}
+
+/* =========================
+   CTA
+   - NEW: bottom-right pinned, does not add whitespace
+   ========================= */
+
+.project-cta {
+  display: inline-block;
+  margin-top: 0; /* remove flow spacing */
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.1;
+  color: var(--k-blue-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  /* pin bottom-right inside the card */
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  white-space: nowrap;
+}
+
+.project-cta:hover {
+  color: var(--k-blue-2);
+}
+
+.section-kicker {
+  margin: 0 0 10px 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(44, 51, 62, 0.7);
+}

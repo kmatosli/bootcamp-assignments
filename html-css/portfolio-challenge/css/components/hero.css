@@ -1,0 +1,195 @@
+/* ============================================================
+   FILE: hero.css
+   TOC (search tokens):
+   - Surface: .hero
+   - Layout: .hero-inner .hero-text .hero-visual
+   - Typography: .hero-title .hero-subtitle .hero-specialization
+   - Divider + tags: .hero-divider .hero-tags
+   - Logo: .hero-logo .logo-sheen ::after @keyframes sheenUp
+   - Motion: prefers-reduced-motion
+   ============================================================ */
+
+/* =========================
+   Hero surface (appearance)
+   ========================= */
+
+.hero {
+  background: var(--k-ink); /* AnchorInk */
+  color: var(--k-bg); /* readable text on dark */
+
+  /* KEY FIX: shrink vertical footprint */
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* subtle transition edge */
+}
+
+/* =========================
+   Hero layout (structural)
+   - Keeps logo from forcing extra height
+   ========================= */
+
+.hero-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* KEY: vertically center rather than stretch */
+  gap: 24px; /* tighter than before */
+}
+
+.hero-text {
+  min-width: 0; /* prevents overflow issues with long text */
+}
+
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* align to container edge */
+  max-height: 260px;
+  min-width: 0;
+}
+
+/* =========================
+   Hero typography
+   ========================= */
+
+.hero-title {
+  font-family: var(--font-serif); /* IBM Plex Serif */
+  font-weight: 600;
+  font-size: clamp(21px, 2.08vw, 29px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px 0; /* slightly tighter */
+  color: var(--k-bg); /* OffWhite */
+  max-width: 20ch;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans); /* Inter */
+  font-weight: 500;
+  font-size: 16px; /* requirement */
+  line-height: 1.5; /* requirement */
+  margin: 0; /* KEY FIX: remove extra bottom space */
+  color: #f8fafc; /* keeps strong contrast */
+  max-width: 56ch;
+}
+
+/* Keep this class for other pages/variants, even if removed from index.html */
+.hero-specialization {
+  margin: 10px 0 0 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 62ch;
+}
+
+/* =========================
+   Divider + tags
+   ========================= */
+
+.hero-divider {
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.16);
+  margin: 12px 0 12px 0; /* slightly tighter */
+}
+
+.hero-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0; /* KEY FIX: remove extra bottom space */
+  padding: 0;
+}
+
+/* =========================
+   Logo
+   - KEY FIX: smaller + responsive clamp
+   ========================= */
+
+.hero-logo {
+  width: clamp(180px, 22vw, 240px); /* smaller than min(320px, 40vw) */
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+/* sheen wrapper stays intact */
+.logo-sheen {
+  position: relative;
+  display: inline-block;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.logo-sheen::after {
+  content: "";
+  position: absolute;
+  top: 110%;
+  left: -30%;
+  width: 160%;
+  height: 55%;
+  transform: rotate(-12deg);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 35%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.1) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: sheenUp 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sheenUp {
+  0%,
+  55% {
+    top: 115%;
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.25;
+  }
+  78% {
+    top: -60%;
+    opacity: 0.18;
+  }
+  100% {
+    top: -60%;
+    opacity: 0;
+  }
+}
+
+/* =========================
+   Motion accessibility
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-sheen::after {
+    animation: none;
+  }
+}
+
+@media (min-width: 901px) {
+  .hero {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .hero-inner {
+    gap: 18px;
+  }
+
+  .hero-title {
+    margin-bottom: 8px;
+  }
+
+  .hero-visual {
+    max-height: 200px;
+  }
+
+  .hero-logo {
+    max-height: 170px;
+  }
+}

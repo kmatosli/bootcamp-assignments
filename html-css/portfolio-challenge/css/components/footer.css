@@ -1,0 +1,147 @@
+/* ============================================================
+   FILE: footer.css
+   TOC (search tokens):
+   - Footer surface: .site-footer
+   - Container alignment: .site-footer .container
+   - Row layout: .footer-inner .footer-left .footer-right
+   - Legal links: .footer-legal .footer-link .footer-dot
+   - Contact: .email-link
+   - Icons: .footer-icon
+   - SVG baseline fix: .site-footer svg
+   ============================================================ */
+
+/* =========================
+   Footer surface (appearance)
+   ========================= */
+
+.site-footer {
+  background: #0d0f13;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  line-height: 1;
+}
+
+/* =========================
+   Container alignment (structural)
+   IMPORTANT:
+   - Do NOT override .container width/padding here
+   - This is what keeps header/footer aligned
+   ========================= */
+
+.site-footer .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* =========================
+   Footer row layout
+   ========================= */
+
+.footer-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-left {
+  font-size: 12px;
+  color: #94a3b8;
+  opacity: 1;
+}
+
+.footer-left p {
+  margin: 0;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* =========================
+   Legal links
+   ========================= */
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  opacity: 1;
+}
+
+.footer-link {
+  color: #f1f5f9;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer-dot {
+  opacity: 0.5;
+}
+
+/* =========================
+   Email link (icon + text)
+   ========================= */
+
+.email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #d9dde3;
+  font-size: 12px;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.email-link:hover {
+  opacity: 1;
+}
+
+/* =========================
+   Icons
+   ========================= */
+
+.footer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9dde3;
+  opacity: 1;
+  transform: scale(1.2);
+  transform-origin: center;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.footer-icon:hover {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+/* SVG baseline fix */
+.site-footer svg {
+  display: block;
+}
+
+.footer-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.email-link svg {
+  width: 22px;
+  height: 22px;
+}

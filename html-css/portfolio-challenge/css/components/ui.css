@@ -1,0 +1,72 @@
+/* Button primitives (reusable across site) */
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--k-blue-1); /* Classic Blue */
+  color: var(--k-bg);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--k-blue-2); /* Provence */
+  color: var(--k-bg);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--k-bg);
+  border: 1px solid rgba(229, 231, 235, 0.35); /* LightGrey subtle */
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: var(--k-blue-2); /* Provence */
+  color: var(--k-bg);
+}
+
+.tag {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 7px 10px;
+  border-radius: 999px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  color: var(--k-ink);
+}
+
+.section-link {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--k-blue-1);
+}
+
+.section-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.section-kicker {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(44, 51, 62, 0.65);
+}

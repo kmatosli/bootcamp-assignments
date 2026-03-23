@@ -1,0 +1,272 @@
+/* ============================================================
+   HOMEPAGE: Hero → Flagship spacing
+   - Adds a subtle, senior gap without changing layout math
+   ============================================================ */
+
+.home-panels {
+  margin-top: 24px;
+}
+
+/* =========================
+   About page: executive layout
+   - Constrain readable width
+   - Consistent vertical rhythm
+   ========================= */
+
+.page-narrow {
+  max-width: 780px; /* within 720–800 target */
+  margin: 0 auto; /* centered on container axis */
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  margin: 0 0 24px 0;
+}
+
+.page-lede,
+.page-body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.page-lede + .page-lede,
+.page-body + .page-body {
+  margin-top: 14px;
+}
+
+/* Section spacing: 48px above headings, 24px below headings */
+.about-section + .about-section {
+  margin-top: 48px;
+}
+
+.page-h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  margin: 0 0 24px 0;
+}
+
+.page-list {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+.page-list li + li {
+  margin-top: 10px;
+}
+
+/* CTA block: structured, not decorative */
+.cta-block {
+  border: 1px solid rgba(44, 51, 62, 0.12);
+  border-radius: 14px;
+  background: #fff;
+  padding: 16px 18px;
+}
+
+.cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.cta-link {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--k-blue-1);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.cta-link:hover,
+.cta-link:focus {
+  color: var(--k-blue-2);
+}
+
+/* Nav active state (no header.css changes) */
+.navlinks a[aria-current="page"] {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.page-narrow {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.about-section + .about-section {
+  margin-top: 48px;
+}
+
+.page-title,
+.page-h2 {
+  margin: 0 0 24px 0;
+}
+
+.page-lede,
+.page-body,
+.page-list {
+  line-height: 1.6;
+}
+
+.page-list {
+  padding-left: 18px;
+}
+
+.page-list li + li {
+  margin-top: 10px;
+}
+
+.cta-block {
+  border: 1px solid rgba(44, 51, 62, 0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: #fff;
+}
+
+.cta-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cta-link {
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.navlinks a[aria-current="page"] {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* =========================
+   About page — Strategic Differentiator
+   Add to pages.css or about.css
+   ========================= */
+
+.page-narrow {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.page-kicker {
+  margin: 18px 0 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(17, 24, 39, 0.55);
+}
+
+.about-hero {
+  margin-top: 10px;
+}
+
+.page-title {
+  margin: 0 0 14px 0;
+}
+
+.page-lede {
+  margin: 0 0 10px 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(17, 24, 39, 0.85);
+}
+
+.page-body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(17, 24, 39, 0.82);
+}
+
+.about-section {
+  margin-top: 36px;
+}
+
+.page-h2 {
+  margin: 0 0 14px 0;
+}
+
+.page-list {
+  margin: 0;
+  padding-left: 18px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(17, 24, 39, 0.82);
+}
+
+.page-list li + li {
+  margin-top: 10px;
+}
+
+/* CTA panel */
+.cta-panel {
+  margin-top: 6px;
+  border-radius: 16px;
+  padding: 18px 18px;
+  background: #111827; /* dark panel */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cta-title {
+  margin: 0 0 6px 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.cta-subtitle {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.cta-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Buttons (safe minimal styles if you don't already have them) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: #ffffff;
+  color: #111827;
+}
+
+.btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}

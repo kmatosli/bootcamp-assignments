@@ -1,105 +1,289 @@
+<!-- contact.html -->
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Contact | Kathy Matos Linares</title>
 
+    <!-- Shared site CSS (LOCKED elsewhere): header.css / footer.css / layout.css -->
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
+    <!-- Existing components used across site -->
+    <link rel="stylesheet" href="css/components/footer.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/components/hero.css" />
+
+    <!-- Contact-only -->
     <link rel="stylesheet" href="css/contact.css" />
   </head>
 
-  <body>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand-link" href="index.html">
-          <span class="brand-name">Kathy Matos Linares</span>
-          <span class="brand-subtitle">Data Engineering & Analytics</span>
-        </a>
+  <body class="page-contact">
+    <!-- Header include area (shared across site; do not modify header.css) -->
+    <header class="site-header" role="banner">
+      <nav class="container header-inner" aria-label="Primary Navigation">
+        <div class="brand">
+          <a class="brand-link" href="index.html" aria-label="Go to Home">
+            <span class="brand-name">Kathy Matos Linares</span>
+            <span class="brand-subtitle">Data Engineering &amp; Analytics</span>
+          </a>
+        </div>
 
-        <nav aria-label="Primary">
-          <ul class="navlinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="resume.html">Engineering Profile</a></li>
-            <li><a href="contact.html" aria-current="page">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
+        <ul class="navlinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+
+          <li class="nav-divider" aria-hidden="true"></li>
+
+          <li>
+            <a class="navlink--resume" href="resume.html"
+              >Engineering Profile</a
+            >
+          </li>
+        </ul>
+      </nav>
     </header>
 
-    <main class="contact-page">
+    <!-- IMPORTANT: no background is set here; inherits homepage background system -->
+    <main class="contact-page" role="main">
       <div class="container">
         <!-- HERO -->
-        <section class="contact-hero">
-          <p class="contact-kicker">Contact</p>
-          <h1 class="contact-title">
-            Let’s build systems that scale decisions.
-          </h1>
-          <p class="contact-lede">
-            I’m open to conversations around data engineering, analytics
-            infrastructure, and decision-support platforms. If you're working on
-            complex workflows that need structure, automation, or clarity — I’d
-            be glad to connect.
-          </p>
-        </section>
+        <section class="contact-hero" aria-labelledby="contact-title">
+          <div class="contact-hero__inner">
+            <!-- Left: content -->
+            <div class="contact-hero__copy">
+              <p class="contact-eyebrow">CONTACT</p>
 
-        <!-- CONTACT OPTIONS -->
-        <section class="contact-grid">
-          <div class="contact-card">
-            <h2>Email</h2>
-            <p>For direct inquiries or role discussions.</p>
-            <a href="mailto:kmatosl@yahoo.com" class="contact-link">
-              kmatosl@yahoo.com
-            </a>
-          </div>
+              <h1 id="contact-title">
+                Let’s build systems that scale decisions.
+              </h1>
 
-          <div class="contact-card">
-            <h2>LinkedIn</h2>
-            <p>Professional background and industry updates.</p>
-            <a
-              href="https://www.linkedin.com/"
-              target="_blank"
-              class="contact-link"
+              <p class="contact-subtitle">
+                If you’re evaluating decision infrastructure, workflow
+                modernization, or production analytics systems, here’s the
+                fastest way to engage.
+              </p>
+
+              <div
+                class="contact-hero__areas"
+                aria-label="Areas I’m most useful"
+              >
+                <span class="areas-label">Areas I’m most useful:</span>
+                <ul class="areas-chips" aria-label="Areas of interest">
+                  <li class="chip">Decision infrastructure</li>
+                  <li class="chip">Workflow modernization</li>
+                  <li class="chip">Production analytics</li>
+                  <li class="chip">Signal pipelines</li>
+                  <li class="chip">Governance &amp; QA</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Right: primary action (saves vertical space) -->
+            <aside
+              class="contact-hero__cta"
+              aria-label="Primary contact action"
             >
-              View LinkedIn Profile
-            </a>
-          </div>
-
-          <div class="contact-card">
-            <h2>GitHub</h2>
-            <p>Code repositories and deployed systems.</p>
-            <a href="https://github.com/" target="_blank" class="contact-link">
-              View GitHub
-            </a>
+              <a class="btn btn-primary" href="#schedule-chat">Schedule Chat</a>
+              <p class="cta-hint">For scoped discussions and role alignment.</p>
+            </aside>
           </div>
         </section>
 
-        <!-- ENGAGEMENT TYPES -->
-        <section class="contact-engagement">
-          <h2>Areas of Interest</h2>
+        <!-- ENGAGEMENT CARDS -->
+        <section class="contact-engagement" aria-labelledby="engagement-title">
+          <div class="section-head">
+            <h2 id="engagement-title" class="section-title">How to engage</h2>
+            <p class="section-subtitle">
+              Send a tight note and I’ll respond with next steps or a short
+              working call.
+            </p>
+          </div>
 
-          <ul class="engagement-list">
-            <li>Data engineering & analytics infrastructure roles</li>
-            <li>Decision-support platform development</li>
-            <li>Quantitative research tooling</li>
-            <li>Workflow automation & governance design</li>
-          </ul>
+          <div class="cards-grid" role="list">
+            <!-- Card 1 -->
+            <article
+              class="card"
+              role="listitem"
+              aria-labelledby="card-hiring-title"
+            >
+              <div class="card__header">
+                <h3 id="card-hiring-title" class="card__title">
+                  Hiring &amp; Senior Roles
+                </h3>
+                <p class="card__desc">
+                  For hiring managers and recruiters evaluating senior systems /
+                  platform roles.
+                </p>
+              </div>
 
-          <p class="engagement-note">
-            Based in Chicago • Open to remote and hybrid opportunities.
-          </p>
+              <div class="card__body">
+                <p class="card__label">Please include:</p>
+                <ul class="card__list">
+                  <li>Scope of role</li>
+                  <li>Reporting line</li>
+                  <li>Primary business problem</li>
+                  <li>Current stack</li>
+                  <li>Timeline for hire</li>
+                </ul>
+                <p class="card__close">
+                  This keeps the first call focused on impact.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article
+              class="card"
+              role="listitem"
+              aria-labelledby="card-modernization-title"
+            >
+              <div class="card__header">
+                <h3 id="card-modernization-title" class="card__title">
+                  Workflow Modernization
+                </h3>
+                <p class="card__desc">
+                  For teams modernizing analytics workflows, pipelines, and
+                  operating structure.
+                </p>
+              </div>
+
+              <div class="card__body">
+                <p class="card__label">Email with:</p>
+                <ul class="card__list">
+                  <li>Current tool stack</li>
+                  <li>Primary bottleneck</li>
+                  <li>Timeline</li>
+                  <li>Decision owner</li>
+                </ul>
+
+                <p class="card__label card__label--optional">
+                  Optional but helpful:
+                </p>
+                <ul class="card__list card__list--optional">
+                  <li>Scale (data volume / team size)</li>
+                  <li>Regulatory or compliance constraints</li>
+                  <li>Current validation approach</li>
+                </ul>
+
+                <p class="card__close">
+                  This lets me assess structure, failure modes, and acceleration
+                  opportunities quickly.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article
+              class="card"
+              role="listitem"
+              aria-labelledby="card-collab-title"
+            >
+              <div class="card__header">
+                <h3 id="card-collab-title" class="card__title">
+                  Technical Collaboration
+                </h3>
+                <p class="card__desc">
+                  For architecture reviews, pipeline redesign, or signal
+                  modeling initiatives.
+                </p>
+              </div>
+
+              <div class="card__body">
+                <p class="card__label">Include:</p>
+                <ul class="card__list">
+                  <li>Objective</li>
+                  <li>Current-state diagram (if available)</li>
+                  <li>Known failure points</li>
+                  <li>Stakeholders impacted</li>
+                  <li>Definition of success</li>
+                </ul>
+                <p class="card__close">Clarity accelerates execution.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- RESPONSE EXPECTATIONS STRIP -->
+        <section
+          class="response-strip"
+          aria-labelledby="response-title"
+          id="schedule-chat"
+        >
+          <div class="response-strip__inner">
+            <div class="response-strip__copy">
+              <h2 id="response-title" class="response-strip__title">
+                Response expectations
+              </h2>
+              <p class="response-strip__text">
+                I typically review inquiries within 24–48 hours on business
+                days. For complex topics, I’ll suggest a short working call to
+                validate scope and timeline.
+              </p>
+            </div>
+
+            <div class="response-strip__cta">
+              <a class="btn btn-secondary" href="mailto:kmatosli@yahoo.com"
+                >Email me</a
+              >
+              <a class="btn btn-primary" href="#schedule-chat">Schedule chat</a>
+              <p class="response-strip__note">
+                Include: current stack, bottleneck, timeline, decision owner.
+              </p>
+            </div>
+          </div>
         </section>
       </div>
     </main>
 
+    <!-- Footer (shared; do not modify footer.css) -->
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-left">© 2026 Kathy Matos Linares</div>
-        <div class="footer-right">
-          <a href="mailto:kmatosli@yahoo.com">✉ kmatosli@yahoo.com</a>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-left">
+            <p>© 2026 Kathy Matos Linares. All rights reserved.</p>
+          </div>
+
+          <div class="footer-right">
+            <nav class="footer-legal" aria-label="Legal">
+              <a class="footer-link" href="privacy.html">Privacy Policy</a>
+              <span class="footer-dot" aria-hidden="true">•</span>
+              <a class="footer-link" href="terms.html">Terms of Use</a>
+            </nav>
+
+            <a
+              href="mailto:kmatosli@yahoo.com"
+              class="email-link"
+              aria-label="Email Kathy"
+            >
+              <span>kmatosli@yahoo.com</span>
+            </a>
+
+            <a
+              href="https://github.com/kmatosli"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub Profile"
+              class="footer-icon"
+            >
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/kathy-matos-070802/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn Profile"
+              class="footer-icon"
+            >
+              <span>LinkedIn</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>

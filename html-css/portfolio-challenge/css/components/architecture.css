@@ -1,0 +1,70 @@
+/* ============================================================
+   # ---- Architecture Visual Strip (Engineering Profile) ----
+   - Centered, narrower than body text (Option B)
+   - Text arrows between nodes (Option A)
+   - Subtle hover only
+   ============================================================ */
+
+.arch-visual {
+  margin: 18px 0 22px 0; /* breathing room under title */
+}
+
+.arch-visual-inner {
+  /* Option B: narrower and centered */
+  width: min(760px, 86%);
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* allows wrap on smaller screens */
+  gap: 10px;
+}
+
+.arch-chip {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+
+  background: #fff;
+  color: rgba(44, 51, 62, 0.88);
+  border: 1px solid rgba(44, 51, 62, 0.14);
+  border-radius: 999px;
+
+  padding: 10px 12px;
+  display: inline-flex;
+  align-items: center;
+
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease,
+    background 0.12s ease;
+}
+
+.arch-visual {
+  margin: 14px 0 16px 0;
+}
+
+.arch-chip--accent {
+  border-color: rgba(52, 86, 139, 0.55); /* ClassicBlue */
+  background: rgba(104, 137, 192, 0.12); /* Provence tint */
+  color: rgba(44, 51, 62, 0.92);
+}
+
+.arch-arrow {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  color: rgba(124, 132, 136, 0.65); /* Monument-ish */
+  user-select: none;
+}
+
+/* Subtle hover only */
+.arch-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(44, 51, 62, 0.22);
+}
+
+.arch-chip--accent:hover {
+  border-color: rgba(52, 86, 139, 0.78);
+}

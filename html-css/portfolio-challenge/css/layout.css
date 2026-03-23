@@ -1,131 +1,242 @@
 /* ============================================================
-   # ---- Header Layout ----
-   - Black top bar
-   - Brand left, nav right
-   - Uses flexbox for 1-row layout
-   - Header stays fixed height
-   - Main is exactly the remaining viewport height
+   FILE: layout.css
+   PURPOSE:
+   - Owns page structure + layout primitives (containers, flex/grid, spacing)
+   - Header normal flow
+   - Footer fixed to bottom
+   - Main fills remaining space safely (reserves footer height)
+   - Does NOT own component “look” (colors, typography, buttons, etc.)
    ============================================================ */
 
+/* ============================================================
+   TOC (search tokens):
+   - Tokens: :root
+   - Container: .container
+   - Header layout: .site-header .header-inner
+   - Main layout: main
+   - Hero layout: .hero-inner
+   - Panels layout: .home-panels .home-panels-inner .tabpanels
+   - Projects layout: .projects-grid .project.card
+   - Footer layout: .site-footer
+   ============================================================ */
+
+/* =========================
+   Tokens
+   ========================= */
+
 :root {
-  --header-h: 48px;
-  --footer-h: 42px;
+  --header-h: 64px;
+  --footer-h: 44px;
 }
 
+/* =========================
+   Global container
+   - Single source of truth for header/footer alignment
+   ========================= */
+
+.container {
+  width: min(1280px, 92%);
+  margin: 0 auto;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* =========================
+   Header (normal flow)
+   ========================= */
+
 .site-header {
-  height: var(--header-h);
-  background: var(--header-bg);
-  border-bottom: 0;
-  box-shadow: none;
+  min-height: var(--header-h);
 }
 
 .header-inner {
+  min-height: var(--header-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  /* gives the header height/air */
-  height: var(--header-h);
-  padding: 0 18px;
 }
+
+/* =========================
+   Main (viewport fit + footer-safe)
+   - Footer is fixed, so reserve space with padding-bottom
+   ========================= */
 
 main {
-  height: calc(100vh - var(--header-h) - var(--footer-h));
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  height: auto;
+  overflow: visible;
+  display: block;
 }
 
-/* ============================================================
-   # ---- Hero Layout ----
-   - Two column layout (text left, logo right)
-   - No scrolling landing: hero fills remaining viewport (visible area of the browswer window) under header
-   ============================================================ */
+/* =========================
+   Hero layout
+   ========================= */
 
-.hero {
-  /* dark band like mock up; matches palette */
-  background: var(--k-ink); /* AnchorInk */
-}
-
-/* Actual two columns container */
 .hero-inner {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 36px;
-
-  /* Height strategy:
-    - fill screen belwo header without forcing scroll
-    - adjust 72px if your header height differs
-  */
-
-  padding: 22px 18px;
 }
 
-.hero-text {
-  flex: 1;
-  max-width: 660px;
-}
+/* =========================
+   Panels containment
+   - Prevent parent containers from forcing extra height
+   ========================= */
 
-.hero-visual {
-  flex: 0 0 360px; /* right column width */
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  justify-content: center;
-}
-
-/* Home panels sit under hero; make them compact */
-
-.home-panels {
-  background: var(--k-bg);
-  padding: 14px 0 0 0;
-}
-
-.home-panels-inner {
-  /* Prevent overall page scroll due to panels */
-  overflow: hidden;
-}
-
-/* Tab panel area: sorta fixed so nothing pushes the page */
+.home-panels-inner,
 .tabpanels {
-  margin-top: 12px;
-  overflow: hidden;
+  height: auto;
 }
 
-.projects {
-  background: var(--k-bg);
-  padding: 28px 0 34px 0;
-}
-
-.section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-}
+/* =========================
+   Projects layout
+   - Prevent cards from stretching taller than content
+   ========================= */
 
 .projects-grid {
   display: flex;
   gap: 16px;
+  align-items: flex-start;
 }
 
-.project-card {
-  flex: 1;
+.project.card {
+  align-self: flex-start;
 }
+
+/* =========================
+   Footer (fixed to bottom)
+   ========================= */
 
 .site-footer {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 50;
-  margin-top: 0;
-  padding: 0px 0;
+  height: var(--footer-h);
+  display: flex;
+  align-items: center;
+  z-index: 999;
 }
 
-.site-footer .container {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+/* ============================================================
+   Desktop/Laptop: strict no-scroll landing page (fits 100vh)
+   - Mobile/tablet scroll remains allowed via responsive.css
+   ============================================================ */
+@media (min-width: 901px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Reduce chrome height slightly for smaller laptops */
+  :root {
+    --header-h: 56px;
+    --footer-h: 40px;
+  }
+
+  main {
+    height: calc(100vh - var(--header-h) - var(--footer-h));
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .site-header {
+    min-height: var(--header-h);
+  }
+
+  .header-inner {
+    min-height: var(--header-h);
+  }
+
+  /* Hero remains content-sized */
+  .hero {
+    flex: 0 0 auto;
+  }
+
+  /* Panels absorb remaining height */
+  .home-panels {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .home-panels-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  /* Tabs do not grow */
+  .tabs {
+    flex: 0 0 auto;
+  }
+
+  /* Projects row fills leftover height */
+  .projects-grid {
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+  }
+
+  .project.card {
+    align-self: stretch;
+    height: 100%;
+  }
+
+  .site-footer {
+    height: var(--footer-h);
+  }
+
+
+   /* ============================================================
+     PROJECTS PAGE ONLY: allow scroll
+     ============================================================ */
+
+  /* allow the document to scroll on projects */
+  .page-projects {
+    overflow-y: auto;
+  }
+
+  /* make main a normal block container so content can extend */
+  .page-projects main {
+    height: auto;
+    overflow: visible;
+    display: block;
+    min-height: 0;
+    padding-bottom: calc(var(--footer-h) + 24px); /* prevents last cards hiding behind fixed footer */
+  }
+
+  /* projects grid should wrap onto new rows */
+  .page-projects .projects-grid {
+    flex: initial;          /* neutralize the flex-fill rules */
+    min-height: initial;
+    align-items: flex-start;
+    flex-wrap: wrap;        /* IMPORTANT: allows additional cards to wrap */
+  }
+
+  .page-projects .project.card {
+    height: auto;
+    align-self: flex-start;
+}
+
+
+/* ============================================================
+   ABOUT PAGE ONLY: allow scroll
+   ============================================================ */
+
+/* allow the document to scroll on about */
+.page-about {
+  overflow-y: auto;
+}
+
+/* make main a normal block container so content can extend */
+.page-about main {
+  height: auto;
+  overflow: visible;
+  display: block;
+  min-height: 0;
+  padding-bottom: calc(var(--footer-h) + 24px); /* keeps content above fixed footer */
 }
