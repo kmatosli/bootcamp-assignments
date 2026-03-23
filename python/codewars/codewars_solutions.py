@@ -1,242 +1,221 @@
 """
 ========================================================
-Module: visible_validators.py
-Project: Visible — Career Operating System
-Purpose: Core input validation and sanitization utilities
-         for the Visible data entry pipeline.
- 
-These functions validate and clean user-submitted data
-before it is stored, analyzed, or surfaced in reports.
-They form the foundation of the server-side validation
-layer and mirror the client-side validation in the
-Bootstrap intake form.
- 
+File: codewars_solutions.py
+Assignment: SE Foundations Knowledge Check — Codewars
+Bootcamp: Coding Temple Software Engineering
 Author: Kathy Matos Linares
+
+Kata Solved:
+  1. Even or Odd (8 kyu)
+  2. Convert a Number to a String (8 kyu)
+  3. Remove String Spaces (8 kyu)
+  4. Vowel Count (7 kyu)
+
+All four solutions use only Python built-ins.
+All four passed Codewars test suites on submission.
+
+Real-world context: These functions are also used as
+input validation utilities in Visible, a career decision
+intelligence platform, where they sanitize and validate
+form data before it enters the report generation pipeline.
 ========================================================
 """
- 
- 
+
+
 # --------------------------------------------------------
-# Validator 1: Numeric Field Parity Check
+# Kata 1: Even or Odd
+# Codewars: https://www.codewars.com/kata/53da3dbb4a5168369a0000fe
+# Difficulty: 8 kyu
 # --------------------------------------------------------
-# Used in: Quantification fields (hours saved, people
-# affected, reporting cycles). Validates that numeric
-# inputs meet expected parity constraints.
-# Example: bi-weekly hour counts should be even numbers.
+# Function name required by Codewars: even_or_odd
+# Input: integer (positive, negative, or zero)
+# Output: "Even" if divisible by 2, "Odd" otherwise
 # --------------------------------------------------------
- 
+
 def even_or_odd(number):
     """
-    Determines whether a numeric input is even or odd.
- 
-    In Visible, this validates quantification fields where
-    parity matters — for example, flagging odd hour counts
-    in bi-weekly reporting cycles or validating structured
-    time-saving estimates.
- 
+    Returns "Even" if number is even, "Odd" if not.
+
     Args:
-        number (int): A numeric value from a quantification
-                      field in the Visible intake form.
- 
+        number (int): Any integer value.
+
     Returns:
-        str: "Even" if the number is even, "Odd" if not.
- 
-    Example:
-        >>> even_or_odd(6)
+        str: "Even" or "Odd"
+
+    Examples:
+        >>> even_or_odd(0)
+        'Even'
+        >>> even_or_odd(2)
         'Even'
         >>> even_or_odd(7)
         'Odd'
+        >>> even_or_odd(-3)
+        'Odd'
     """
     return "Even" if number % 2 == 0 else "Odd"
- 
- 
+
+
 # --------------------------------------------------------
-# Validator 2: Numeric to String Type Coercion
+# Kata 2: Convert a Number to a String
+# Codewars: https://www.codewars.com/kata/5265326f5fda8eb1160004c8
+# Difficulty: 8 kyu
 # --------------------------------------------------------
-# Used in: Salary fields, compensation band inputs,
-# quantified impact metrics. Converts numeric values
-# to strings before they are stored in the report
-# engine or displayed in the promotion document.
+# Function name required by Codewars: number_to_string
+# Input: integer
+# Output: string representation of that integer
 # --------------------------------------------------------
- 
+
 def number_to_string(num):
     """
-    Converts a numeric input to its string representation.
- 
-    In Visible, salary figures, compensation bands, and
-    quantified metrics are entered as numbers but must be
-    converted to strings for report generation, display,
-    and consistent storage in the contribution record.
- 
+    Converts an integer to its string representation.
+
     Args:
-        num (int): A numeric value such as salary,
-                   hours saved, or AUM figure.
- 
+        num (int): Any integer value.
+
     Returns:
-        str: The string representation of the number.
- 
-    Example:
-        >>> number_to_string(145000)
-        '145000'
-        >>> number_to_string(-5000)
-        '-5000'
+        str: The string form of the number.
+
+    Examples:
+        >>> number_to_string(123)
+        '123'
+        >>> number_to_string(999)
+        '999'
+        >>> number_to_string(-100)
+        '-100'
+        >>> number_to_string(0)
+        '0'
     """
     return str(num)
- 
- 
+
+
 # --------------------------------------------------------
-# Validator 3: Input Whitespace Sanitization
+# Kata 3: Remove String Spaces
+# Codewars: https://www.codewars.com/kata/57eae20f31dd3048b4000139
+# Difficulty: 8 kyu
 # --------------------------------------------------------
-# Used in: Job title, company name, LinkedIn URL,
-# skill tags, and contribution title fields. Strips
-# whitespace from user input before storage to prevent
-# duplicate entries and ensure consistent matching.
+# Function name required by Codewars: no_space
+# Input: string (may contain spaces anywhere)
+# Output: same string with all spaces removed
 # --------------------------------------------------------
- 
+
 def no_space(x):
     """
-    Removes all whitespace from a string input.
- 
-    In Visible, job titles, skill tags, and identifiers
-    entered with inconsistent spacing are sanitized before
-    storage. This prevents duplicate contribution records
-    caused by whitespace variations and ensures reliable
-    pattern matching across entries.
- 
+    Removes all spaces from a string.
+
     Args:
-        x (str): A string input from a Visible form field.
- 
+        x (str): A string that may contain spaces.
+
     Returns:
         str: The input string with all spaces removed.
- 
-    Example:
-        >>> no_space("Senior Data Engineer ")
-        'SeniorDataEngineer'
-        >>> no_space("risk model ")
-        'riskmodel'
+
+    Examples:
+        >>> no_space("8 j 8 mBliB8g imjB8B8 jl B")
+        '8j8mBliB8gimjB8B8jlB'
+        >>> no_space("hello world")
+        'helloworld'
+        >>> no_space("  leading and trailing  ")
+        'leadingandtrailing'
     """
     return x.replace(" ", "")
- 
- 
+
+
 # --------------------------------------------------------
-# Validator 4: Narrative Quality Signal
+# Kata 4: Vowel Count
+# Codewars: https://www.codewars.com/kata/54ff3102c1bad923760001f3
+# Difficulty: 7 kyu
 # --------------------------------------------------------
-# Used in: Problem, Action, Impact, and Counterfactual
-# narrative fields. A low vowel count relative to string
-# length signals placeholder text, gibberish, or
-# excessively abbreviated input that will produce
-# low-quality report output.
+# Function name required by Codewars: get_count
+# Input: string of lowercase letters and/or spaces
+# Output: count of vowels (a, e, i, o, u) in the string
 # --------------------------------------------------------
- 
+
 def get_count(string):
     """
-    Counts the number of vowels in a narrative string.
- 
-    In Visible, narrative fields (Problem, Action, Impact,
-    Evidence) require meaningful text to generate
-    high-quality promotion documents. A low vowel count
-    relative to string length is used as a signal that
-    the input may be placeholder text, an abbreviation,
-    or insufficiently detailed for report generation.
- 
-    The mapping layer uses this signal to prompt the user
-    to expand their narrative before the entry is saved.
- 
+    Returns the number of vowels in a string.
+
+    Counts only: a, e, i, o, u (lowercase).
+    Input will be lowercase letters and/or spaces.
+
     Args:
-        string (str): A narrative string from a Visible
-                      intake form field.
- 
+        string (str): A string of lowercase letters and spaces.
+
     Returns:
-        int: The count of vowels (a, e, i, o, u) in
-             the string.
- 
-    Example:
-        >>> get_count("automated the reporting workflow")
-        11
-        >>> get_count("asdfghjkl")
-        1
+        int: Count of vowel characters in the string.
+
+    Examples:
+        >>> get_count("hello")
+        2
+        >>> get_count("aeiou")
+        5
+        >>> get_count("bcdfg")
+        0
+        >>> get_count("")
+        0
     """
     return sum(1 for char in string if char in "aeiou")
- 
- 
+
+
 # --------------------------------------------------------
-# Validation Pipeline: Realistic Visible Scenarios
+# TEST SUITE
 # --------------------------------------------------------
-# These tests simulate real data entry scenarios from
-# the Visible intake form and report generation pipeline.
+# Assertion-based tests that mirror Codewars test cases.
+# Run this file directly to verify all solutions pass:
+#   python codewars_solutions.py
+#
+# Expected output: "All tests passed." with no errors.
+# AssertionError is raised immediately if any test fails.
 # --------------------------------------------------------
- 
+
+def run_tests():
+    """Runs assertion-based tests for all four kata solutions."""
+
+    print("Running tests...\n")
+
+    # ---- even_or_odd ----
+    print("[1] even_or_odd")
+    assert even_or_odd(2)   == "Even", "Failed: even_or_odd(2)"
+    assert even_or_odd(7)   == "Odd",  "Failed: even_or_odd(7)"
+    assert even_or_odd(0)   == "Even", "Failed: even_or_odd(0)"
+    assert even_or_odd(-4)  == "Even", "Failed: even_or_odd(-4)"
+    assert even_or_odd(-3)  == "Odd",  "Failed: even_or_odd(-3)"
+    assert even_or_odd(1)   == "Odd",  "Failed: even_or_odd(1)"
+    assert even_or_odd(100) == "Even", "Failed: even_or_odd(100)"
+    print("    All even_or_odd tests passed ✓")
+
+    # ---- number_to_string ----
+    print("[2] number_to_string")
+    assert number_to_string(123)  == "123",  "Failed: number_to_string(123)"
+    assert number_to_string(999)  == "999",  "Failed: number_to_string(999)"
+    assert number_to_string(-100) == "-100", "Failed: number_to_string(-100)"
+    assert number_to_string(0)    == "0",    "Failed: number_to_string(0)"
+    assert number_to_string(1)    == "1",    "Failed: number_to_string(1)"
+    print("    All number_to_string tests passed ✓")
+
+    # ---- no_space ----
+    print("[3] no_space")
+    assert no_space("8 j 8 mBliB8g imjB8B8 jl B") == "8j8mBliB8gimjB8B8jlB", \
+        "Failed: no_space codewars example"
+    assert no_space("hello world")   == "helloworld",        "Failed: no_space hello world"
+    assert no_space("  leading  ")   == "leading",           "Failed: no_space leading spaces"
+    assert no_space("nospace")       == "nospace",           "Failed: no_space no spaces"
+    assert no_space(" ")             == "",                  "Failed: no_space single space"
+    assert no_space("")              == "",                  "Failed: no_space empty string"
+    print("    All no_space tests passed ✓")
+
+    # ---- get_count ----
+    print("[4] get_count")
+    assert get_count("hello")          == 2, "Failed: get_count hello"
+    assert get_count("aeiou")          == 5, "Failed: get_count aeiou"
+    assert get_count("bcdfg")          == 0, "Failed: get_count bcdfg"
+    assert get_count("")               == 0, "Failed: get_count empty"
+    assert get_count("abracadabra")    == 5, "Failed: get_count abracadabra"
+    assert get_count("the quick brown fox") == 5, "Failed: get_count quick brown fox"
+    print("    All get_count tests passed ✓")
+
+    print("\n" + "=" * 40)
+    print("All tests passed.")
+    print("=" * 40)
+
+
 if __name__ == "__main__":
- 
-    print("=" * 55)
-    print("VISIBLE — Input Validation Pipeline")
-    print("=" * 55)
- 
-    # --- Numeric Field Parity Check ---
-    print("\n[1] Numeric Parity Validation")
-    print("-" * 40)
-    hours_saved = 6
-    result = even_or_odd(hours_saved)
-    print(f"Hours saved per cycle: {hours_saved} → {result}")
-    print(f"  Status: {'Valid bi-weekly figure' if result == 'Even' else 'Flag for review'}")
- 
-    reporting_cycles = 7
-    result2 = even_or_odd(reporting_cycles)
-    print(f"Reporting cycles logged: {reporting_cycles} → {result2}")
-    print(f"  Status: {'Flag for review — odd cycle count' if result2 == 'Odd' else 'Valid'}")
- 
-    # --- Salary and Compensation Type Coercion ---
-    print("\n[2] Compensation Field Type Coercion")
-    print("-" * 40)
-    salary = 145000
-    salary_str = number_to_string(salary)
-    print(f"Salary input: {salary} (int) → '{salary_str}' (str)")
-    print(f"  Status: Ready for report generation")
- 
-    compensation_gap = -32000
-    gap_str = number_to_string(compensation_gap)
-    print(f"Compensation gap: {compensation_gap} (int) → '{gap_str}' (str)")
-    print(f"  Status: Negative value flagged for compensation review")
- 
-    # --- Input Sanitization ---
-    print("\n[3] Form Field Whitespace Sanitization")
-    print("-" * 40)
-    raw_title = "  Quant Associate  "
-    clean_title = no_space(raw_title)
-    print(f"Raw job title: '{raw_title}'")
-    print(f"Sanitized: '{clean_title}'")
-    print(f"  Status: Ready for storage and matching")
- 
-    raw_skill = "workflow automation "
-    clean_skill = no_space(raw_skill)
-    print(f"Raw skill tag: '{raw_skill}'")
-    print(f"Sanitized: '{clean_skill}'")
-    print(f"  Status: Duplicate prevention check passed")
- 
-    # --- Narrative Quality Validation ---
-    print("\n[4] Narrative Field Quality Signal")
-    print("-" * 40)
- 
-    strong_narrative = (
-        "automated the conference room scheduling process "
-        "using access and vba eliminating manual coordination "
-        "across four stakeholder groups"
-    )
-    weak_narrative = "did stuff mgmt rpt sys"
- 
-    strong_count = get_count(strong_narrative)
-    weak_count = get_count(weak_narrative)
-    strong_ratio = round(strong_count / len(strong_narrative), 3)
-    weak_ratio = round(weak_count / len(weak_narrative), 3)
- 
-    print(f"Strong narrative vowel count: {strong_count}")
-    print(f"  Vowel density: {strong_ratio}")
-    print(f"  Status: {'Sufficient detail — proceed to mapping layer' if strong_ratio > 0.1 else 'Flag for expansion'}")
- 
-    print(f"\nWeak narrative vowel count: {weak_count}")
-    print(f"  Vowel density: {weak_ratio}")
-    print(f"  Status: {'Flag — narrative too abbreviated for quality report output' if weak_ratio < 0.1 else 'Acceptable'}")
- 
-    print("\n" + "=" * 55)
-    print("Validation pipeline complete.")
-    print("=" * 55)
+    run_tests()
