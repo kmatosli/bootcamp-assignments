@@ -1,0 +1,1421 @@
+Copy
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visible — Know Your Leverage Before the Meeting</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --ink: #0f1923;
+        --ink-mid: #1c2e3f;
+        --teal: #0e7c6e;
+        --teal-light: #12a592;
+        --teal-glow: rgba(14, 124, 110, 0.12);
+        --gold: #c8a84b;
+        --gold-soft: rgba(200, 168, 75, 0.12);
+        --white: #ffffff;
+        --muted: #7d94a8;
+        --border: rgba(255, 255, 255, 0.07);
+        --card: rgba(255, 255, 255, 0.035);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--ink);
+        color: var(--white);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      h1,
+      h2,
+      h3,
+      .serif {
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        background: rgba(15, 25, 35, 0.96) !important;
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 1.1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .navbar-brand {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--white) !important;
+      }
+      .navbar-brand .accent {
+        color: var(--teal-light);
+      }
+      .nav-link {
+        color: var(--muted) !important;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 0.5rem 1rem !important;
+        transition: color 0.2s;
+      }
+      .nav-link:hover {
+        color: var(--white) !important;
+      }
+      .navbar-toggler {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.6rem;
+      }
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.6)' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+      .nav-cta {
+        background: var(--teal);
+        color: var(--white) !important;
+        border-radius: 6px;
+        padding: 0.5rem 1.25rem !important;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--teal-light) !important;
+        transform: translateY(-1px);
+        color: var(--white) !important;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 92vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 0 4rem;
+      }
+      .hero-glow-1 {
+        position: absolute;
+        top: -15%;
+        right: -10%;
+        width: 65vw;
+        height: 65vw;
+        background: radial-gradient(
+          circle,
+          rgba(14, 124, 110, 0.09) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
+      .hero-glow-2 {
+        position: absolute;
+        bottom: -20%;
+        left: -15%;
+        width: 55vw;
+        height: 55vw;
+        background: radial-gradient(
+          circle,
+          rgba(200, 168, 75, 0.06) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        margin-bottom: 1.5rem;
+        padding: 0.35rem 0.85rem;
+        border: 1px solid rgba(18, 165, 146, 0.25);
+        border-radius: 4px;
+        background: rgba(18, 165, 146, 0.06);
+      }
+      .hero-headline {
+        font-size: clamp(3rem, 6.5vw, 5.5rem);
+        font-weight: 700;
+        line-height: 1.02;
+        letter-spacing: -1px;
+        margin-bottom: 1.75rem;
+      }
+      .hero-headline .line-gold {
+        color: var(--gold);
+      }
+      .hero-body {
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 500px;
+        margin-bottom: 2.5rem;
+      }
+      .hero-body strong {
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      /* BUTTONS */
+      .btn-primary-visible {
+        display: inline-block;
+        background: var(--teal);
+        color: var(--white);
+        border: none;
+        padding: 0.9rem 2rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.25s;
+        letter-spacing: 0.2px;
+      }
+      .btn-primary-visible:hover {
+        background: var(--teal-light);
+        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(14, 124, 110, 0.35);
+      }
+      /* Visible all screen sizes */
+      .btn-secondary-visible {
+        display: inline-block;
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid rgba(125, 148, 168, 0.3);
+        padding: 0.9rem 2rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.25s;
+      }
+      .btn-secondary-visible:hover {
+        border-color: var(--white);
+        color: var(--white);
+      }
+      /* Hidden small screens: d-none d-md-block */
+      .btn-gold-visible {
+        display: inline-block;
+        background: var(--gold);
+        color: var(--ink);
+        border: none;
+        padding: 0.9rem 2rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.25s;
+      }
+      .btn-gold-visible:hover {
+        background: #d4b55a;
+        color: var(--ink);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(200, 168, 75, 0.3);
+      }
+
+      /* HERO IMAGE */
+      .hero-main-img {
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        box-shadow:
+          0 0 0 1px rgba(14, 124, 110, 0.1),
+          0 40px 80px rgba(0, 0, 0, 0.55);
+        width: 100%;
+      }
+      .hero-badge {
+        position: absolute;
+        bottom: -20px;
+        left: -20px;
+        background: var(--ink-mid);
+        border: 1px solid rgba(14, 124, 110, 0.3);
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      }
+      /* rounded-circle: assignment requirement */
+      .hero-badge-avatar {
+        width: 44px;
+        height: 44px;
+        object-fit: cover;
+        border: 2px solid var(--teal);
+        flex-shrink: 0;
+      }
+      .hero-badge-name {
+        font-weight: 600;
+        color: var(--white);
+        display: block;
+        font-size: 0.8rem;
+      }
+      .hero-badge-outcome {
+        color: var(--teal-light);
+        display: block;
+        font-size: 0.75rem;
+      }
+
+      /* TRUTH BAR */
+      .truth-bar {
+        background: var(--ink-mid);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 2rem 0;
+      }
+      .truth-number {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: var(--gold);
+        display: block;
+        line-height: 1;
+        margin-bottom: 0.35rem;
+      }
+      .truth-label {
+        font-size: 0.78rem;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      /* SECTIONS */
+      .section-pad {
+        padding: 5.5rem 0;
+      }
+      .section-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        margin-bottom: 0.85rem;
+      }
+      .section-headline {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        line-height: 1.12;
+        letter-spacing: -0.5px;
+        margin-bottom: 1rem;
+      }
+      .section-body {
+        font-size: 1rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.75;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      /* PROBLEM SECTION */
+      .problem-section {
+        background: var(--ink-mid);
+        padding: 5.5rem 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .pull-quote {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        font-weight: 600;
+        line-height: 1.3;
+        color: var(--white);
+        border-left: 3px solid var(--teal);
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .pull-quote .emphasis {
+        color: var(--gold);
+      }
+      .reality-item {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        margin-bottom: 1.25rem;
+      }
+      .reality-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--teal-glow);
+        border: 1px solid rgba(14, 124, 110, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .reality-text {
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+      .reality-text strong {
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      /* DOOR CARDS */
+      .door-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 2rem;
+        height: 100%;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .door-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--teal), var(--teal-light));
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .door-card:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(14, 124, 110, 0.3);
+        transform: translateY(-4px);
+      }
+      .door-card:hover::before {
+        opacity: 1;
+      }
+      .door-number {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: rgba(14, 124, 110, 0.2);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+      .door-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .door-problem {
+        font-size: 0.85rem;
+        color: var(--teal-light);
+        font-weight: 500;
+        margin-bottom: 1rem;
+        padding: 0.4rem 0.75rem;
+        background: var(--teal-glow);
+        border-radius: 4px;
+        display: inline-block;
+      }
+      .door-description {
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+        font-weight: 300;
+      }
+      .door-output {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .door-output-label {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+      .door-output-item {
+        font-size: 0.85rem;
+        color: var(--white);
+        padding: 0.3rem 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .door-output-item::before {
+        content: "→";
+        color: var(--teal-light);
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .door-promise {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.05rem;
+        font-style: italic;
+        color: var(--white);
+        border-left: 2px solid var(--gold);
+        padding-left: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .door-price {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .door-price strong {
+        color: var(--gold);
+        font-size: 1rem;
+      }
+
+      /* TABLE */
+      .table-visible {
+        color: var(--white);
+        font-size: 0.875rem;
+        margin: 0;
+      }
+      .table-visible thead th {
+        background: rgba(14, 124, 110, 0.15);
+        color: var(--teal-light);
+        font-size: 0.68rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border-color: var(--border);
+        padding: 1rem 1.25rem;
+        white-space: nowrap;
+      }
+      .table-visible tbody tr {
+        border-color: var(--border);
+        transition: background 0.15s;
+      }
+      .table-visible tbody tr:nth-child(odd) {
+        background: rgba(255, 255, 255, 0.018);
+      }
+      .table-visible tbody tr:hover {
+        background: var(--teal-glow) !important;
+      }
+      .table-visible td {
+        padding: 1.1rem 1.25rem;
+        vertical-align: middle;
+        border-color: var(--border);
+      }
+      .role-badge {
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 0.28rem 0.6rem;
+        border-radius: 4px;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+      }
+      .role-admin {
+        background: var(--gold-soft);
+        color: var(--gold);
+        border: 1px solid rgba(200, 168, 75, 0.2);
+      }
+      .role-quant {
+        background: var(--teal-glow);
+        color: var(--teal-light);
+        border: 1px solid rgba(14, 124, 110, 0.25);
+      }
+      .entry-title {
+        font-weight: 600;
+        color: var(--white);
+        font-size: 0.875rem;
+        margin-bottom: 0.2rem;
+      }
+      .entry-detail {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin: 0;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+      .value-tag {
+        font-size: 0.68rem;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        border: 1px solid var(--border);
+        padding: 0.22rem 0.55rem;
+        border-radius: 4px;
+        display: inline-block;
+        margin-bottom: 3px;
+      }
+      .outcome-text {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--teal-light);
+      }
+      .outcome-sub {
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-weight: 300;
+      }
+
+      /* FORM */
+      .signup-section {
+        padding: 5.5rem 0;
+      }
+      .form-card {
+        background: var(--ink-mid);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 3rem;
+      }
+      .form-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+      }
+      .form-control,
+      .form-select {
+        background: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.09) !important;
+        color: var(--white) !important;
+        border-radius: 7px;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--teal) !important;
+        box-shadow: 0 0 0 3px rgba(14, 124, 110, 0.15) !important;
+        outline: none;
+        background: rgba(255, 255, 255, 0.06) !important;
+      }
+      .form-control::placeholder {
+        color: rgba(125, 148, 168, 0.45);
+      }
+      .form-select option {
+        background: var(--ink-mid);
+        color: var(--white);
+      }
+      .form-check-label {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .form-check-input:checked {
+        background-color: var(--teal);
+        border-color: var(--teal);
+      }
+      .optional-tag {
+        font-size: 0.7rem;
+        color: var(--muted);
+        font-weight: 400;
+        letter-spacing: 0;
+        text-transform: none;
+        margin-left: 0.3rem;
+      }
+      .form-hint {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+        font-weight: 300;
+      }
+      .was-validated .form-control:valid {
+        border-color: var(--teal) !important;
+      }
+
+      /* FOOTER */
+      .footer {
+        background: var(--ink);
+        border-top: 1px solid var(--border);
+        padding: 2.5rem 0;
+      }
+      .footer-brand {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .footer-brand .accent {
+        color: var(--teal-light);
+      }
+      .footer-tagline {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 0.25rem;
+        font-weight: 300;
+      }
+      .footer-copy {
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-weight: 300;
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-1 {
+        animation: fadeUp 0.65s ease both;
+      }
+      .fade-2 {
+        animation: fadeUp 0.65s 0.12s ease both;
+      }
+      .fade-3 {
+        animation: fadeUp 0.65s 0.24s ease both;
+      }
+      .fade-4 {
+        animation: fadeUp 0.65s 0.36s ease both;
+      }
+      .fade-5 {
+        animation: fadeUp 0.65s 0.48s ease both;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR: assignment requirement — navbar, collapse, hamburger -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">Visi<span class="accent">ble</span></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#how">How It Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Get Started</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a href="#contact" class="nav-link nav-cta">Get Early Access</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO: assignment — container, img-fluid, rounded-circle, two buttons -->
+    <section class="hero" id="home">
+      <div class="hero-glow-1"></div>
+      <div class="hero-glow-2"></div>
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <span class="hero-eyebrow fade-1"
+              >Career Decision Intelligence</span
+            >
+            <h1 class="hero-headline fade-2">
+              Know your<br />leverage<br />
+              <span class="line-gold">before the meeting.</span>
+            </h1>
+            <p class="hero-body fade-3">
+              Your employer knows what your work is worth.
+              <strong>You should too.</strong>
+              Visible gives you the analysis, the language, and the evidence to
+              walk into your next review, negotiation, or career decision with
+              complete information — not gut feeling.
+            </p>
+            <div class="d-flex flex-wrap gap-3 fade-4">
+              <!-- Button 1: visible ALL screen sizes — assignment requirement -->
+              <a href="#contact" class="btn-primary-visible"
+                >Get Early Access — Free</a
+              >
+              <!-- Button 2: hidden small screens — d-none d-md-block — assignment requirement -->
+              <a href="#how" class="btn-gold-visible d-none d-md-block"
+                >See How It Works</a
+              >
+            </div>
+            <p
+              class="fade-5"
+              style="
+                margin-top: 1.25rem;
+                font-size: 0.8rem;
+                color: var(--muted);
+              "
+            >
+              No subscription required to experience value. Pay only when you
+              generate an output that matters.
+            </p>
+          </div>
+          <div class="col-lg-6 fade-4">
+            <div style="position: relative">
+              <!-- img-fluid — assignment requirement -->
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                alt="Visible career intelligence dashboard"
+                class="img-fluid hero-main-img"
+              />
+              <div class="hero-badge">
+                <!-- rounded-circle — assignment requirement -->
+                <img
+                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80"
+                  alt="Professional using Visible"
+                  class="img-fluid rounded-circle hero-badge-avatar"
+                />
+                <div>
+                  <span class="hero-badge-name"
+                    >Used Visible before her review</span
+                  >
+                  <span class="hero-badge-outcome"
+                    >Negotiated 22% compensation increase</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUTH BAR -->
+    <section class="truth-bar">
+      <div class="container">
+        <div class="row g-3 text-center">
+          <div class="col-6 col-md-3">
+            <span class="truth-number">63%</span>
+            <span class="truth-label"
+              >of employers cite skills gaps as their top barrier — but never
+              tell employees which skills</span
+            >
+          </div>
+          <div class="col-6 col-md-3">
+            <span class="truth-number">40%</span>
+            <span class="truth-label"
+              >of core job skills will change by 2030. Most employees have no
+              system to track where they stand</span
+            >
+          </div>
+          <div class="col-6 col-md-3">
+            <span class="truth-number">19yr</span>
+            <span class="truth-label"
+              >the average tenure of a professional who never had the
+              information to advocate for themselves</span
+            >
+          </div>
+          <div class="col-6 col-md-3">
+            <span class="truth-number">$0</span>
+            <span class="truth-label"
+              >what most employees invest in understanding their market value
+              before a compensation conversation</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section class="problem-section" id="about">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <p class="section-eyebrow">The Information Gap</p>
+            <div class="pull-quote">
+              This is not a talent problem.<br />
+              It is an <span class="emphasis">information problem.</span>
+            </div>
+            <p
+              style="
+                font-size: 0.95rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.75;
+                margin-bottom: 1.75rem;
+              "
+            >
+              Organizations have always had more information than employees
+              about what work is worth, what the real criteria for advancement
+              are, and what the ceiling looks like before you hit it. That
+              asymmetry has always worked in the employer's favor.
+            </p>
+            <p
+              style="
+                font-size: 0.95rem;
+                color: var(--muted);
+                font-weight: 300;
+                line-height: 1.75;
+              "
+            >
+              Visible does not give you their information. It makes sure you
+              have structured, analyzed, and understood your own — completely —
+              before any consequential decision is made.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <div class="reality-item">
+              <div class="reality-icon">💰</div>
+              <p class="reality-text">
+                <strong>A cost of living raise is not recognition.</strong> It
+                is maintenance. A 3% raise in a 4% inflation year is a pay cut —
+                and most people never see that calculation until it is too late
+                to act on it.
+              </p>
+            </div>
+            <div class="reality-item">
+              <div class="reality-icon">🔍</div>
+              <p class="reality-text">
+                <strong>Your most valuable work is invisible.</strong> The
+                contribution that kept everything running. The fragment that
+                made the whole presentation possible. The system you built that
+                IT never did. None of it appears in a standard performance
+                review.
+              </p>
+            </div>
+            <div class="reality-item">
+              <div class="reality-icon">⏱️</div>
+              <p class="reality-text">
+                <strong>Promotions are decided before the conversation.</strong>
+                By the time you are in the room, the decision is mostly made.
+                Visible helps you influence it before you get there.
+              </p>
+            </div>
+            <div class="reality-item">
+              <div class="reality-icon">🚪</div>
+              <p class="reality-text">
+                <strong>The ceiling is structural, not personal.</strong> When
+                your manager says you have reached the top of your band, they
+                are telling you something specific about the organization — not
+                about your capability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THREE DOORS -->
+    <section class="section-pad" id="how">
+      <div class="container">
+        <div class="text-center mb-5">
+          <p class="section-eyebrow">How Visible Works</p>
+          <h2 class="section-headline">
+            Three moments.<br />One source of truth.
+          </h2>
+          <p class="section-body">
+            Visible is not a continuous tracking system. It is a decision engine
+            built for the moments where the stakes are highest and the
+            information gap costs you the most.
+          </p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="door-card">
+              <div class="door-number">01</div>
+              <h3 class="door-title">Review Ready</h3>
+              <span class="door-problem">Performance review coming up</span>
+              <p class="door-description">
+                Answer five to ten guided questions about your strongest
+                contributions. Visible structures, translates, and generates a
+                polished promotion-ready document you bring into the meeting.
+              </p>
+              <div class="door-output">
+                <p class="door-output-label">You receive</p>
+                <div class="door-output-item">
+                  Executive-ready contribution summary
+                </div>
+                <div class="door-output-item">
+                  Quantified outcomes in business value language
+                </div>
+                <div class="door-output-item">
+                  Scope signals that support promotion arguments
+                </div>
+                <div class="door-output-item">
+                  Conversation guide for your specific audience
+                </div>
+              </div>
+              <p class="door-promise">
+                Walk into your review with a stronger case than your manager
+                expects.
+              </p>
+              <p class="door-price">
+                Free to start &nbsp;·&nbsp; <strong>$25</strong> to generate
+                your document
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="door-card">
+              <div class="door-number">02</div>
+              <h3 class="door-title">Offer Lens</h3>
+              <span class="door-problem">Job offer on the table</span>
+              <p class="door-description">
+                Enter the offer details and your current compensation. Visible
+                calculates the real comparison — total value, work mode costs,
+                financial anchors forfeited, trajectory implications, and market
+                benchmarks.
+              </p>
+              <div class="door-output">
+                <p class="door-output-label">You receive</p>
+                <div class="door-output-item">
+                  True total compensation comparison
+                </div>
+                <div class="door-output-item">
+                  Work mode and commute cost adjustment
+                </div>
+                <div class="door-output-item">
+                  Trajectory and exit optionality analysis
+                </div>
+                <div class="door-output-item">
+                  Negotiation leverage and questions to ask
+                </div>
+              </div>
+              <p class="door-promise">
+                Know what the offer is actually worth before you say yes.
+              </p>
+              <p class="door-price"><strong>$20</strong> per evaluation</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="door-card">
+              <div class="door-number">03</div>
+              <h3 class="door-title">Signal Check</h3>
+              <span class="door-problem">Something feels wrong</span>
+              <p class="door-description">
+                A fifteen-minute structured assessment covering compensation
+                trajectory, visibility, skill alignment, sponsorship, and
+                ceiling patterns. An honest picture of what the signals say and
+                what your options are.
+              </p>
+              <div class="door-output">
+                <p class="door-output-label">You receive</p>
+                <div class="door-output-item">
+                  Five-dimension departure signal score
+                </div>
+                <div class="door-output-item">
+                  Golden cuffs and financial anchor breakdown
+                </div>
+                <div class="door-output-item">
+                  External market value estimate
+                </div>
+                <div class="door-output-item">
+                  Conditions for staying versus leaving
+                </div>
+              </div>
+              <p class="door-promise">
+                Stop guessing whether it is time to go.
+              </p>
+              <p class="door-price">
+                <strong>$15</strong> for the full analysis
+              </p>
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-center mt-4"
+          style="font-size: 0.85rem; color: var(--muted); font-weight: 300"
+        >
+          Every tool feeds the same data spine. The more you use Visible, the
+          more accurate and personalized your outputs become.
+        </p>
+      </div>
+    </section>
+
+    <!-- TABLE: assignment — Bootstrap table, striped, hover, table-responsive, hardcoded data -->
+    <section style="padding: 0 0 5.5rem; background: var(--ink)">
+      <div class="container">
+        <div class="text-center mb-5">
+          <p class="section-eyebrow">What Visible Captures</p>
+          <h2 class="section-headline">
+            From admin to associate.<br />Every contribution documented.
+          </h2>
+          <p class="section-body">
+            Visible works for any professional whose contributions are real but
+            structurally invisible in standard performance frameworks.
+          </p>
+        </div>
+        <!-- table-responsive — assignment requirement -->
+        <div class="table-responsive">
+          <table
+            class="table table-striped table-hover table-visible align-middle"
+          >
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Contribution</th>
+                <th>Business Value</th>
+                <th>Outcome</th>
+                <th>Signal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="role-badge role-admin">Admin</span></td>
+                <td>
+                  <p class="entry-title">Conference Room Automation System</p>
+                  <p class="entry-detail">
+                    Built Access + VBA system replacing manual coordination
+                    across broker notifications, host attendance, AV routing,
+                    and guest arrival. Solved a problem IT never addressed.
+                  </p>
+                </td>
+                <td>
+                  <span class="value-tag">Operational Reliability</span>
+                  <span class="value-tag">Efficiency</span>
+                  <span class="value-tag">Client Experience</span>
+                </td>
+                <td>
+                  <p class="outcome-text">✓ Live 4+ years</p>
+                  <p class="outcome-sub">Outperformed enterprise replacement</p>
+                </td>
+                <td
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--gold);
+                    font-weight: 600;
+                  "
+                >
+                  Above Scope<br /><span
+                    style="color: var(--muted); font-weight: 400"
+                    >Ongoing Value</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td><span class="role-badge role-admin">Admin</span></td>
+                <td>
+                  <p class="entry-title">Guest Arrival & Host Routing</p>
+                  <p class="entry-detail">
+                    Extended automation to receptionist-facing guest arrival
+                    lists. Eliminated guesswork, reduced wait times, removed
+                    unnecessary interruptions during meetings.
+                  </p>
+                </td>
+                <td>
+                  <span class="value-tag">Client Experience</span>
+                  <span class="value-tag">Decision Speed</span>
+                </td>
+                <td>
+                  <p class="outcome-text">✓ Embedded in daily ops</p>
+                  <p class="outcome-sub">Zero escalations post-deployment</p>
+                </td>
+                <td
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--gold);
+                    font-weight: 600;
+                  "
+                >
+                  Cross-Functional<br /><span
+                    style="color: var(--muted); font-weight: 400"
+                    >Enabling</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="role-badge role-quant">Quant Associate</span>
+                </td>
+                <td>
+                  <p class="entry-title">Emerging Markets Risk Model</p>
+                  <p class="entry-detail">
+                    Designed and built EM-specific risk model capturing factor
+                    exposures generic models missed. Full documentation,
+                    presentation materials, embedded in portfolio evaluation.
+                  </p>
+                </td>
+                <td>
+                  <span class="value-tag">Risk Reduction</span>
+                  <span class="value-tag">Decision Quality</span>
+                  <span class="value-tag">Strategic</span>
+                </td>
+                <td>
+                  <p class="outcome-text">✓ In production</p>
+                  <p class="outcome-sub">Portfolios evaluated using model</p>
+                </td>
+                <td
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--gold);
+                    font-weight: 600;
+                  "
+                >
+                  Strategic<br /><span
+                    style="color: var(--muted); font-weight: 400"
+                    >Fully Documented</span
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM: assignment — Bootstrap form, grid (first/last side by side), required validation, btn-success, checkbox -->
+    <section class="signup-section" id="contact">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="text-center mb-4">
+              <p class="section-eyebrow">Early Access</p>
+              <h2 class="section-headline">
+                Start with your<br /><span style="color: var(--gold)"
+                  >next career moment.</span
+                >
+              </h2>
+              <p
+                style="
+                  font-size: 0.92rem;
+                  color: var(--muted);
+                  font-weight: 300;
+                  line-height: 1.7;
+                "
+              >
+                Join the waitlist. Free to start. No subscription. No blood
+                sample. Just two minutes.
+              </p>
+            </div>
+            <div class="form-card">
+              <form class="needs-validation" novalidate id="visibleForm">
+                <!-- First + Last side by side — assignment requirement -->
+                <div class="row g-3 mb-3">
+                  <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="First name"
+                      required
+                    />
+                    <div class="invalid-feedback">First name is required.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="Last name"
+                      required
+                    />
+                    <div class="invalid-feedback">Last name is required.</div>
+                  </div>
+                </div>
+                <!-- Email — required — assignment requirement -->
+                <div class="mb-3">
+                  <label for="email" class="form-label">Work Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="you@company.com"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    A valid email address is required.
+                  </div>
+                </div>
+                <!-- Password — required — assignment requirement -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Minimum 8 characters"
+                    minlength="8"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Password must be at least 8 characters.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="role" class="form-label">Your Role</label>
+                  <select class="form-select" id="role" required>
+                    <option value="" disabled selected>What do you do?</option>
+                    <option>Administrative Professional</option>
+                    <option>Analyst</option>
+                    <option>Associate</option>
+                    <option>Data / Quant Engineer</option>
+                    <option>Operations</option>
+                    <option>Portfolio Manager</option>
+                    <option>Project Manager</option>
+                    <option>Technology</option>
+                    <option>Other</option>
+                  </select>
+                  <div class="invalid-feedback">Please select your role.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="firstUse" class="form-label"
+                    >What brings you here first?</label
+                  >
+                  <select class="form-select" id="firstUse">
+                    <option value="" disabled selected>
+                      Select your most urgent need
+                    </option>
+                    <option>Performance review coming up — Review Ready</option>
+                    <option>Evaluating a job offer — Offer Lens</option>
+                    <option>Something feels wrong — Signal Check</option>
+                    <option>Just exploring</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="linkedin" class="form-label"
+                    >LinkedIn Profile
+                    <span class="optional-tag">(optional)</span></label
+                  >
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="linkedin"
+                    placeholder="https://linkedin.com/in/yourprofile"
+                  />
+                  <p class="form-hint">
+                    Visible uses this to help keep your profile current as a
+                    byproduct of documenting your work.
+                  </p>
+                </div>
+                <div class="mb-4">
+                  <label for="github" class="form-label"
+                    >GitHub
+                    <span class="optional-tag"
+                      >(optional — technical roles)</span
+                    ></label
+                  >
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="github"
+                    placeholder="https://github.com/yourusername"
+                  />
+                </div>
+                <!-- Checkbox — assignment requirement -->
+                <div class="mb-4">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="terms"
+                      required
+                    />
+                    <label class="form-check-label" for="terms">
+                      I agree to the
+                      <a href="#" style="color: var(--teal-light)"
+                        >Terms of Service</a
+                      >
+                      and
+                      <a href="#" style="color: var(--teal-light)"
+                        >Privacy Policy</a
+                      >. My data belongs to me. Always.
+                    </label>
+                    <div class="invalid-feedback">
+                      You must agree to continue.
+                    </div>
+                  </div>
+                </div>
+                <!-- btn-success — assignment requirement -->
+                <div class="d-grid">
+                  <button
+                    type="submit"
+                    class="btn btn-success btn-lg"
+                    id="submitBtn"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--teal),
+                        var(--teal-light)
+                      );
+                      border: none;
+                      font-weight: 600;
+                      padding: 0.9rem;
+                      border-radius: 8px;
+                      font-size: 1rem;
+                    "
+                  >
+                    Get Early Access
+                  </button>
+                </div>
+                <p
+                  class="text-center mt-3"
+                  style="font-size: 0.75rem; color: var(--muted)"
+                >
+                  No subscription to start. No credit card. Your record is yours
+                  — it travels with you.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <div class="footer-brand">Visi<span class="accent">ble</span></div>
+            <p class="footer-tagline">Know your leverage before the meeting.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="footer-copy">
+              © 2025 Visible. Built for every professional whose work happens
+              below the waterline.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        const form = document.getElementById("visibleForm");
+        const btn = document.getElementById("submitBtn");
+        form.addEventListener("submit", function (e) {
+          if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            form.classList.add("was-validated");
+            return;
+          }
+          e.preventDefault();
+          btn.textContent = "✓ You are on the list";
+          btn.style.background = "linear-gradient(135deg, #0e7c6e, #12a592)";
+          btn.disabled = true;
+          form.classList.add("was-validated");
+        });
+      })();
+    </script>
+  </body>
+</html>
