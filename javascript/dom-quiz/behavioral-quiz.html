@@ -1,0 +1,1140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visible — How You Show Up</title>
+    <style>
+      /* ============================================================
+       Visible Design System — Behavioral Onboarding Quiz
+       Assignment: DOMination — JavaScript Fundamentals Quiz
+       ============================================================ */
+
+      :root {
+        --ink: #0f1923;
+        --ink-mid: #1c2e3f;
+        --ink-soft: #2d4155;
+        --teal: #0e7c6e;
+        --teal-light: #12a592;
+        --teal-glow: rgba(14, 124, 110, 0.12);
+        --gold: #c8a84b;
+        --gold-soft: rgba(200, 168, 75, 0.12);
+        --white: #ffffff;
+        --muted: #7d94a8;
+        --border: rgba(255, 255, 255, 0.07);
+        --correct: #10b981;
+        --correct-bg: rgba(16, 185, 129, 0.12);
+        --incorrect: #ef4444;
+        --incorrect-bg: rgba(239, 68, 68, 0.1);
+        --font-serif: "Georgia", serif;
+        --font-sans: system-ui, -apple-system, sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background: var(--ink);
+        color: var(--white);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 40px 24px 80px;
+      }
+
+      /* ---- BRAND ---- */
+      .brand {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 40px;
+        letter-spacing: -0.3px;
+      }
+
+      .brand span {
+        color: var(--teal-light);
+      }
+
+      /* ---- CARD ---- */
+      .card {
+        width: 100%;
+        max-width: 660px;
+        background: var(--ink-mid);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 36px;
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ---- HIDDEN UTILITY ---- */
+      .hidden {
+        display: none !important;
+      }
+
+      /* ---- START SCREEN ---- */
+      #start-container .eyebrow {
+        display: inline-block;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        margin-bottom: 16px;
+        padding: 4px 10px;
+        border: 1px solid rgba(18, 165, 146, 0.25);
+        border-radius: 4px;
+        background: rgba(18, 165, 146, 0.06);
+      }
+
+      #start-container h1 {
+        font-family: var(--font-serif);
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        color: var(--white);
+      }
+
+      #start-container h1 span {
+        color: var(--gold);
+      }
+
+      #start-container p {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.75;
+        font-weight: 300;
+        margin-bottom: 12px;
+      }
+
+      .what-this-is {
+        background: var(--teal-glow);
+        border: 1px solid rgba(14, 124, 110, 0.2);
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin: 20px 0 28px;
+      }
+
+      .what-this-is p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.65;
+      }
+
+      .what-this-is p + p {
+        margin-top: 8px;
+      }
+
+      .what-this-is strong {
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      /* ---- QUIZ SCREEN ---- */
+      #quiz-container .progress-bar {
+        height: 3px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 2px;
+        margin-bottom: 8px;
+        overflow: hidden;
+      }
+
+      #quiz-container .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--teal), var(--teal-light));
+        border-radius: 2px;
+        transition: width 0.4s ease;
+      }
+
+      .progress-label {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-bottom: 28px;
+        letter-spacing: 0.5px;
+      }
+
+      .question-area {
+        margin-bottom: 24px;
+      }
+
+      .question-signal {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      #question-container {
+        font-family: var(--font-serif);
+        font-size: clamp(1.1rem, 3vw, 1.35rem);
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1.35;
+      }
+
+      #options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .option-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 9px;
+        padding: 14px 18px;
+        color: var(--white);
+        font-size: 0.9rem;
+        font-family: var(--font-sans);
+        font-weight: 400;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        line-height: 1.5;
+      }
+
+      .option-btn:hover:not(:disabled) {
+        background: rgba(14, 124, 110, 0.12);
+        border-color: rgba(14, 124, 110, 0.3);
+        transform: translateX(4px);
+      }
+
+      .option-btn:disabled {
+        cursor: not-allowed;
+      }
+
+      .option-btn.correct {
+        background: var(--correct-bg);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: var(--correct);
+        font-weight: 600;
+      }
+
+      .option-btn.incorrect {
+        background: var(--incorrect-bg);
+        border-color: rgba(239, 68, 68, 0.3);
+        color: var(--incorrect);
+      }
+
+      .option-btn.correct::after {
+        content: " ✓";
+      }
+      .option-btn.incorrect::after {
+        content: " ✗";
+      }
+
+      /* Feedback box */
+      #feedback-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.6;
+        font-weight: 300;
+      }
+
+      #feedback-box.visible-feedback {
+        display: block;
+      }
+
+      #feedback-box strong {
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      /* Why this matters box */
+      .why-box {
+        background: var(--teal-glow);
+        border: 1px solid rgba(14, 124, 110, 0.15);
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-bottom: 20px;
+      }
+
+      .why-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .why-text {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.55;
+        font-weight: 300;
+      }
+
+      /* Next button */
+      #next-button {
+        background: var(--teal);
+        color: var(--white);
+        border: none;
+        padding: 12px 28px;
+        border-radius: 8px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        font-family: var(--font-sans);
+        cursor: pointer;
+        transition: all 0.2s;
+        float: right;
+      }
+
+      #next-button:hover {
+        background: var(--teal-light);
+        transform: translateY(-1px);
+      }
+
+      .clearfix::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      /* ---- SCORE SCREEN ---- */
+      #score-container h2 {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+
+      #score-container .score-sub {
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-weight: 300;
+        margin-bottom: 28px;
+      }
+
+      /* Score ring */
+      .score-display {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 28px;
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+
+      .score-number {
+        font-family: var(--font-serif);
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--gold);
+        flex-shrink: 0;
+      }
+
+      .score-number span {
+        font-size: 1.2rem;
+        color: var(--muted);
+      }
+
+      .score-label {
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+      }
+
+      /* Profile result */
+      .profile-card {
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+      }
+
+      .profile-card.strong {
+        background: var(--correct-bg);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+      }
+
+      .profile-card.moderate {
+        background: var(--gold-soft);
+        border: 1px solid rgba(200, 168, 75, 0.2);
+      }
+
+      .profile-card.developing {
+        background: var(--incorrect-bg);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+      }
+
+      .profile-title {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .profile-card.strong .profile-title {
+        color: var(--correct);
+      }
+      .profile-card.moderate .profile-title {
+        color: var(--gold);
+      }
+      .profile-card.developing .profile-title {
+        color: var(--incorrect);
+      }
+
+      .profile-description {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+
+      /* Signal breakdown */
+      .signal-section {
+        margin-bottom: 24px;
+      }
+
+      .signal-section h3 {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        margin-bottom: 12px;
+      }
+
+      .signal-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .signal-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.5;
+      }
+
+      .signal-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 5px;
+      }
+
+      .signal-dot.flag {
+        background: var(--incorrect);
+      }
+      .signal-dot.strong {
+        background: var(--correct);
+      }
+
+      /* First priority */
+      .priority-box {
+        background: rgba(200, 168, 75, 0.08);
+        border: 1px solid rgba(200, 168, 75, 0.2);
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 24px;
+      }
+
+      .priority-label {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .priority-text {
+        font-size: 0.9rem;
+        color: var(--white);
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* Action row */
+      .score-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      #restart-button {
+        background: var(--teal);
+        color: var(--white);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: var(--font-sans);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      #restart-button:hover {
+        background: var(--teal-light);
+        transform: translateY(-1px);
+      }
+
+      .app-link {
+        display: inline-block;
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+
+      .app-link:hover {
+        border-color: var(--white);
+        color: var(--white);
+      }
+
+      /* ---- PRIMARY BUTTON (shared) ---- */
+      .primary-btn {
+        display: inline-block;
+        background: var(--teal);
+        color: var(--white);
+        border: none;
+        padding: 13px 28px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        font-family: var(--font-sans);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .primary-btn:hover {
+        background: var(--teal-light);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(14, 124, 110, 0.3);
+      }
+
+      /* ---- RESPONSIVE ---- */
+      @media (max-width: 480px) {
+        .card {
+          padding: 24px 20px;
+        }
+        .score-display {
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brand">Visi<span>ble</span></div>
+
+    <!-- ================================================
+       START SCREEN
+       ================================================ -->
+    <div id="start-container" class="card">
+      <span class="eyebrow">Behavioral Onboarding</span>
+      <h1>How do you <span>actually</span> show up?</h1>
+
+      <p>
+        Everyone is the hero of their own story. The problem is that your
+        manager is writing a different story — and you may not know which one.
+      </p>
+
+      <p>
+        This is not a performance test. It is a mirror. Ten questions. Honest
+        answers only. The more accurate you are, the more useful the output will
+        be.
+      </p>
+
+      <div class="what-this-is">
+        <p>
+          <strong>What this measures:</strong>
+          The ten behavioral signals that managers use to evaluate whether
+          someone is ready for the next level — almost always without ever
+          saying so directly.
+        </p>
+        <p>
+          Initiative. Judgment. Listening. Reliability. Learning orientation.
+          Discovery vs reporting. Communication discipline. Documentation.
+          Project completion. Purpose over presence.
+        </p>
+      </div>
+
+      <button class="primary-btn" id="start-button">
+        Start the Assessment →
+      </button>
+    </div>
+
+    <!-- ================================================
+       QUIZ SCREEN
+       Assignment: quiz-container with question-container,
+       options-container, and next-button
+       ================================================ -->
+    <div id="quiz-container" class="card hidden">
+      <!-- Progress bar -->
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <p class="progress-label" id="progress-label">Question 1 of 10</p>
+
+      <!-- Question -->
+      <div class="question-area">
+        <span class="question-signal" id="question-signal">Initiative</span>
+        <div id="question-container"></div>
+      </div>
+
+      <!-- Why this matters -->
+      <div class="why-box" id="why-box">
+        <span class="why-label">Why this matters</span>
+        <p class="why-text" id="why-text"></p>
+      </div>
+
+      <!-- Options -->
+      <div id="options-container"></div>
+
+      <!-- Feedback box — hidden until answer selected -->
+      <div id="feedback-box" class="hidden"></div>
+
+      <!-- Next button -->
+      <div class="clearfix">
+        <button id="next-button" class="hidden">Next →</button>
+      </div>
+    </div>
+
+    <!-- ================================================
+       SCORE SCREEN
+       Assignment: score-container with score and restart-button
+       ================================================ -->
+    <div id="score-container" class="card hidden">
+      <h2>Your Behavioral Profile</h2>
+      <p class="score-sub">
+        Based on your honest answers to all ten questions.
+      </p>
+
+      <!-- Score display -->
+      <div class="score-display">
+        <div class="score-number" id="score-number">0<span>/10</span></div>
+        <p class="score-label" id="score-label">Calculating your profile...</p>
+      </div>
+
+      <!-- Profile result card -->
+      <div class="profile-card" id="profile-card">
+        <p class="profile-title" id="profile-title"></p>
+        <p class="profile-description" id="profile-description"></p>
+      </div>
+
+      <!-- Signal breakdown -->
+      <div class="signal-section" id="signal-section">
+        <h3>Signal Breakdown</h3>
+        <div class="signal-list" id="signal-list"></div>
+      </div>
+
+      <!-- First priority -->
+      <div class="priority-box" id="priority-box">
+        <span class="priority-label">Your First Priority</span>
+        <p class="priority-text" id="priority-text"></p>
+      </div>
+
+      <!-- Actions -->
+      <div class="score-actions">
+        <button id="restart-button">Retake Assessment</button>
+        <a href="#" class="app-link">Continue to Visible →</a>
+      </div>
+    </div>
+
+    <!-- ================================================
+       JAVASCRIPT
+       Assignment: DOM manipulation, event listeners,
+       conditional logic, arrays and loops,
+       show/hide sections, score tracking, restart
+       ================================================ -->
+    <script>
+      // --------------------------------------------------------
+      // QUIZ DATA
+      // Ten behavioral signals from direct manager feedback.
+      // Each question maps to a BehavioralSignal in the
+      // Visible data model. The "optimal" answer index
+      // is what managers consistently identify as the
+      // behavior of someone ready for the next level.
+      // --------------------------------------------------------
+
+      const quizData = [
+        {
+          signal: "Initiative",
+          question:
+            "When you hit a problem you cannot solve immediately, what do you typically do?",
+          options: [
+            "Bring it to my manager right away so they are aware.",
+            "Research and attempt a solution first, then escalate if needed.",
+            "Sit with it until I figure it out completely on my own.",
+            "Wait to see if it resolves itself before escalating.",
+          ],
+          answer: 1,
+          why: "Managers consistently name initiative as a top signal. Coming with a problem and a proposed solution tells them you are already thinking at the next level. Coming with only the problem tells them you need management.",
+          feedback: {
+            correct:
+              "This is the behavior that consistently differentiates promotable from non-promotable employees. You are protecting your manager's time while demonstrating you can think independently.",
+            incorrect:
+              "The optimal behavior is to attempt a solution first, then escalate if needed. Managers want to see you exercise judgment before you ask for theirs.",
+          },
+        },
+        {
+          signal: "Reliability",
+          question:
+            "When your manager asks how long something will take, what do you typically say?",
+          options: [
+            "I give my best estimate even if I am not certain, and flag my confidence level.",
+            "I say I need to look into it and will come back with a timeline.",
+            "I avoid committing until I am sure I can deliver.",
+            "I give a generous buffer so I always come in under deadline.",
+          ],
+          answer: 0,
+          why: "Willingness to estimate is a reliability signal. A manager who cannot get a timeline from you cannot plan around you. Flagging your confidence level shows self-awareness. Refusing to estimate shows risk aversion.",
+          feedback: {
+            correct:
+              "Estimating with a confidence level is sophisticated professional behavior. It gives your manager what they need to plan while being honest about uncertainty.",
+            incorrect:
+              "Managers identify unwillingness to estimate as a significant barrier to advancement. The optimal behavior is to give your best estimate and flag your confidence level.",
+          },
+        },
+        {
+          signal: "Quality",
+          question:
+            "How do you typically handle your work before you submit or send it?",
+          options: [
+            "I trust my instincts — if it feels right, I send it.",
+            "I review it once quickly before sending.",
+            "I check it carefully and test the key assumptions before submitting.",
+            "I ask a colleague to review it before it goes anywhere important.",
+          ],
+          answer: 2,
+          why: "Checking your own work before submission is one of the most direct signals of professional maturity. Errors that reach your manager or stakeholders are visible. Errors you catch yourself are invisible.",
+          feedback: {
+            correct:
+              "Checking work carefully and testing key assumptions before submission is the behavior that builds a reputation for reliability. Every error your manager has to catch costs you.",
+            incorrect:
+              "The optimal behavior is careful review before submission. Managers notice error rates over time even when they do not mention them directly.",
+          },
+        },
+        {
+          signal: "Discovery vs Reporting",
+          question:
+            "How does your manager usually find out when you have completed significant work?",
+          options: [
+            "I tell them in our scheduled one on one.",
+            "I send a proactive update when I finish.",
+            "They usually discover it themselves.",
+            "They sometimes have to ask me what happened with something.",
+          ],
+          answer: 2,
+          why: "The manager who discovers your completed work feels genuinely good. The manager who has to ask feels like they are managing upward. Natural discovery is the highest signal — it means you are operating without needing supervision.",
+          feedback: {
+            correct:
+              "This is the rarest and most powerful pattern. The manager who discovers your work feels confident in you. Work on creating the conditions for natural discovery rather than scheduled reporting.",
+            incorrect:
+              "The optimal pattern is natural discovery. Structure your work so that outcomes become visible to your manager without you having to report them. This signals self-direction.",
+          },
+        },
+        {
+          signal: "Manager Time",
+          question:
+            "How would you honestly rate the amount of your manager's time you consume compared to your peers?",
+          options: [
+            "Probably less than most of my peers.",
+            "About the same as my peers.",
+            "Probably more than most of my peers.",
+            "I have never thought about it.",
+          ],
+          answer: 0,
+          why: "Managers feel the cost of high-maintenance employees even when they never say so. Consuming more time than peers is a hidden career tax. The employee who requires the least management has the most leverage.",
+          feedback: {
+            correct:
+              "Being a low-maintenance, high-output employee is one of the most powerful career positions. Your manager's time is a finite resource and you are using less of it than others.",
+            incorrect:
+              "Time consumption is a signal managers track even when they do not mention it. The optimal position is consuming less manager time than your peers while delivering equal or better output.",
+          },
+        },
+        {
+          signal: "Listening",
+          question:
+            "During important conversations or meetings, what best describes how you listen?",
+          options: [
+            "I am fully present and capture what matters.",
+            "I listen well but sometimes miss details.",
+            "I am often thinking about my response while the other person speaks.",
+            "I find it hard to stay focused in long meetings.",
+          ],
+          answer: 0,
+          why: "Not listening is one of the most commonly cited barriers to advancement by managers. The person who listens fully and responds to what was actually said is noticeably different from the person who was preparing their response while you were talking.",
+          feedback: {
+            correct:
+              "Full presence in conversations is rarer than most people think. It is a significant differentiator — managers and stakeholders feel it immediately.",
+            incorrect:
+              "Listening fully and responding to what was actually said is a core advancement signal. The habit of preparing your response while others speak is one of the most common career blind spots.",
+          },
+        },
+        {
+          signal: "Learning",
+          question:
+            "When new technology or tools are introduced in your workplace, what is your typical response?",
+          options: [
+            "I engage actively and try to learn it quickly.",
+            "I learn what I need for my immediate tasks.",
+            "I wait until I am required to use it.",
+            "I find ways to continue with tools I already know.",
+          ],
+          answer: 0,
+          why: "Technology adaptability is a growing signal as AI and automation change every function. The person who actively learns new tools builds transferable value. The person who waits becomes dependent on the tools they already know.",
+          feedback: {
+            correct:
+              "Active engagement with new technology builds transferable market value and signals to managers that you can evolve with the role rather than requiring the role to stay still for you.",
+            incorrect:
+              "Unwillingness to engage with new technology is one of the clearest signals that someone is optimizing for their current role rather than their next one.",
+          },
+        },
+        {
+          signal: "Documentation",
+          question:
+            "How consistently do you document processes and knowledge that currently only you possess?",
+          options: [
+            "Consistently — I keep documentation current.",
+            "Sometimes when I have time.",
+            "Rarely — documenting is not something I prioritize.",
+            "Almost never — my knowledge is how I add value.",
+          ],
+          answer: 0,
+          why: "Documentation creates backup coverage and enables vacation without operational risk. More importantly, it signals that you think about the organization beyond your own role. The employee who documents is thinking like a manager.",
+          feedback: {
+            correct:
+              "Consistent documentation is a management-level behavior that most individual contributors skip. It signals organizational thinking and builds trust that you can take on more scope.",
+            incorrect:
+              "Documentation is more important than most employees realize. It protects the organization when you are away and signals that you think beyond your own role.",
+          },
+        },
+        {
+          signal: "Completion",
+          question:
+            "How often do you complete projects through to full close-out versus leaving the last portion unfinished?",
+          options: [
+            "I always close out completely including documentation and handoff.",
+            "Usually, with occasional loose ends.",
+            "Once the main work is done I tend to move to the next thing.",
+            "I often leave the last ten percent when the next priority appears.",
+          ],
+          answer: 0,
+          why: "The ability to bring a large project through to full completion is one of the clearest signals of readiness for more scope. Managers notice who closes out and who leaves threads. Loose ends accumulate into a pattern.",
+          feedback: {
+            correct:
+              "Full project close-out including documentation and handoff is a rare discipline. It builds a reputation for seeing things through that compounds significantly over time.",
+            incorrect:
+              "Bringing work fully to completion — including the unglamorous last portion — is a core signal that managers use to evaluate readiness for larger responsibility.",
+          },
+        },
+        {
+          signal: "Purpose",
+          question:
+            "How would you honestly describe the relationship between your physical presence at work and your actual output?",
+          options: [
+            "My output is what matters — I focus on results regardless of how it looks.",
+            "I try to be present and visible while also delivering results.",
+            "Being seen is important — visibility matters for career advancement.",
+            "I sometimes stay later or come in earlier to signal commitment.",
+          ],
+          answer: 0,
+          why: "Prioritizing face time over purpose is one of the most commonly cited behaviors that limits advancement. Managers who are worth working for evaluate output. Managers who prioritize presence over results are managing optics, not outcomes.",
+          feedback: {
+            correct:
+              "Output-focused professionals have the clearest career leverage because their value is measurable. The strongest position is consistent high output regardless of visibility.",
+            incorrect:
+              "The optimal behavior is focusing on output over optics. Presence-based signaling is a short-term strategy that does not compound. Output-based reputation does.",
+          },
+        },
+      ];
+
+      // --------------------------------------------------------
+      // STATE
+      // --------------------------------------------------------
+
+      let currentIndex = 0;
+      let score = 0;
+      let answered = false;
+      const flaggedSignals = [];
+      const strongSignals = [];
+
+      // --------------------------------------------------------
+      // DOM REFERENCES
+      // --------------------------------------------------------
+
+      const startContainer = document.getElementById("start-container");
+      const quizContainer = document.getElementById("quiz-container");
+      const scoreContainer = document.getElementById("score-container");
+      const startButton = document.getElementById("start-button");
+      const questionEl = document.getElementById("question-container");
+      const optionsEl = document.getElementById("options-container");
+      const nextButton = document.getElementById("next-button");
+      const restartButton = document.getElementById("restart-button");
+      const progressFill = document.getElementById("progress-fill");
+      const progressLabel = document.getElementById("progress-label");
+      const feedbackBox = document.getElementById("feedback-box");
+      const questionSignal = document.getElementById("question-signal");
+      const whyText = document.getElementById("why-text");
+      const scoreNumber = document.getElementById("score-number");
+      const scoreLabel = document.getElementById("score-label");
+      const profileCard = document.getElementById("profile-card");
+      const profileTitle = document.getElementById("profile-title");
+      const profileDesc = document.getElementById("profile-description");
+      const signalList = document.getElementById("signal-list");
+      const priorityText = document.getElementById("priority-text");
+
+      // --------------------------------------------------------
+      // LOAD QUESTION
+      // --------------------------------------------------------
+
+      function loadQuestion() {
+        answered = false;
+        feedbackBox.classList.add("hidden");
+        nextButton.classList.add("hidden");
+
+        const current = quizData[currentIndex];
+        const total = quizData.length;
+        const percent = (currentIndex / total) * 100;
+
+        // Update progress
+        progressFill.style.width = percent + "%";
+        progressLabel.textContent =
+          "Question " + (currentIndex + 1) + " of " + total;
+
+        // Update signal label
+        questionSignal.textContent = current.signal;
+
+        // Update question text
+        questionEl.textContent = current.question;
+
+        // Update why text
+        whyText.textContent = current.why;
+
+        // Clear and rebuild options
+        optionsEl.innerHTML = "";
+
+        current.options.forEach(function (option, index) {
+          const btn = document.createElement("button");
+          btn.textContent = option;
+          btn.classList.add("option-btn");
+          btn.addEventListener("click", function () {
+            selectOption(index);
+          });
+          optionsEl.appendChild(btn);
+        });
+      }
+
+      // --------------------------------------------------------
+      // SELECT OPTION
+      // --------------------------------------------------------
+
+      function selectOption(selectedIndex) {
+        if (answered) return;
+        answered = true;
+
+        const current = quizData[currentIndex];
+        const buttons = optionsEl.querySelectorAll(".option-btn");
+
+        // Disable all buttons
+        buttons.forEach(function (btn) {
+          btn.disabled = true;
+        });
+
+        // Mark correct and incorrect
+        buttons[current.answer].classList.add("correct");
+
+        if (selectedIndex === current.answer) {
+          score++;
+          strongSignals.push(current.signal);
+          feedbackBox.innerHTML =
+            "<strong>Strong signal.</strong> " + current.feedback.correct;
+          feedbackBox.style.borderColor = "rgba(16,185,129,0.3)";
+          feedbackBox.style.background = "rgba(16,185,129,0.06)";
+        } else {
+          buttons[selectedIndex].classList.add("incorrect");
+          flaggedSignals.push(current.signal);
+          feedbackBox.innerHTML =
+            "<strong>Development area.</strong> " + current.feedback.incorrect;
+          feedbackBox.style.borderColor = "rgba(239,68,68,0.2)";
+          feedbackBox.style.background = "rgba(239,68,68,0.05)";
+        }
+
+        // Show feedback
+        feedbackBox.classList.remove("hidden");
+
+        // Show next button
+        const isLast = currentIndex === quizData.length - 1;
+        nextButton.textContent = isLast ? "See My Profile →" : "Next →";
+        nextButton.classList.remove("hidden");
+      }
+
+      // --------------------------------------------------------
+      // SHOW SCORE
+      // --------------------------------------------------------
+
+      function showScore() {
+        quizContainer.classList.add("hidden");
+        scoreContainer.classList.remove("hidden");
+
+        const total = quizData.length;
+        const flagCount = flaggedSignals.length;
+
+        // Score display
+        scoreNumber.innerHTML = score + "<span>/" + total + "</span>";
+
+        // Profile determination
+        let profile;
+
+        if (flagCount <= 2) {
+          profile = {
+            level: "strong",
+            title: "Strong Behavioral Foundation",
+            description:
+              "Your answers suggest you are already demonstrating most of the behaviors that managers associate with readiness for the next level. Your starting position is strong. The check-in system will help you maintain and document this pattern.",
+            labelText:
+              "You are operating with strong behavioral signals across most dimensions.",
+          };
+        } else if (flagCount <= 5) {
+          profile = {
+            level: "moderate",
+            title: "Developing — Clear Opportunities",
+            description:
+              "Your answers reveal a mix of strong signals and development areas. This is the most common starting position. You have real strengths to build on and specific behaviors to develop. The check-in system will track your progress on both.",
+            labelText:
+              "You have solid foundations and specific, addressable development areas.",
+          };
+        } else {
+          profile = {
+            level: "developing",
+            title: "Significant Gap Between Story and Signal",
+            description:
+              "Your honest answers suggest there may be a meaningful gap between how you see yourself and how your manager experiences working with you. This is not a judgment — it is the most useful possible starting point. You now know exactly where to focus.",
+            labelText:
+              "Your answers flag multiple behaviors that typically limit advancement. You now have a clear map.",
+          };
+        }
+
+        // Apply profile
+        profileCard.className = "profile-card " + profile.level;
+        profileTitle.textContent = profile.title;
+        profileDesc.textContent = profile.description;
+        scoreLabel.textContent = profile.labelText;
+
+        // Signal breakdown
+        signalList.innerHTML = "";
+
+        flaggedSignals.forEach(function (signal) {
+          const item = document.createElement("div");
+          item.classList.add("signal-item");
+          item.innerHTML =
+            '<span class="signal-dot flag"></span>' +
+            '<span><strong style="color:var(--white)">' +
+            signal +
+            "</strong> — flagged for development</span>";
+          signalList.appendChild(item);
+        });
+
+        strongSignals.forEach(function (signal) {
+          const item = document.createElement("div");
+          item.classList.add("signal-item");
+          item.innerHTML =
+            '<span class="signal-dot strong"></span>' +
+            '<span><strong style="color:var(--white)">' +
+            signal +
+            "</strong> — strong signal</span>";
+          signalList.appendChild(item);
+        });
+
+        // First priority
+        if (flaggedSignals.length > 0) {
+          const firstFlag = flaggedSignals[0];
+          const matchedQuestion = quizData.find(function (q) {
+            return q.signal === firstFlag;
+          });
+
+          priorityText.textContent =
+            "Focus on " +
+            firstFlag +
+            " first. " +
+            (matchedQuestion ? matchedQuestion.why : "") +
+            " This is the behavior most likely to change how your manager experiences working with you in the next 90 days.";
+        } else {
+          priorityText.textContent =
+            "Your behavioral foundation is strong. Your first priority is ensuring your manager has full visibility into the work you are already doing well. Focus on the discovery pattern — let your manager find your outcomes rather than reporting them.";
+        }
+
+        // Update progress to 100%
+        progressFill.style.width = "100%";
+      }
+
+      // --------------------------------------------------------
+      // EVENT LISTENERS
+      // --------------------------------------------------------
+
+      // Start button
+      startButton.addEventListener("click", function () {
+        startContainer.classList.add("hidden");
+        quizContainer.classList.remove("hidden");
+        loadQuestion();
+      });
+
+      // Next button
+      nextButton.addEventListener("click", function () {
+        currentIndex++;
+        if (currentIndex < quizData.length) {
+          loadQuestion();
+        } else {
+          showScore();
+        }
+      });
+
+      // Restart button
+      restartButton.addEventListener("click", function () {
+        // Reset all state
+        currentIndex = 0;
+        score = 0;
+        answered = false;
+        flaggedSignals.length = 0;
+        strongSignals.length = 0;
+
+        // Reset UI
+        scoreContainer.classList.add("hidden");
+        quizContainer.classList.remove("hidden");
+        progressFill.style.width = "0%";
+
+        loadQuestion();
+      });
+    </script>
+  </body>
+</html>
