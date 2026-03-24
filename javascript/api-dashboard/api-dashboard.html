@@ -1,0 +1,1507 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visible — Career Intelligence Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ============================================================
+       VISIBLE — Career Intelligence Dashboard
+       Assignment: Final JavaScript Project — API Dashboard
+       Eight panels. Eight public APIs. All Visible-relevant.
+       ============================================================ */
+
+      :root {
+        --ink: #0a1628;
+        --ink-mid: #0f2040;
+        --ink-soft: #1a3050;
+        --teal: #00c9a7;
+        --teal-dim: rgba(0, 201, 167, 0.12);
+        --teal-glow: rgba(0, 201, 167, 0.06);
+        --gold: #f0c040;
+        --gold-dim: rgba(240, 192, 64, 0.12);
+        --white: #f0f4f8;
+        --muted: #6b8caa;
+        --border: rgba(0, 201, 167, 0.12);
+        --card: rgba(15, 32, 64, 0.95);
+        --error: #ff6b6b;
+        --mono: "DM Mono", monospace;
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "DM Sans", system-ui, sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--sans);
+        background: var(--ink);
+        color: var(--white);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Animated background grid */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 201, 167, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 201, 167, 0.03) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ---- HEADER ---- */
+      header {
+        position: relative;
+        z-index: 10;
+        padding: 32px 40px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .brand {
+        font-family: var(--serif);
+        font-size: 2rem;
+        font-weight: 900;
+        letter-spacing: -1px;
+        color: var(--white);
+      }
+
+      .brand span {
+        color: var(--teal);
+      }
+
+      .header-meta {
+        text-align: right;
+      }
+
+      .header-title {
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 4px;
+      }
+
+      .header-sub {
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-weight: 300;
+      }
+
+      /* ---- GRID ---- */
+      .dashboard {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 20px;
+        padding: 32px 40px 60px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* ---- PANEL CARD ---- */
+      .panel {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 280px;
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+        backdrop-filter: blur(12px);
+      }
+
+      .panel:hover {
+        border-color: rgba(0, 201, 167, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .panel-header {
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .panel-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .panel-icon {
+        font-size: 1.1rem;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--teal-dim);
+        border-radius: 8px;
+        flex-shrink: 0;
+      }
+
+      .panel-name {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--teal);
+      }
+
+      .panel-api {
+        font-size: 0.65rem;
+        color: var(--muted);
+        font-family: var(--mono);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 3px 8px;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+      }
+
+      .panel-body {
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* ---- LOADING STATE ---- */
+      .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        gap: 12px;
+        padding: 20px;
+      }
+
+      .spinner {
+        width: 28px;
+        height: 28px;
+        border: 2px solid rgba(0, 201, 167, 0.15);
+        border-top-color: var(--teal);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 1px;
+      }
+
+      /* ---- ERROR STATE ---- */
+      .error-state {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background: rgba(255, 107, 107, 0.08);
+        border: 1px solid rgba(255, 107, 107, 0.2);
+        border-radius: 8px;
+        font-size: 0.8rem;
+        color: var(--error);
+        font-family: var(--mono);
+      }
+
+      /* ---- REFRESH BUTTON ---- */
+      .refresh-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-family: var(--mono);
+        cursor: pointer;
+        transition: all 0.2s;
+        letter-spacing: 0.5px;
+        width: fit-content;
+      }
+
+      .refresh-btn:hover {
+        border-color: var(--teal);
+        color: var(--teal);
+      }
+
+      /* ---- PANEL 1: WEATHER ---- */
+      .weather-main {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+      }
+
+      .weather-temp {
+        font-family: var(--serif);
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1;
+      }
+
+      .weather-unit {
+        font-size: 1.2rem;
+        color: var(--muted);
+        padding-bottom: 6px;
+      }
+
+      .weather-meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+      }
+
+      .weather-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .weather-item {
+        background: var(--teal-glow);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .weather-item-label {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .weather-item-value {
+        font-size: 0.92rem;
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      /* ---- PANEL 2: CURRENCY ---- */
+      .currency-base {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .currency-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .currency-item {
+        background: var(--teal-glow);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .currency-code {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        color: var(--teal);
+        letter-spacing: 2px;
+        margin-bottom: 4px;
+      }
+
+      .currency-rate {
+        font-family: var(--mono);
+        font-size: 1rem;
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      .currency-note {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 300;
+        font-style: italic;
+      }
+
+      /* ---- PANEL 3: GITHUB ---- */
+      .github-profile {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .github-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 2px solid var(--teal);
+        flex-shrink: 0;
+        object-fit: cover;
+      }
+
+      .github-info {
+        flex: 1;
+      }
+
+      .github-name {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 2px;
+      }
+
+      .github-login {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--teal);
+        margin-bottom: 6px;
+      }
+
+      .github-bio {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.5;
+        font-weight: 300;
+      }
+
+      .github-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .github-stat {
+        background: var(--teal-glow);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px;
+        text-align: center;
+      }
+
+      .github-stat-value {
+        font-family: var(--mono);
+        font-size: 1rem;
+        color: var(--white);
+        font-weight: 500;
+        display: block;
+      }
+
+      .github-stat-label {
+        font-size: 0.62rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .github-input-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .github-input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 8px 12px;
+        color: var(--white);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .github-input:focus {
+        border-color: var(--teal);
+      }
+      .github-input::placeholder {
+        color: var(--muted);
+      }
+
+      /* ---- PANEL 4: JOB MARKET ---- */
+      .job-tag {
+        display: inline-block;
+        background: var(--teal-dim);
+        color: var(--teal);
+        border: 1px solid rgba(0, 201, 167, 0.2);
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-family: var(--mono);
+        margin: 3px;
+      }
+
+      .job-item {
+        background: var(--teal-glow);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 8px;
+      }
+
+      .job-title {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+
+      .job-company {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        color: var(--teal);
+        margin-bottom: 6px;
+      }
+
+      .job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      /* ---- PANEL 5: QUOTE ---- */
+      .quote-text {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1.5;
+        border-left: 3px solid var(--gold);
+        padding-left: 16px;
+        flex: 1;
+      }
+
+      .quote-author {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--gold);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* ---- PANEL 6: COUNTRY / WORK LOCATION ---- */
+      .country-flag {
+        font-size: 2.5rem;
+        line-height: 1;
+      }
+
+      .country-name {
+        font-family: var(--serif);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+
+      .country-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .country-item {
+        background: var(--teal-glow);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .country-item-label {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .country-item-value {
+        font-size: 0.85rem;
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      .country-input-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .country-input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 8px 12px;
+        color: var(--white);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .country-input:focus {
+        border-color: var(--teal);
+      }
+      .country-input::placeholder {
+        color: var(--muted);
+      }
+
+      /* ---- PANEL 7: DOG / MORALE ---- */
+      .dog-image {
+        width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+        max-height: 180px;
+      }
+
+      .morale-label {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--muted);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      /* ---- PANEL 8: OPEN LIBRARY ---- */
+      .book-item {
+        background: var(--teal-glow);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-bottom: 8px;
+      }
+
+      .book-title {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--white);
+        margin-bottom: 3px;
+        line-height: 1.3;
+      }
+
+      .book-author {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--teal);
+      }
+
+      .book-year {
+        font-size: 0.68rem;
+        color: var(--muted);
+      }
+
+      .book-input-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .book-input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 8px 12px;
+        color: var(--white);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .book-input:focus {
+        border-color: var(--teal);
+      }
+      .book-input::placeholder {
+        color: var(--muted);
+      }
+
+      /* ---- STAT ROW ---- */
+      .stat-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(0, 201, 167, 0.06);
+        font-size: 0.82rem;
+      }
+
+      .stat-row:last-child {
+        border-bottom: none;
+      }
+
+      .stat-label {
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .stat-value {
+        color: var(--white);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+      }
+      .stat-value.highlight {
+        color: var(--teal);
+      }
+      .stat-value.gold {
+        color: var(--gold);
+      }
+
+      /* ---- FOOTER ---- */
+      footer {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 24px;
+        border-top: 1px solid var(--border);
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        letter-spacing: 1px;
+      }
+
+      /* ---- ANIMATIONS ---- */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.4s ease both;
+      }
+
+      /* ---- RESPONSIVE ---- */
+      @media (max-width: 600px) {
+        header {
+          padding: 20px;
+        }
+        .dashboard {
+          padding: 20px;
+          gap: 16px;
+        }
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <div class="brand">Visi<span>ble</span></div>
+      </div>
+      <div class="header-meta">
+        <div class="header-title">Career Intelligence Dashboard</div>
+        <div class="header-sub">Live market signals for career decisions</div>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <!-- =====================================================
+         PANEL 1: WEATHER — Work Location Context
+         API: Open-Meteo (no key required)
+         Visible feature: Commute cost calculator context
+         ===================================================== -->
+      <div class="panel" id="panel-weather">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">🌤️</div>
+            <div class="panel-name">Work Location</div>
+          </div>
+          <span class="panel-api">Open-Meteo</span>
+        </div>
+        <div class="panel-body" id="weather-body">
+          <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Fetching conditions...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+         PANEL 2: CURRENCY — Compensation Comparison
+         API: Open Exchange Rates (no key required)
+         Visible feature: International offer comparison
+         ===================================================== -->
+      <div class="panel" id="panel-currency">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">💱</div>
+            <div class="panel-name">Compensation FX</div>
+          </div>
+          <span class="panel-api">ExchangeRate-API</span>
+        </div>
+        <div class="panel-body" id="currency-body">
+          <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading rates...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+         PANEL 3: GITHUB — Skills Verification
+         API: GitHub REST API (no key required)
+         Visible feature: Public contribution evidence
+         ===================================================== -->
+      <div class="panel" id="panel-github">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">🧑‍💻</div>
+            <div class="panel-name">Skills Profile</div>
+          </div>
+          <span class="panel-api">GitHub API</span>
+        </div>
+        <div class="panel-body" id="github-body">
+          <div class="github-input-row">
+            <input
+              class="github-input"
+              id="github-input"
+              type="text"
+              placeholder="GitHub username..."
+              value="kmatosli"
+            />
+            <button class="refresh-btn" onclick="fetchGitHub()">Search</button>
+          </div>
+          <div id="github-result">
+            <div class="loading">
+              <div class="spinner"></div>
+              <div class="loading-text">Loading profile...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+         PANEL 4: JOB MARKET — Skills Demand Signal
+         API: RemoteOK (no key required)
+         Visible feature: Skills demand trajectory
+         ===================================================== -->
+      <div class="panel" id="panel-jobs">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">📊</div>
+            <div class="panel-name">Job Market Signal</div>
+          </div>
+          <span class="panel-api">RemoteOK API</span>
+        </div>
+        <div class="panel-body" id="jobs-body">
+          <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Reading market signals...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+         PANEL 5: QUOTE — Career Insight of the Day
+         API: Quotable.io (no key required)
+         Visible feature: Daily strategic insight
+         ===================================================== -->
+      <div class="panel" id="panel-quote">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">💡</div>
+            <div class="panel-name">Career Insight</div>
+          </div>
+          <span class="panel-api">Quotable API</span>
+        </div>
+        <div class="panel-body" id="quote-body">
+          <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading insight...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+         PANEL 6: COUNTRY — Geographic Context
+         API: REST Countries (no key required)
+         Visible feature: International compensation context
+         ===================================================== -->
+      <div class="panel" id="panel-country">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">🌍</div>
+            <div class="panel-name">Market Geography</div>
+          </div>
+          <span class="panel-api">REST Countries</span>
+        </div>
+        <div class="panel-body" id="country-body">
+          <div class="country-input-row">
+            <input
+              class="country-input"
+              id="country-input"
+              type="text"
+              placeholder="Country name..."
+              value="United States"
+            />
+            <button class="refresh-btn" onclick="fetchCountry()">
+              Look Up
+            </button>
+          </div>
+          <div id="country-result">
+            <div class="loading">
+              <div class="spinner"></div>
+              <div class="loading-text">Loading country data...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+         PANEL 7: DOG IMAGE — Morale Break
+         API: Dog CEO API (no key required)
+         Visible feature: End of day decompression
+         ===================================================== -->
+      <div class="panel" id="panel-dog">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">🐶</div>
+            <div class="panel-name">Morale Break</div>
+          </div>
+          <span class="panel-api">Dog CEO API</span>
+        </div>
+        <div class="panel-body" id="dog-body">
+          <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Fetching good boy...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+         PANEL 8: OPEN LIBRARY — Development Reading
+         API: Open Library (no key required)
+         Visible feature: Skill gap development recommendations
+         ===================================================== -->
+      <div class="panel" id="panel-books">
+        <div class="panel-header">
+          <div class="panel-label">
+            <div class="panel-icon">📚</div>
+            <div class="panel-name">Development Reading</div>
+          </div>
+          <span class="panel-api">Open Library</span>
+        </div>
+        <div class="panel-body" id="books-body">
+          <div class="book-input-row">
+            <input
+              class="book-input"
+              id="book-input"
+              type="text"
+              placeholder="Search topic..."
+              value="career negotiation"
+            />
+            <button class="refresh-btn" onclick="fetchBooks()">Search</button>
+          </div>
+          <div id="books-result">
+            <div class="loading">
+              <div class="spinner"></div>
+              <div class="loading-text">Searching library...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      VISIBLE CAREER INTELLIGENCE &nbsp;·&nbsp; ALL DATA FROM PUBLIC APIS
+      &nbsp;·&nbsp; NO API KEYS REQUIRED
+    </footer>
+
+    <script>
+      // ============================================================
+      // VISIBLE — Career Intelligence Dashboard
+      // Assignment: Final JavaScript Project — API Dashboard
+      //
+      // Eight panels. Eight public APIs. All no-key-required.
+      // Each panel maps to a real Visible career feature.
+      //
+      // JavaScript concepts demonstrated:
+      // - async/await for all API calls
+      // - fetch() for HTTP requests
+      // - Error handling with try/catch
+      // - DOM manipulation with createElement and innerHTML
+      // - ES6 arrow functions and destructuring
+      // - Template literals for dynamic HTML
+      // - Event listeners on interactive inputs
+      // ============================================================
+
+      // ============================================================
+      // PANEL 1: WEATHER — Open-Meteo API
+      // No key required. Returns current weather by coordinates.
+      // Visible use: Commute cost calculator — work location context
+      // ============================================================
+
+      async function fetchWeather() {
+        const body = document.getElementById("weather-body");
+
+        try {
+          // Step 1: Get coordinates for Chicago (default work location)
+          const geoRes = await fetch(
+            "https://geocoding-api.open-meteo.com/v1/search?name=Chicago&count=1&language=en&format=json",
+          );
+          const geoData = await geoRes.json();
+          const { latitude, longitude, name, country } = geoData.results[0];
+
+          // Step 2: Fetch current weather using coordinates
+          const weatherRes = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,windspeed_10m,weathercode,apparent_temperature&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=auto`,
+          );
+          const weatherData = await weatherRes.json();
+          const {
+            temperature_2m,
+            apparent_temperature,
+            windspeed_10m,
+            weathercode,
+          } = weatherData.current;
+
+          // Map weather code to description
+          const weatherDesc = getWeatherDesc(weathercode);
+
+          body.innerHTML = `
+          <div class="fade-in">
+            <div class="weather-main">
+              <div class="weather-temp">${Math.round(temperature_2m)}<span class="weather-unit">°F</span></div>
+              <div class="weather-meta">
+                <div style="font-size:0.9rem;font-weight:600;color:var(--white)">${weatherDesc}</div>
+                <div>${name}, ${country}</div>
+                <div>Feels like ${Math.round(apparent_temperature)}°F</div>
+              </div>
+            </div>
+            <div class="weather-detail">
+              <div class="weather-item">
+                <div class="weather-item-label">Wind Speed</div>
+                <div class="weather-item-value">${windspeed_10m} mph</div>
+              </div>
+              <div class="weather-item">
+                <div class="weather-item-label">Commute Signal</div>
+                <div class="weather-item-value" style="color:${windspeed_10m > 20 || weathercode > 60 ? "var(--gold)" : "var(--teal)"}">
+                  ${windspeed_10m > 20 || weathercode > 60 ? "Factor in" : "Normal"}
+                </div>
+              </div>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Visible context</span>
+              <span class="stat-value highlight">Commute cost calculator</span>
+            </div>
+          </div>
+        `;
+        } catch (err) {
+          body.innerHTML = `<div class="error-state">⚠ Weather data unavailable — ${err.message}</div>`;
+        }
+      }
+
+      function getWeatherDesc(code) {
+        if (code === 0) return "Clear sky";
+        if (code <= 3) return "Partly cloudy";
+        if (code <= 49) return "Foggy";
+        if (code <= 59) return "Drizzle";
+        if (code <= 69) return "Rain";
+        if (code <= 79) return "Snow";
+        if (code <= 82) return "Rain showers";
+        if (code <= 86) return "Snow showers";
+        return "Thunderstorm";
+      }
+
+      // ============================================================
+      // PANEL 2: CURRENCY — ExchangeRate API
+      // No key required endpoint. Returns live FX rates.
+      // Visible use: International job offer total comp comparison
+      // ============================================================
+
+      async function fetchCurrency() {
+        const body = document.getElementById("currency-body");
+
+        try {
+          const res = await fetch("https://open.er-api.com/v6/latest/USD");
+          const data = await res.json();
+
+          // Key currencies for finance and tech professionals
+          const currencies = [
+            { code: "EUR", name: "Euro" },
+            { code: "GBP", name: "British Pound" },
+            { code: "CAD", name: "Canadian Dollar" },
+            { code: "CHF", name: "Swiss Franc" },
+            { code: "AUD", name: "Australian Dollar" },
+            { code: "SGD", name: "Singapore Dollar" },
+          ];
+
+          const ratesHTML = currencies
+            .map(
+              ({ code, name }) => `
+            <div class="currency-item">
+              <div class="currency-code">${code}</div>
+              <div class="currency-rate">${data.rates[code].toFixed(4)}</div>
+              <div style="font-size:0.62rem;color:var(--muted)">${name}</div>
+            </div>
+          `,
+            )
+            .join("");
+
+          body.innerHTML = `
+          <div class="fade-in">
+            <div class="currency-base">1 USD equals</div>
+            <div class="currency-grid">${ratesHTML}</div>
+            <div class="currency-note">
+              Use for international offer comparisons in Visible
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Updated</span>
+              <span class="stat-value highlight">${new Date(data.time_last_update_utc).toLocaleDateString()}</span>
+            </div>
+          </div>
+        `;
+        } catch (err) {
+          body.innerHTML = `<div class="error-state">⚠ Rate data unavailable — ${err.message}</div>`;
+        }
+      }
+
+      // ============================================================
+      // PANEL 3: GITHUB — GitHub REST API
+      // No key required for public data. Returns user profile.
+      // Visible use: Skills verification and public contribution record
+      // ============================================================
+
+      async function fetchGitHub() {
+        const result = document.getElementById("github-result");
+        const username =
+          document.getElementById("github-input").value.trim() || "kmatosli";
+
+        result.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">Loading profile...</div></div>`;
+
+        try {
+          // Fetch user profile and repos in parallel
+          const [userRes, reposRes] = await Promise.all([
+            fetch(`https://api.github.com/users/${username}`),
+            fetch(
+              `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`,
+            ),
+          ]);
+
+          if (!userRes.ok) throw new Error(`User "${username}" not found`);
+
+          const user = await userRes.json();
+          const repos = await reposRes.json();
+
+          // Get top languages
+          const languages = [
+            ...new Set(repos.filter((r) => r.language).map((r) => r.language)),
+          ].slice(0, 3);
+
+          result.innerHTML = `
+          <div class="fade-in">
+            <div class="github-profile">
+              <img class="github-avatar" src="${user.avatar_url}" alt="${user.login}" />
+              <div class="github-info">
+                <div class="github-name">${user.name || user.login}</div>
+                <div class="github-login">@${user.login}</div>
+                <div class="github-bio">${user.bio || "No bio provided"}</div>
+              </div>
+            </div>
+            <div class="github-stats">
+              <div class="github-stat">
+                <span class="github-stat-value">${user.public_repos}</span>
+                <span class="github-stat-label">Repos</span>
+              </div>
+              <div class="github-stat">
+                <span class="github-stat-value">${user.followers}</span>
+                <span class="github-stat-label">Followers</span>
+              </div>
+              <div class="github-stat">
+                <span class="github-stat-value">${user.following}</span>
+                <span class="github-stat-label">Following</span>
+              </div>
+            </div>
+            ${
+              languages.length > 0
+                ? `
+              <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">
+                ${languages.map((l) => `<span class="job-tag">${l}</span>`).join("")}
+              </div>`
+                : ""
+            }
+            <div class="stat-row">
+              <span class="stat-label">Location</span>
+              <span class="stat-value">${user.location || "Not specified"}</span>
+            </div>
+          </div>
+        `;
+        } catch (err) {
+          result.innerHTML = `<div class="error-state">⚠ ${err.message}</div>`;
+        }
+      }
+
+      // Allow Enter key to trigger GitHub search
+      document
+        .getElementById("github-input")
+        .addEventListener("keydown", (e) => {
+          if (e.key === "Enter") fetchGitHub();
+        });
+
+      // ============================================================
+      // PANEL 4: JOB MARKET — RemoteOK API
+      // No key required. Returns live remote job listings.
+      // Visible use: Skills demand trajectory signal
+      // ============================================================
+
+      async function fetchJobs() {
+        const body = document.getElementById("jobs-body");
+
+        try {
+          const res = await fetch("https://remoteok.com/api");
+          const data = await res.json();
+
+          // First item is metadata, skip it
+          const jobs = data.slice(1, 6);
+
+          // Collect all skill tags to show market demand
+          const allTags = jobs.flatMap((job) => job.tags || []);
+          const tagCounts = {};
+          allTags.forEach((tag) => {
+            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+          });
+
+          // Top 8 most demanded skills
+          const topSkills = Object.entries(tagCounts)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 8)
+            .map(([tag]) => tag);
+
+          const jobsHTML = jobs
+            .slice(0, 3)
+            .map(
+              (job) => `
+          <div class="job-item">
+            <div class="job-title">${job.position || "Role"}</div>
+            <div class="job-company">${job.company || "Company"}</div>
+            <div class="job-tags">
+              ${(job.tags || [])
+                .slice(0, 3)
+                .map((t) => `<span class="job-tag">${t}</span>`)
+                .join("")}
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+
+          body.innerHTML = `
+          <div class="fade-in">
+            <div style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">
+              Top Skills In Demand Right Now
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px">
+              ${topSkills.map((s) => `<span class="job-tag">${s}</span>`).join("")}
+            </div>
+            <div style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">
+              Recent Remote Roles
+            </div>
+            ${jobsHTML}
+          </div>
+        `;
+        } catch (err) {
+          body.innerHTML = `
+          <div class="error-state">⚠ Job market data unavailable</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:8px;font-weight:300">
+            RemoteOK may be blocking browser requests. In production Visible fetches this server-side.
+          </div>
+        `;
+        }
+      }
+
+      // ============================================================
+      // PANEL 5: QUOTE — Quotable API
+      // No key required. Returns curated professional quotes.
+      // Visible use: Daily strategic career insight
+      // ============================================================
+
+      async function fetchQuote() {
+        const body = document.getElementById("quote-body");
+
+        try {
+          // Try business/leadership quotes
+          const res = await fetch(
+            "https://api.quotable.io/quotes/random?tags=business|leadership|success&limit=1",
+          );
+          const data = await res.json();
+          const quote = data[0];
+
+          body.innerHTML = `
+          <div class="fade-in" style="display:flex;flex-direction:column;gap:16px;flex:1">
+            <div style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase">
+              Insight of the Day
+            </div>
+            <div class="quote-text">"${quote.content}"</div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="quote-author">— ${quote.author}</div>
+              <button class="refresh-btn" onclick="fetchQuote()">New insight</button>
+            </div>
+          </div>
+        `;
+        } catch (err) {
+          // Fallback quote if API is down
+          const fallbacks = [
+            {
+              content:
+                "The most dangerous phrase in the language is: we've always done it this way.",
+              author: "Grace Hopper",
+            },
+            {
+              content:
+                "Your salary is the bribe they give you to forget your dreams.",
+              author: "Unknown",
+            },
+            { content: "Know your worth. Then add tax.", author: "Unknown" },
+            {
+              content:
+                "The best time to negotiate your salary was before you accepted the offer. The second best time is now.",
+              author: "Career Wisdom",
+            },
+          ];
+          const q = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+          body.innerHTML = `
+          <div class="fade-in" style="display:flex;flex-direction:column;gap:16px;flex:1">
+            <div style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase">
+              Insight of the Day
+            </div>
+            <div class="quote-text">"${q.content}"</div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="quote-author">— ${q.author}</div>
+              <button class="refresh-btn" onclick="fetchQuote()">New insight</button>
+            </div>
+          </div>
+        `;
+        }
+      }
+
+      // ============================================================
+      // PANEL 6: COUNTRY — REST Countries API
+      // No key required. Returns country economic data.
+      // Visible use: Geographic compensation context for offers
+      // ============================================================
+
+      async function fetchCountry() {
+        const result = document.getElementById("country-result");
+        const countryName =
+          document.getElementById("country-input").value.trim() ||
+          "United States";
+
+        result.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">Loading country data...</div></div>`;
+
+        try {
+          const res = await fetch(
+            `https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fields=name,flags,currencies,languages,region,population,capital`,
+          );
+
+          if (!res.ok) throw new Error(`Country "${countryName}" not found`);
+
+          const data = await res.json();
+          const country = data[0];
+
+          const currencies = Object.entries(country.currencies || {})
+            .map(([code, info]) => `${info.name} (${info.symbol || code})`)
+            .join(", ");
+
+          const languages = Object.values(country.languages || {})
+            .slice(0, 2)
+            .join(", ");
+
+          const population = country.population
+            ? (country.population / 1000000).toFixed(1) + "M"
+            : "N/A";
+
+          result.innerHTML = `
+          <div class="fade-in">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+              <img src="${country.flags?.png}" alt="flag" style="width:40px;border-radius:4px;border:1px solid var(--border)" />
+              <div>
+                <div class="country-name">${country.name?.common}</div>
+                <div style="font-size:0.75rem;color:var(--muted)">${country.region} · ${country.capital?.[0] || ""}</div>
+              </div>
+            </div>
+            <div class="country-detail">
+              <div class="country-item">
+                <div class="country-item-label">Currency</div>
+                <div class="country-item-value" style="font-size:0.75rem">${currencies || "N/A"}</div>
+              </div>
+              <div class="country-item">
+                <div class="country-item-label">Population</div>
+                <div class="country-item-value">${population}</div>
+              </div>
+              <div class="country-item">
+                <div class="country-item-label">Language</div>
+                <div class="country-item-value" style="font-size:0.75rem">${languages || "N/A"}</div>
+              </div>
+              <div class="country-item">
+                <div class="country-item-label">Region</div>
+                <div class="country-item-value" style="font-size:0.75rem">${country.region}</div>
+              </div>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Visible use</span>
+              <span class="stat-value highlight">Offer geography context</span>
+            </div>
+          </div>
+        `;
+        } catch (err) {
+          result.innerHTML = `<div class="error-state">⚠ ${err.message}</div>`;
+        }
+      }
+
+      // Allow Enter key on country input
+      document
+        .getElementById("country-input")
+        .addEventListener("keydown", (e) => {
+          if (e.key === "Enter") fetchCountry();
+        });
+
+      // ============================================================
+      // PANEL 7: DOG IMAGE — Dog CEO API
+      // No key required. Returns random dog image.
+      // Visible use: Morale break — career management is heavy work
+      // ============================================================
+
+      async function fetchDog() {
+        const body = document.getElementById("dog-body");
+
+        try {
+          const res = await fetch("https://dog.ceo/api/breeds/image/random");
+          const data = await res.json();
+
+          body.innerHTML = `
+          <div class="fade-in" style="display:flex;flex-direction:column;gap:10px">
+            <div class="morale-label">You made it through another meeting.</div>
+            <img class="dog-image" src="${data.message}" alt="Good boy" />
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-size:0.75rem;color:var(--muted);font-weight:300">
+                Visible knows career strategy is heavy. This one is free.
+              </div>
+              <button class="refresh-btn" onclick="fetchDog()">Another</button>
+            </div>
+          </div>
+        `;
+        } catch (err) {
+          body.innerHTML = `<div class="error-state">⚠ Good boy unavailable — ${err.message}</div>`;
+        }
+      }
+
+      // ============================================================
+      // PANEL 8: OPEN LIBRARY — Open Library Search API
+      // No key required. Returns book search results.
+      // Visible use: Skill gap development reading recommendations
+      // ============================================================
+
+      async function fetchBooks() {
+        const result = document.getElementById("books-result");
+        const topic =
+          document.getElementById("book-input").value.trim() ||
+          "career negotiation";
+
+        result.innerHTML = `<div class="loading"><div class="spinner"></div><div class="loading-text">Searching library...</div></div>`;
+
+        try {
+          const query = encodeURIComponent(topic);
+          const res = await fetch(
+            `https://openlibrary.org/search.json?q=${query}&limit=4&fields=title,author_name,first_publish_year,subject`,
+          );
+          const data = await res.json();
+
+          if (!data.docs || data.docs.length === 0) {
+            throw new Error("No books found for that topic");
+          }
+
+          const booksHTML = data.docs
+            .slice(0, 4)
+            .map(
+              (book) => `
+          <div class="book-item">
+            <div class="book-title">${book.title}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="book-author">${book.author_name?.[0] || "Unknown author"}</div>
+              <div class="book-year">${book.first_publish_year || ""}</div>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+
+          result.innerHTML = `
+          <div class="fade-in">
+            <div style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:1px;margin-bottom:8px">
+              ${data.numFound.toLocaleString()} results for "${topic}"
+            </div>
+            ${booksHTML}
+          </div>
+        `;
+        } catch (err) {
+          result.innerHTML = `<div class="error-state">⚠ ${err.message}</div>`;
+        }
+      }
+
+      // Allow Enter key on book input
+      document.getElementById("book-input").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") fetchBooks();
+      });
+
+      // ============================================================
+      // INITIALIZE ALL PANELS ON PAGE LOAD
+      // Each panel loads independently so one failure does not
+      // block the others. Error handling in every fetch function.
+      // ============================================================
+
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchWeather();
+        fetchCurrency();
+        fetchGitHub();
+        fetchJobs();
+        fetchQuote();
+        fetchCountry();
+        fetchDog();
+        fetchBooks();
+      });
+    </script>
+  </body>
+</html>
