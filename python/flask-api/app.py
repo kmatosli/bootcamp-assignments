@@ -38,10 +38,7 @@ app = Flask(__name__)
 # Set before running: $env:MYSQL_PASSWORD = "your_password"
 mysql_password = os.environ.get('MYSQL_PASSWORD', 'root')
 
-from urllib.parse import quote_plus
-app.config['SQLALCHEMY_DATABASE_URI'] = (
-    f'sqlite:///visible_api.db'
-)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///visible_api.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -174,7 +171,26 @@ contrib_schema      = ContributionEntrySchema()
 contribs_schema     = ContributionEntrySchema(many=True)
 case_schema         = PromotionCaseSchema()
 cases_schema        = PromotionCaseSchema(many=True)
+# ============================================================
+# SWAGGER UI
+# ============================================================
+from flask_swagger_ui import get_swaggerui_blueprint
 
+SWAGGER_URL = '/docs'
+API_URL = '/static/swagger.yaml'
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL, API_URL,
+    config={'app_name': 'Visible Career Intelligence API'}
+)
+app.register_blueprint(swaggerui_blueprint)
+
+
+@app.route('/static/swagger.yaml')
+def swagger_spec():
+    spec_path = os.path.join(os.path.dirname(__file__), 'swagger.yaml')
+    with open(spec_path, 'r') as f:
+        return f.read(), 200, {'Content-Type': 'text/yaml'}
 
 # ============================================================
 # USER ENDPOINTS
@@ -547,4 +563,3 @@ if __name__ == '__main__':
         print("  GET    /cases/unsubmitted")
         print("  POST   /init  (seed sample data)")
     app.run(debug=True)
-

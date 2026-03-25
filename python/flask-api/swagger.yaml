@@ -1,0 +1,561 @@
+swagger: "2.0"
+info:
+  title: Visible Career Intelligence API
+  description: |
+    REST API for the Visible career decision intelligence platform.
+    Manages users, contribution entries, and promotion cases.
+  version: "1.0.0"
+  contact:
+    name: Visible Platform
+host: "127.0.0.1:5000"
+basePath: "/"
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
+tags:
+  - name: users
+    description: Visible user management
+  - name: contributions
+    description: Contribution entry management
+  - name: cases
+    description: Promotion case management
+  - name: system
+    description: System and database operations
+
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: Get all users
+      description: Returns a list of all Visible users on the platform.
+      responses:
+        200:
+          description: List of users returned successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/UserResponse"
+          examples:
+            application/json:
+              - id: 1
+                name: "Kathy Matos"
+                email: "kmatosli@yahoo.com"
+                job_title: "Senior Operations Analyst"
+                company: "Acme Financial"
+                address: "Chicago, IL"
+
+    post:
+      tags:
+        - users
+      summary: Create a new user
+      description: Creates a new Visible user account.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/UserCreate"
+      responses:
+        201:
+          description: User created successfully
+          schema:
+            $ref: "#/definitions/UserResponse"
+          examples:
+            application/json:
+              id: 3
+              name: "Jordan Rivera"
+              email: "jrivera@gmail.com"
+              job_title: "Finance Associate"
+              company: "Meridian Capital"
+              address: "New York, NY"
+        400:
+          description: No data provided
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        409:
+          description: Email already exists
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /users/{user_id}:
+    get:
+      tags:
+        - users
+      summary: Get a user by ID
+      description: Returns a single user by their ID.
+      parameters:
+        - in: path
+          name: user_id
+          type: integer
+          required: true
+          description: The user ID
+      responses:
+        200:
+          description: User found
+          schema:
+            $ref: "#/definitions/UserResponse"
+        404:
+          description: User not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    put:
+      tags:
+        - users
+      summary: Update a user
+      description: Updates an existing user's profile information.
+      parameters:
+        - in: path
+          name: user_id
+          type: integer
+          required: true
+          description: The user ID
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/UserUpdate"
+      responses:
+        200:
+          description: User updated successfully
+          schema:
+            $ref: "#/definitions/UserResponse"
+        404:
+          description: User not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    delete:
+      tags:
+        - users
+      summary: Delete a user
+      description: Permanently deletes a user and all their promotion cases.
+      parameters:
+        - in: path
+          name: user_id
+          type: integer
+          required: true
+          description: The user ID
+      responses:
+        200:
+          description: User deleted successfully
+          examples:
+            application/json:
+              message: "User 1 deleted"
+        404:
+          description: User not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /contributions:
+    get:
+      tags:
+        - contributions
+      summary: Get all contributions
+      description: Returns all documented contribution entries on the platform.
+      responses:
+        200:
+          description: List of contributions
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ContributionResponse"
+          examples:
+            application/json:
+              - id: 1
+                product_name: "Automated monthly reconciliation"
+                category: "process"
+                price: 88.5
+                description: "Eliminated manual reconciliation process"
+
+    post:
+      tags:
+        - contributions
+      summary: Create a contribution entry
+      description: Documents a new work contribution on the platform.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ContributionCreate"
+      responses:
+        201:
+          description: Contribution created successfully
+          schema:
+            $ref: "#/definitions/ContributionResponse"
+        400:
+          description: No data provided
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /contributions/{contrib_id}:
+    get:
+      tags:
+        - contributions
+      summary: Get a contribution by ID
+      description: Returns a single contribution entry by ID.
+      parameters:
+        - in: path
+          name: contrib_id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Contribution found
+          schema:
+            $ref: "#/definitions/ContributionResponse"
+        404:
+          description: Contribution not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    put:
+      tags:
+        - contributions
+      summary: Update a contribution
+      description: Updates an existing contribution entry.
+      parameters:
+        - in: path
+          name: contrib_id
+          type: integer
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ContributionUpdate"
+      responses:
+        200:
+          description: Contribution updated
+          schema:
+            $ref: "#/definitions/ContributionResponse"
+        404:
+          description: Contribution not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    delete:
+      tags:
+        - contributions
+      summary: Delete a contribution
+      description: Permanently deletes a contribution entry.
+      parameters:
+        - in: path
+          name: contrib_id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Contribution deleted
+          examples:
+            application/json:
+              message: "Contribution 1 deleted"
+        404:
+          description: Contribution not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /cases:
+    post:
+      tags:
+        - cases
+      summary: Create a promotion case
+      description: Creates a new promotion case for a user.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CaseCreate"
+      responses:
+        201:
+          description: Case created successfully
+          schema:
+            $ref: "#/definitions/CaseResponse"
+        400:
+          description: No data provided
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: User not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /cases/user/{user_id}:
+    get:
+      tags:
+        - cases
+      summary: Get cases for a user
+      description: Returns all promotion cases belonging to a specific user.
+      parameters:
+        - in: path
+          name: user_id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: List of cases
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/CaseResponse"
+        404:
+          description: User not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /cases/unsubmitted:
+    get:
+      tags:
+        - cases
+      summary: Get unsubmitted cases
+      description: Returns all promotion cases not yet submitted to a manager.
+      responses:
+        200:
+          description: List of unsubmitted cases
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/CaseResponse"
+
+  /cases/{case_id}/add_contribution/{contrib_id}:
+    put:
+      tags:
+        - cases
+      summary: Add contribution to case
+      description: Links a contribution entry to a promotion case.
+      parameters:
+        - in: path
+          name: case_id
+          type: integer
+          required: true
+        - in: path
+          name: contrib_id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Contribution added to case
+        404:
+          description: Case or contribution not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        409:
+          description: Contribution already in case
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /cases/{case_id}/remove_contribution/{contrib_id}:
+    delete:
+      tags:
+        - cases
+      summary: Remove contribution from case
+      description: Unlinks a contribution entry from a promotion case.
+      parameters:
+        - in: path
+          name: case_id
+          type: integer
+          required: true
+        - in: path
+          name: contrib_id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Contribution removed from case
+        404:
+          description: Case or contribution not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /cases/{case_id}/contributions:
+    get:
+      tags:
+        - cases
+      summary: Get contributions in a case
+      description: Returns all contribution entries linked to a promotion case.
+      parameters:
+        - in: path
+          name: case_id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: List of contributions in case
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ContributionResponse"
+        404:
+          description: Case not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /init:
+    post:
+      tags:
+        - system
+      summary: Initialize database
+      description: Creates all tables and seeds sample data if empty.
+      responses:
+        200:
+          description: Database initialized
+          examples:
+            application/json:
+              message: "Database initialized"
+              tables:
+                - "visible_users"
+                - "contribution_entries"
+                - "promotion_cases"
+                - "case_contributions"
+
+definitions:
+  UserCreate:
+    type: object
+    required:
+      - name
+      - email
+    properties:
+      name:
+        type: string
+        example: "Kathy Matos"
+      email:
+        type: string
+        example: "kmatosli@yahoo.com"
+      job_title:
+        type: string
+        example: "Senior Operations Analyst"
+      company:
+        type: string
+        example: "Acme Financial"
+      address:
+        type: string
+        example: "Chicago, IL"
+
+  UserUpdate:
+    type: object
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      job_title:
+        type: string
+      company:
+        type: string
+      address:
+        type: string
+
+  UserResponse:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      name:
+        type: string
+        example: "Kathy Matos"
+      email:
+        type: string
+        example: "kmatosli@yahoo.com"
+      job_title:
+        type: string
+        example: "Senior Operations Analyst"
+      company:
+        type: string
+        example: "Acme Financial"
+      address:
+        type: string
+        example: "Chicago, IL"
+
+  ContributionCreate:
+    type: object
+    required:
+      - product_name
+      - category
+      - price
+    properties:
+      product_name:
+        type: string
+        example: "Automated monthly reconciliation — saved 12hrs/mo"
+      category:
+        type: string
+        example: "process"
+      price:
+        type: number
+        example: 88.5
+      description:
+        type: string
+        example: "Eliminated manual reconciliation saving 12 hours per month"
+
+  ContributionUpdate:
+    type: object
+    properties:
+      product_name:
+        type: string
+      category:
+        type: string
+      price:
+        type: number
+      description:
+        type: string
+
+  ContributionResponse:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      product_name:
+        type: string
+        example: "Automated monthly reconciliation"
+      category:
+        type: string
+        example: "process"
+      price:
+        type: number
+        example: 88.5
+      description:
+        type: string
+        example: "Eliminated manual reconciliation process"
+
+  CaseCreate:
+    type: object
+    required:
+      - user_id
+    properties:
+      user_id:
+        type: integer
+        example: 1
+      submitted:
+        type: boolean
+        example: false
+
+  CaseResponse:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      user_id:
+        type: integer
+        example: 1
+      order_date:
+        type: string
+        example: "2026-03-25T12:00:00"
+      submitted:
+        type: boolean
+        example: false
+
+  ErrorResponse:
+    type: object
+    properties:
+      error:
+        type: string
+        example: "User 99 not found"
