@@ -532,34 +532,3 @@ def init_db():
                    'promotion_cases', 'case_contributions']
     }), 200
 
-
-# ============================================================
-# MAIN
-# ============================================================
-
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        print("Tables created in visible_api database.")
-        print("Visible Career Intelligence API running.")
-        print("Base URL: http://localhost:5000")
-        print()
-        print("Endpoints:")
-        print("  GET    /users")
-        print("  POST   /users")
-        print("  GET    /users/<id>")
-        print("  PUT    /users/<id>")
-        print("  DELETE /users/<id>")
-        print("  GET    /contributions")
-        print("  POST   /contributions")
-        print("  GET    /contributions/<id>")
-        print("  PUT    /contributions/<id>")
-        print("  DELETE /contributions/<id>")
-        print("  POST   /cases")
-        print("  GET    /cases/user/<user_id>")
-        print("  PUT    /cases/<id>/add_contribution/<contrib_id>")
-        print("  DELETE /cases/<id>/remove_contribution/<contrib_id>")
-        print("  GET    /cases/<id>/contributions")
-        print("  GET    /cases/unsubmitted")
-        print("  POST   /init  (seed sample data)")
-    app.run(debug=True)
