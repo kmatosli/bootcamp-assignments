@@ -38,7 +38,8 @@ app = Flask(__name__)
 # Set before running: $env:MYSQL_PASSWORD = "your_password"
 mysql_password = os.environ.get('MYSQL_PASSWORD', 'root')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///visible_api.db'
+import os
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname('.')), 'visible_api.db'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -536,3 +537,5 @@ def init_db():
 # Create tables on startup
 with app.app_context():
     db.create_all()
+if __name__ == '__main__':
+    app.run(debug=True)
