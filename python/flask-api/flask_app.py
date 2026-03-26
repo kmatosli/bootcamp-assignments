@@ -45,10 +45,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-# Create tables on startup
-with app.app_context():
-    db.create_all()
-    
+
+
 # ============================================================
 # ASSOCIATION TABLE — Many-to-Many
 # ============================================================
@@ -535,3 +533,6 @@ def init_db():
                    'promotion_cases', 'case_contributions']
     }), 200
 
+# Create tables on startup
+with app.app_context():
+    db.create_all()
