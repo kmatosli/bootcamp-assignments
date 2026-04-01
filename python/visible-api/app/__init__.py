@@ -17,10 +17,12 @@ def create_app():
     from app.blueprints.resources import resources_bp
     from app.blueprints.sessions import sessions_bp
     from app.blueprints.users import users_bp
+    from app.blueprints.inventory import inventory_bp
 
     app.register_blueprint(advisors_bp, url_prefix='/advisors')
     app.register_blueprint(resources_bp, url_prefix='/resources')
     app.register_blueprint(sessions_bp, url_prefix='/sessions')
     app.register_blueprint(users_bp, url_prefix='/users')
+    app.register_blueprint(inventory_bp, url_prefix='/inventory')
 
     return app

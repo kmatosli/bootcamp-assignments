@@ -26,6 +26,13 @@ class Resource(db.Model):
     description = db.Column(db.Text)
     url = db.Column(db.String(500))
 
+class Inventory(db.Model):
+    __tablename__ = 'inventory'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    price = db.Column(db.Float, default=0.0)
+    quantity = db.Column(db.Integer, default=0)
+
 class CareerSession(db.Model):
     __tablename__ = 'career_sessions'
     id = db.Column(db.Integer, primary_key=True)
