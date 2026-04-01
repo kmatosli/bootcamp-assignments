@@ -1,0 +1,59 @@
+{
+  "info": {
+    "name": "Visible API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Advisors",
+      "item": [
+        {"name": "Create Advisor", "request": {"method": "POST", "url": "http://127.0.0.1:5000/advisors/", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"name\": \"Jane Smith\", \"email\": \"jane@visible.com\", \"password\": \"test123\", \"specialty\": \"Career Coaching\"}"}}},
+        {"name": "Get All Advisors", "request": {"method": "GET", "url": "http://127.0.0.1:5000/advisors/"}},
+        {"name": "Get Advisor by ID", "request": {"method": "GET", "url": "http://127.0.0.1:5000/advisors/1"}},
+        {"name": "Update Advisor", "request": {"method": "PUT", "url": "http://127.0.0.1:5000/advisors/1", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"specialty\": \"Executive Coaching\"}"}}},
+        {"name": "Delete Advisor", "request": {"method": "DELETE", "url": "http://127.0.0.1:5000/advisors/1"}},
+        {"name": "Advisor Login", "request": {"method": "POST", "url": "http://127.0.0.1:5000/advisors/login", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"email\": \"jane@visible.com\", \"password\": \"test123\"}"}}}
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {"name": "Create User", "request": {"method": "POST", "url": "http://127.0.0.1:5000/users/", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"name\": \"Test User\", \"email\": \"test@visible.com\", \"password\": \"test123\", \"job_title\": \"Engineer\", \"company\": \"Acme\"}"}}},
+        {"name": "Get All Users", "request": {"method": "GET", "url": "http://127.0.0.1:5000/users/"}},
+        {"name": "Get User by ID", "request": {"method": "GET", "url": "http://127.0.0.1:5000/users/1"}},
+        {"name": "Update User", "request": {"method": "PUT", "url": "http://127.0.0.1:5000/users/1", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"job_title\": \"Senior Engineer\"}"}}},
+        {"name": "Delete User", "request": {"method": "DELETE", "url": "http://127.0.0.1:5000/users/1"}},
+        {"name": "User Login", "request": {"method": "POST", "url": "http://127.0.0.1:5000/users/login", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"email\": \"test@visible.com\", \"password\": \"test123\"}"}}}
+      ]
+    },
+    {
+      "name": "Sessions",
+      "item": [
+        {"name": "Create Session", "request": {"method": "POST", "url": "http://127.0.0.1:5000/sessions/", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"advisor_id\": 1, \"user_id\": 1, \"notes\": \"Initial career coaching session\"}"}}},
+        {"name": "Get All Sessions", "request": {"method": "GET", "url": "http://127.0.0.1:5000/sessions/"}},
+        {"name": "Get Session by ID", "request": {"method": "GET", "url": "http://127.0.0.1:5000/sessions/1"}},
+        {"name": "Delete Session", "request": {"method": "DELETE", "url": "http://127.0.0.1:5000/sessions/1"}}
+      ]
+    },
+    {
+      "name": "Resources",
+      "item": [
+        {"name": "Create Resource", "request": {"method": "POST", "url": "http://127.0.0.1:5000/resources/", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"title\": \"Resume Writing Guide\", \"description\": \"How to write a great resume\", \"url\": \"https://example.com\"}"}}},
+        {"name": "Get All Resources", "request": {"method": "GET", "url": "http://127.0.0.1:5000/resources/"}},
+        {"name": "Get Resource by ID", "request": {"method": "GET", "url": "http://127.0.0.1:5000/resources/1"}},
+        {"name": "Update Resource", "request": {"method": "PUT", "url": "http://127.0.0.1:5000/resources/1", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"title\": \"Updated Resume Guide\"}"}}},
+        {"name": "Delete Resource", "request": {"method": "DELETE", "url": "http://127.0.0.1:5000/resources/1"}}
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {"name": "Create Inventory Item", "request": {"method": "POST", "url": "http://127.0.0.1:5000/inventory/", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"name\": \"Career Coaching Session\", \"price\": 150.00, \"quantity\": 10}"}}},
+        {"name": "Get All Inventory", "request": {"method": "GET", "url": "http://127.0.0.1:5000/inventory/"}},
+        {"name": "Get Inventory Item by ID", "request": {"method": "GET", "url": "http://127.0.0.1:5000/inventory/1"}},
+        {"name": "Update Inventory Item", "request": {"method": "PUT", "url": "http://127.0.0.1:5000/inventory/1", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\"price\": 175.00, \"quantity\": 8}"}}},
+        {"name": "Delete Inventory Item", "request": {"method": "DELETE", "url": "http://127.0.0.1:5000/inventory/1"}}
+      ]
+    }
+  ]
+}
